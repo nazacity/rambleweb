@@ -15,7 +15,8 @@ const QrcodeGenerator = ({ activityDetail }) => {
             value={activityDetail._id}
             imageSettings={{
               src: activityDetail.activity_picture_url,
-
+              height: 50,
+              width: 50,
               excavate: true,
             }}
             size={600}
@@ -38,6 +39,8 @@ const QrcodeGenerator = ({ activityDetail }) => {
                 value={item._id}
                 imageSettings={{
                   src: item.course_picture_url,
+                  height: 50,
+                  width: 50,
                   excavate: true,
                 }}
                 size={600}

@@ -24,7 +24,7 @@ const index = ({ user }) => {
       case 0:
         return <ActivityContent />;
       default:
-        return <div>Content is Not Found</div>;
+        return <div>Coming Soon</div>;
     }
   };
 
