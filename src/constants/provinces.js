@@ -313,7 +313,6 @@ export const provinceDict = provinces.map((item) => {
   return { label: item.province, value: item.province };
 });
 
-// export const provinceEnum = provinces.map(({ province }) => province);
 export const regionEnum = [
   'ภาคกลาง',
   'ภาคใต้',

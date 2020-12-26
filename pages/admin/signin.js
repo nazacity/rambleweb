@@ -48,6 +48,7 @@ const signin = () => {
   const onSubmit = async (data) => {
     dispatch(setLoading(true));
     try {
+      console.log(data);
       const res = await axios.post(`${api}/employees/login`, {
         username: data.username,
         password: data.password,
@@ -166,6 +167,7 @@ export const getServerSideProps = async (ctx) => {
   try {
     const user = await get('/api/employees/getemployeebyjwt', ctx);
     res.writeHead(302, { Location: '/admin' });
+    res.end();
     return { props: { user: user } };
   } catch (error) {
     return { props: {} };
