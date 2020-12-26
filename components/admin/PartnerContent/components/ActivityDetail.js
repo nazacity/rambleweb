@@ -63,6 +63,8 @@ const ActivityDetail = ({
     }
   };
 
+  console.log(activityDetail.rules1);
+
   return (
     <div
       style={{

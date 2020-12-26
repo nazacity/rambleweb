@@ -20,7 +20,7 @@ import { post } from '../../../../src/utils/request';
 
 import moment from 'moment';
 import 'moment/locale/th';
-import { useRouter } from 'next/router';
+
 moment.locale('th');
 
 const defaultValues = {
@@ -42,10 +42,11 @@ const defaultValues = {
   courses: [],
   timeline: [],
   rules: [],
-  more_detail: [],
+  rules1: '',
+  more_detail: '',
   shirt_detail: [],
   size: [],
-  condition: [],
+  condition: '',
   gifts: [],
 };
 
@@ -73,6 +74,7 @@ const AddActivity = ({
   });
   const [contentState, setContentState] = useState(0);
   const onSubmit = async (data) => {
+    // console.log(data.more_detail);
     setActivityDetail({ ...activityDetail, ...data });
     setContentState(1);
   };
@@ -97,18 +99,14 @@ const AddActivity = ({
         });
         return { ...item, id: `${index + 1}`, detail: detail };
       });
-      const more_detail = activityDetail.more_detail.map((item, index) => {
-        return { ...item, id: `${index + 1}` };
-      });
+
       const shirt_detail = activityDetail.shirt_detail.map((item, index) => {
         return { ...item, id: `${index + 1}` };
       });
       const size = activityDetail.size.map((item, index) => {
         return { ...item, id: `${index + 1}` };
       });
-      const condition = activityDetail.condition.map((item, index) => {
-        return { ...item, id: `${index + 1}` };
-      });
+
       let gifts = [];
       if (activityDetail.gifts[0].description !== '') {
         gifts = activityDetail.gifts.map((item, index) => {
@@ -137,16 +135,15 @@ const AddActivity = ({
         timeline: timeline,
 
         rules: rules,
+        rules1: activityDetail.rules1,
 
-        more_detail: more_detail,
+        more_detail: activityDetail.more_detail,
 
         shirt_detail: shirt_detail,
         size: size,
-        condition: condition,
-        gifts: gifts,
+        condition: activityDetail.condition,
+        gifts: activityDetail.gifts,
       };
-
-      console.log(data);
 
       const res = await post('/api/employees/createactivity', data);
       if (res.status === 201) {

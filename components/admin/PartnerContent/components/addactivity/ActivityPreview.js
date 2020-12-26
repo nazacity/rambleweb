@@ -9,6 +9,7 @@ import 'moment/locale/th';
 moment.locale('th');
 
 import TimelineDisplay from '../activitydetail/TimelineDisplay';
+import ReactMarkdown from 'react-markdown';
 
 const ActivityPreview = ({ activityDetail }) => {
   return (
@@ -277,35 +278,7 @@ const ActivityPreview = ({ activityDetail }) => {
           <Typography variant="h4">กฏ</Typography>
         </div>
         <div style={{ paddingLeft: 20 }}>
-          {activityDetail.rules1.map((item, index) => {
-            return (
-              <div
-                key={index}
-                style={{ paddingHorizontal: 20, marginBottom: 5 }}
-              >
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                  }}
-                >
-                  <div
-                    style={{
-                      backgroundColor: 'red',
-                      width: 10,
-                      height: 10,
-                      borderRadius: 10,
-                      marginRight: 10,
-                    }}
-                  />
-                  <div style={{ flex: 1 }}>
-                    <Typography>{item.title}</Typography>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+          <ReactMarkdown source={activityDetail.rules1} />
         </div>
       </div>
       <div style={{ margin: '20px auto' }}>
@@ -313,25 +286,11 @@ const ActivityPreview = ({ activityDetail }) => {
           <Typography variant="h4">รายละเอียดเพิ่มเติม</Typography>
         </div>
         <div style={{ paddingLeft: 20 }}>
-          {activityDetail.more_detail.map((item, index) => {
-            return (
-              <div key={index}>
-                <Typography>{item.description}</Typography>
-              </div>
-            );
-          })}
+          <ReactMarkdown source={activityDetail.more_detail} />
         </div>
       </div>
       <div style={{ paddingLeft: 20 }}>
-        {activityDetail.condition.map((item, index) => {
-          return (
-            <div key={index}>
-              <Typography style={{ textAlign: 'center' }}>
-                {item.description}
-              </Typography>
-            </div>
-          );
-        })}
+        <ReactMarkdown source={activityDetail.condition} />
       </div>
     </div>
   );

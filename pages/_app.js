@@ -14,6 +14,7 @@ import MomentUtils from '@date-io/moment';
 import moment from 'moment';
 import 'moment/locale/th';
 moment.locale('th');
+import 'react-markdown-editor-lite/lib/index.css';
 
 import i18n from 'i18n-js';
 import '../src/translations';

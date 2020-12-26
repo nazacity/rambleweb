@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { IconButton, TextField, Typography } from '@material-ui/core';
-import { HighlightOff, Add, Edit, Save, Close } from '@material-ui/icons';
+import { IconButton, Typography } from '@material-ui/core';
+import { Edit, Save, Close } from '@material-ui/icons';
+import ReactMarkdown from 'react-markdown';
+import dynamic from 'next/dynamic';
+
+const MdEditor = dynamic(() => import('react-markdown-editor-lite'), {
+  ssr: false,
+});
 
 const MoreDetail = ({
   editMode,
@@ -21,39 +27,12 @@ const MoreDetail = ({
       more_detail: activityDetail.more_detail,
     },
   });
-  const [indexes, setIndexes] = React.useState(
-    activityDetail.more_detail.length > 0
-      ? activityDetail.more_detail.map((item, index) => {
-          return index;
-        })
-      : [0]
-  );
-  const [counter, setCounter] = React.useState(
-    activityDetail.more_detail.length > 0
-      ? activityDetail.more_detail.length
-      : 1
-  );
-  const addCourse = () => {
-    setIndexes((prevIndexes) => [...prevIndexes, counter]);
-    setCounter((prevCounter) => prevCounter + 1);
-  };
-
-  const removeCourse = (index) => () => {
-    setIndexes((prevIndexes) => [
-      ...prevIndexes.filter((item) => item !== index),
-    ]);
-    const fieldName = `more_detail[${index}]`;
-    unregister(`${fieldName}.more_detail`);
-  };
 
   const onSubmit = async (data) => {
-    const more_detail = data.more_detail.map((item, index) => {
-      return { ...item, id: `${index + 1}` };
-    });
     await editActivity(
       {
         type: 'more_detail',
-        more_detail: [...more_detail],
+        more_detail: data.more_detail,
       },
       reset
     );
@@ -75,39 +54,21 @@ const MoreDetail = ({
           >
             <Close />
           </IconButton>
-          <IconButton onClick={addCourse}>
-            <Add />
-          </IconButton>
         </div>
-        {indexes.map((index) => {
-          return (
-            <div name="courses" key={index}>
-              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <IconButton
-                  variant="outlined"
-                  color="primary"
-                  onClick={removeCourse(index)}
-                  disabled={index === 0}
-                >
-                  <HighlightOff />
-                </IconButton>
-              </div>
-              <Controller
-                as={TextField}
-                name={`more_detail[${index}].description`}
-                control={control}
-                defaultValue=""
-                label={`More Detail ${index + 1}`}
-                variant="outlined"
-                // disabled={loading}
-                style={{
-                  width: '100%',
-                  margin: '1vh auto',
-                }}
-              />
-            </div>
-          );
-        })}
+        <Controller
+          name="more_detail"
+          control={control}
+          render={({ onChange, onBlur, value }) => (
+            <MdEditor
+              value={value}
+              style={{ height: '500px' }}
+              renderHTML={(text) => <ReactMarkdown source={text} />}
+              onChange={({ html, text }) => {
+                onChange(text);
+              }}
+            />
+          )}
+        />
       </form>
     );
   }
@@ -124,15 +85,7 @@ const MoreDetail = ({
           <Edit />
         </IconButton>
       </div>
-      <div style={{ paddingLeft: 20 }}>
-        {activityDetail.more_detail.map((item, index) => {
-          return (
-            <div key={index}>
-              <Typography>{item.description}</Typography>
-            </div>
-          );
-        })}
-      </div>
+      <ReactMarkdown source={activityDetail.more_detail} />
     </div>
   );
 };

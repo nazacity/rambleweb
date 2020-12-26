@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { IconButton, TextField, Typography } from '@material-ui/core';
-import { HighlightOff, Add, Edit, Save, Close } from '@material-ui/icons';
+import { IconButton, Typography } from '@material-ui/core';
+import { Edit, Save, Close } from '@material-ui/icons';
+import ReactMarkdown from 'react-markdown';
+import dynamic from 'next/dynamic';
+
+const MdEditor = dynamic(() => import('react-markdown-editor-lite'), {
+  ssr: false,
+});
 
 const Condition = ({ editMode, setEditMode, activityDetail, editActivity }) => {
   const { handleSubmit, unregister, control, reset } = useForm({
@@ -9,37 +15,12 @@ const Condition = ({ editMode, setEditMode, activityDetail, editActivity }) => {
       condition: activityDetail.condition,
     },
   });
-  const [indexes, setIndexes] = React.useState(
-    activityDetail.condition.length > 0
-      ? activityDetail.condition.map((item, index) => {
-          return index;
-        })
-      : [0]
-  );
-  const [counter, setCounter] = React.useState(
-    activityDetail.condition.length > 0 ? activityDetail.condition.length : 1
-  );
-  const addCourse = () => {
-    setIndexes((prevIndexes) => [...prevIndexes, counter]);
-    setCounter((prevCounter) => prevCounter + 1);
-  };
-
-  const removeCourse = (index) => () => {
-    setIndexes((prevIndexes) => [
-      ...prevIndexes.filter((item) => item !== index),
-    ]);
-    const fieldName = `condition[${index}]`;
-    unregister(`${fieldName}.condition`);
-  };
 
   const onSubmit = async (data) => {
-    const condition = data.condition.map((item, index) => {
-      return { ...item, id: `${index + 1}` };
-    });
     await editActivity(
       {
         type: 'condition',
-        condition: [...condition],
+        condition: data.condition,
       },
       reset
     );
@@ -61,41 +42,21 @@ const Condition = ({ editMode, setEditMode, activityDetail, editActivity }) => {
           >
             <Close />
           </IconButton>
-          <IconButton onClick={addCourse}>
-            <Add />
-          </IconButton>
         </div>
-        {indexes.map((index) => {
-          return (
-            <div name="courses" key={index}>
-              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <IconButton
-                  variant="outlined"
-                  color="primary"
-                  onClick={removeCourse(index)}
-                  disabled={index === 0}
-                >
-                  <HighlightOff />
-                </IconButton>
-              </div>
-              <Controller
-                as={TextField}
-                name={`condition[${index}].description`}
-                control={control}
-                defaultValue=""
-                label={`Condition ${index + 1}`}
-                variant="outlined"
-                // disabled={loading}
-                style={{
-                  width: '100%',
-                  margin: '1vh auto',
-                }}
-                multiline={true}
-                rows={5}
-              />
-            </div>
-          );
-        })}
+        <Controller
+          name="condition"
+          control={control}
+          render={({ onChange, onBlur, value }) => (
+            <MdEditor
+              value={value}
+              style={{ height: '500px' }}
+              renderHTML={(text) => <ReactMarkdown source={text} />}
+              onChange={({ html, text }) => {
+                onChange(text);
+              }}
+            />
+          )}
+        />
       </form>
     );
   }
@@ -112,17 +73,7 @@ const Condition = ({ editMode, setEditMode, activityDetail, editActivity }) => {
           <Edit />
         </IconButton>
       </div>
-      <div style={{ paddingLeft: 20 }}>
-        {activityDetail.condition.map((item, index) => {
-          return (
-            <div key={index}>
-              <Typography style={{ textAlign: 'center' }}>
-                {item.description}
-              </Typography>
-            </div>
-          );
-        })}
-      </div>
+      <ReactMarkdown source={activityDetail.condition} />
     </div>
   );
 };
