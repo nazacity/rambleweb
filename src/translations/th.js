@@ -12,6 +12,10 @@ const th = {
     keyfeatures: 'KEY FEATURES',
     title: 'ค้นพบฟีเจอร์ใหม่ๆ ในระบบของเรา',
   },
+  getstarted: {
+    getstart: 'เริ่มต้นกันเถอะ',
+    title: 'ดาวน์โหลดแอพพลิเคชั่นของเราบน iOS หรือ Android ได้แล้ววันนี้',
+  },
 };
 
 export default th;

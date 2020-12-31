@@ -12,6 +12,10 @@ const en = {
     keyfeatures: 'KEY FEATURES',
     title: 'What features are inside our app',
   },
+  getstarted: {
+    getstart: 'Get started',
+    title: 'Download our app on your iOS or Android device',
+  },
 };
 
 export default en;

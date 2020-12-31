@@ -10,6 +10,7 @@ import bannerImg from 'common/assets/image/appModern/banner2.png';
 import videoBanner1 from 'common/assets/image/appModern/video-1.png';
 import videoBanner2 from 'common/assets/image/appModern/video-2.png';
 import { LocalizationContext } from '../../../pages/_app';
+import AnchorLink from 'react-anchor-link-smooth-scroll';
 
 import { Grid, Hidden, Typography } from '@material-ui/core';
 // close button for modal
@@ -87,7 +88,12 @@ const Banner = () => {
               </Fade>
               <Fade up delay={300}>
                 <ButtonGroup>
-                  <Button className="primary" title={t('banner.getstarted')} />
+                  <AnchorLink href="#getstarted" offset={84}>
+                    <Button
+                      className="primary"
+                      title={t('banner.getstarted')}
+                    />
+                  </AnchorLink>
                   <Button
                     className="text"
                     variant="textButton"

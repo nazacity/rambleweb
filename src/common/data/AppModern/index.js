@@ -506,23 +506,23 @@ export const footer = {
     {
       id: 1,
       icon: chat,
-      title: 'Join the Community',
+      title: 'Discover New Marathon Activity',
       description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit sed eiusmod tempor incididunt labore dolore.',
+        'Find your first marathon with out platform. Start your journey!',
     },
     {
       id: 2,
       icon: group,
-      title: 'Join in Chat Community',
+      title: 'Join in Our Community',
       description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit sed eiusmod tempor incididunt labore dolore.',
+        'Find your new friends and get into marathon together. Have fun!',
     },
     {
       id: 3,
       icon: github,
-      title: 'Github Access',
+      title: 'New Way Of Registering',
       description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit sed eiusmod tempor incididunt labore dolore.',
+        'More convinient with new processing of register a marathon competition. Easy than ever!',
     },
   ],
   logo: footerLogo,
@@ -534,21 +534,26 @@ export const footer = {
     },
     {
       id: 2,
-      text: 'Adversite',
+      text: 'Partner',
       link: '#',
     },
     {
       id: 3,
-      text: 'Supports',
+      text: 'Adversite',
       link: '#',
     },
     {
       id: 4,
-      text: 'Marketing',
+      text: 'Supports',
       link: '#',
     },
     {
       id: 5,
+      text: 'Marketing',
+      link: '#',
+    },
+    {
+      id: 6,
       text: 'Contact',
       link: '#',
     },

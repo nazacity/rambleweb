@@ -13,7 +13,7 @@ import DesignedAndBuilt from 'landingpage/DesignedAndBuilt';
 import PricingPolicy from 'landingpage/PricingPolicy';
 import TeamPortfolio from 'landingpage/TeamPortfoilo';
 import Testimonial from 'landingpage/Testimonial';
-import Newsletter from 'landingpage/Newsletter';
+import GetStarted from 'landingpage/GetStarted';
 import Footer from 'landingpage/Footer';
 import GlobalStyle, {
   AppWrapper,
@@ -60,12 +60,13 @@ const AppModern = () => {
             <Features />
             <AppSlider />
             <DashboardFeatures />
-            <Testimonial />
             <ProductSlide />
-            {/* <DesignedAndBuilt />
-            <PricingPolicy />
-            <TeamPortfolio />
-            <Newsletter /> */}
+            <Testimonial />
+            <GetStarted />
+            {/* <DesignedAndBuilt /> */}
+            {/* <PricingPolicy /> */}
+            {/* <TeamPortfolio /> */}
+            {/* <Newsletter /> */}
           </ContentWrapper>
           <Footer />
         </AppWrapper>

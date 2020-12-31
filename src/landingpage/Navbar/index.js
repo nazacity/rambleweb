@@ -12,7 +12,7 @@ import Button from 'common/components/Button';
 import Container from 'common/components/UI/Container';
 import useOnClickOutside from 'common/hooks/useOnClickOutside';
 import NavbarWrapper, { MenuArea, MobileMenu, Search } from './navbar.style';
-import LogoImage from 'assets/logo/ramble.png';
+import LogoImage from '../../../public/assets/logo/ramblewhite.png';
 import LogoImageAlt from 'assets/logo/ramble.png';
 import { useScrollTrigger, IconButton } from '@material-ui/core';
 
@@ -155,7 +155,7 @@ const Navbar = (props) => {
             </IconButton>
           </div>
 
-          <AnchorLink href="#trail" offset={84}>
+          <AnchorLink href="#getstarted" offset={84}>
             <Button className="trail" title={t('banner.getstarted')} />
           </AnchorLink>
 

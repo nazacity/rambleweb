@@ -17,7 +17,7 @@ import FooterArea, {
 import { footer } from 'common/data/AppModern';
 
 const Footer = () => {
-  const { logo, menu, widgets } = footer;
+  const { menu, widgets } = footer;
   const date = new Date();
   const year = date.getFullYear();
 
@@ -35,12 +35,7 @@ const Footer = () => {
         </WidgetArea>
         {/* End of footer widgets area */}
         <MenuArea>
-          <Logo
-            className="logo"
-            href="/appclassic"
-            logoSrc={logo}
-            title="App Classic"
-          />
+          <img src="./assets/logo/ramblewhite.png" style={{ height: 50 }} />
           <Menu>
             {menu.map((item) => (
               <MenuItem key={`footer-link${item.id}`}>
@@ -50,7 +45,7 @@ const Footer = () => {
               </MenuItem>
             ))}
           </Menu>
-          <CopyrightText>Copyright {year} By RedQ Inc</CopyrightText>
+          {/* <CopyrightText>Copyright {year} By Nazacity</CopyrightText> */}
         </MenuArea>
         {/* End of footer menu area */}
       </Container>

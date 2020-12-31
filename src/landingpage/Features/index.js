@@ -18,7 +18,7 @@ import { Typography } from '@material-ui/core';
 import { LocalizationContext } from '../../../pages/_app';
 
 const Features = () => {
-  const { slogan, title, items_th, items_en } = features;
+  const { items_th, items_en } = features;
   const lang = useSelector((state) => state.layout.lang);
   const { t } = React.useContext(LocalizationContext);
 
