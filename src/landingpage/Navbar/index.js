@@ -211,7 +211,9 @@ const Navbar = (props) => {
                   </li>
                 ))}
           </Scrollspy>
-          <Button title="Try for Free" />
+          <AnchorLink href="#getstarted" offset={84} onClick={handleRemoveMenu}>
+            <Button title={t('banner.getstarted')} />
+          </AnchorLink>
         </Container>
       </MobileMenu>
       {/* end of mobile menu */}
