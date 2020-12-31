@@ -1,0 +1,93 @@
+import React, { useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { IconButton, Typography } from '@material-ui/core';
+import { Edit, Save, Close } from '@material-ui/icons';
+import ReactMarkdown from 'react-markdown';
+import dynamic from 'next/dynamic';
+
+const MdEditor = dynamic(() => import('react-markdown-editor-lite'), {
+  ssr: false,
+});
+
+const MoreDetail = ({
+  editMode,
+  setEditMode,
+  activityDetail,
+  editActivity,
+}) => {
+  const {
+    register,
+    handleSubmit,
+    unregister,
+    control,
+    errors,
+    reset,
+  } = useForm({
+    defaultValues: {
+      more_detail: activityDetail.more_detail,
+    },
+  });
+
+  const onSubmit = async (data) => {
+    await editActivity(
+      {
+        type: 'more_detail',
+        more_detail: data.more_detail,
+      },
+      reset
+    );
+    setEditMode({ ...editMode, moredetail: false });
+  };
+  if (editMode) {
+    return (
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div style={{ display: 'flex' }}>
+          <Typography variant="h4">รายละเอียดเพิ่มเติม</Typography>
+          <div style={{ flex: 1 }} />
+          <IconButton type="submit">
+            <Save />
+          </IconButton>
+          <IconButton
+            onClick={() => {
+              setEditMode({ ...editMode, moredetail: false });
+            }}
+          >
+            <Close />
+          </IconButton>
+        </div>
+        <Controller
+          name="more_detail"
+          control={control}
+          render={({ onChange, onBlur, value }) => (
+            <MdEditor
+              value={value}
+              style={{ height: '500px' }}
+              renderHTML={(text) => <ReactMarkdown source={text} />}
+              onChange={({ html, text }) => {
+                onChange(text);
+              }}
+            />
+          )}
+        />
+      </form>
+    );
+  }
+  return (
+    <div style={{ margin: '20px auto' }}>
+      <div style={{ display: 'flex' }}>
+        <Typography variant="h4">รายละเอียดเพิ่มเติม</Typography>
+        <div style={{ flex: 1 }} />
+        <IconButton
+          onClick={() => {
+            setEditMode({ ...editMode, moredetail: true });
+          }}
+        >
+          <Edit />
+        </IconButton>
+      </div>
+      <ReactMarkdown source={activityDetail.more_detail} />
+    </div>
+  );
+};
+
+export default MoreDetail;

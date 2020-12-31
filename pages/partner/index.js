@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { get } from '../../src/utils/request';
+import { get } from 'utils/request';
 import { useSelector, useDispatch } from 'react-redux';
 import { userStateHandle } from '../../redux/actions/userActions';
 import { setLoading } from '../../redux/actions/layoutActions';
-import ActivityContent from '../../components/partner/ActivityContent';
+import ActivityContent from 'components/partner/ActivityContent';
 
 // Partner Content
 

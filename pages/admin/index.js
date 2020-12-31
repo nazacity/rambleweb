@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
-import { get } from '../../src/utils/request';
+import { get } from 'utils/request';
 import { useSelector, useDispatch } from 'react-redux';
 import { userStateHandle } from '../../redux/actions/userActions';
 import { setLoading } from '../../redux/actions/layoutActions';
 
 // Admin Content
-import ActivityContent from '../../components/admin/ActivityContent';
-import AdsContent from '../../components/admin/AdsContent';
-import PartnerContent from '../../components/admin/PartnerContent';
-import ReportContent from '../../components/admin/ReportContent';
-import UserContent from '../../components/admin/UserContent';
+import ActivityContent from 'components/admin/ActivityContent';
+import AdsContent from 'components/admin/AdsContent';
+import PartnerContent from 'components/admin/PartnerContent';
+import ReportContent from 'components/admin/ReportContent';
+import UserContent from 'components/admin/UserContent';
 
 const index = ({ user }) => {
   const adminIndexMenu = useSelector(

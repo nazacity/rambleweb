@@ -2,22 +2,27 @@ import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import theme from '../src/theme';
+import theme from 'theme';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { persistor, store } from '../redux/store';
 import { ToastProvider } from 'react-toast-notifications';
-import NavBar from '../components/layout/navbar/NavBar';
-import LoadingOverlay from '../components/layout/LoadingOverlay';
+import NavBar from 'components/layout/navbar/NavBar';
+import LoadingOverlay from 'components/layout/LoadingOverlay';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 import moment from 'moment';
 import 'moment/locale/th';
 moment.locale('th');
 import 'react-markdown-editor-lite/lib/index.css';
+import { Modal } from '@redq/reuse-modal';
+import '@redq/reuse-modal/es/index.css';
+import 'common/assets/css/flaticon.css';
+import 'swiper/swiper-bundle.css';
+import 'common/assets/css/icon-example-page.css';
 
 import i18n from 'i18n-js';
-import '../src/translations';
+import 'translations';
 
 export const LocalizationContext = React.createContext({});
 
@@ -45,13 +50,14 @@ export default function MyApp(props) {
   }, []);
 
   return (
-    <React.Fragment>
+    <Modal>
       <Head>
         <title>Ramble Marathon Community</title>
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
+        <link rel="icon" href="./assets/icon/ramble144.png" />
       </Head>
       <MuiPickersUtilsProvider utils={MomentUtils}>
         <LocalizationContext.Provider value={localizationContext}>
@@ -71,6 +77,6 @@ export default function MyApp(props) {
           </ThemeProvider>
         </LocalizationContext.Provider>
       </MuiPickersUtilsProvider>
-    </React.Fragment>
+    </Modal>
   );
 }
