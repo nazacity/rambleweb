@@ -21,12 +21,6 @@ const BannerWrapper = styled.div`
     rgb(100, 43, 115) 0%,
     rgb(198, 66, 110) 100%
   );
-  @media only screen and (min-width: 1201px) and (max-width: 1440px) {
-    min-height: 100vh;
-  }
-  @media only screen and (max-width: 1099px) {
-    min-height: 100%;
-  }
   @media only screen and (max-width: 480px) {
     padding-top: 90px;
   }
@@ -57,35 +51,6 @@ const BannerWrapper = styled.div`
   }
 `;
 
-export const BannerContent = styled.div`
-  width: 40%;
-  flex-shrink: 0;
-  @media only screen and (max-width: 1199px) {
-    flex-shrink: 0;
-    width: 100%;
-    margin-top: 25px;
-  }
-
-  h1 {
-    font-size: 46px;
-    line-height: 55px;
-    font-weight: 700;
-    color: ${themeGet('colors.menu', '#0D233E')};
-    margin-bottom: 24px;
-    @media only screen and (max-width: 1366px) {
-      font-size: 32px;
-      line-height: 42px;
-      margin-bottom: 20px;
-    }
-  }
-
-  p {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 16px;
-    line-height: 29px;
-  }
-`;
-
 export const RatingInfo = styled.div`
   display: flex;
   align-items: center;
@@ -104,20 +69,6 @@ export const RatingInfo = styled.div`
 
   img {
     margin-left: 9px;
-  }
-`;
-
-export const BannerImage = styled.div`
-  flex-shrink: 0;
-  img {
-    margin-left: -40px;
-    margin-top: 50px;
-    @media only screen and (max-width: 1440px) {
-      margin-top: 0px;
-    }
-  }
-  @media only screen and (max-width: 1199px) {
-    display: none;
   }
 `;
 
@@ -157,27 +108,6 @@ export const ButtonGroup = styled.div`
     }
   }
 `;
-export const VideoGroup = styled.div`
-  display: flex;
-  margin-top: 60px;
-  @media only screen and (max-width: 768px) {
-    margin-top: 45px;
-  }
-  @media only screen and (max-width: 600px) {
-    flex-direction: column;
-  }
-  img {
-    margin-right: 10px;
-    max-width: 100%;
-    object-fit: cover;
-    cursor: pointer;
-    height: 100%;
-    @media only screen and (max-width: 600px) {
-      margin-right: 0;
-      margin-bottom: 15px;
-    }
-  }
-`;
 export const VideoWrapper = styled.div`
   max-width: 100%;
   width: 900px;
@@ -193,51 +123,6 @@ export const VideoWrapper = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-  }
-`;
-export const CustomerWrapper = styled.div`
-  max-width: 850px;
-  padding: 0px 0 70px;
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  @media only screen and (max-width: 1440px) {
-    padding: 0px 0 55px;
-  }
-  @media only screen and (max-width: 1099px) {
-    padding: 55px 0 55px;
-    max-width: 920px;
-  }
-  @media only screen and (max-width: 991px) {
-    padding: 40px 0;
-  }
-  @media only screen and (max-width: 600px) {
-    padding: 25px 0 40px;
-  }
-
-  p {
-    margin: 0 12px 0 0;
-    color: ${themeGet('colors.menu', '#0D233E')};
-    @media only screen and (max-width: 991px) {
-      display: none;
-    }
-  }
-`;
-
-export const ImageWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  @media only screen and (max-width: 991px) {
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 0 auto;
-  }
-  img {
-    margin: 0 12px;
-    @media only screen and (max-width: 667px) {
-      margin: 5px 10px;
-    }
   }
 `;
 export default BannerWrapper;

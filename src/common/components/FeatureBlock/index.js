@@ -10,6 +10,7 @@ const FeatureBlock = ({
   className,
   icon,
   title,
+  subtitle,
   button,
   description,
   iconPosition,
@@ -52,6 +53,7 @@ const FeatureBlock = ({
         <Fragment>
           <ContentWrapper className="content__wrapper" {...contentStyle}>
             {title}
+            {subtitle}
             {description}
             {button && (
               <ButtonWrapper className="button__wrapper" {...btnWrapperStyle}>

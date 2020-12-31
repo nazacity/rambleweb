@@ -5,7 +5,7 @@ import logo from 'common/assets/image/appModern/logo.png';
 
 export const navbar = {
   logo: logo,
-  navMenu: [
+  navMenu_en: [
     {
       id: 1,
       label: 'Home',
@@ -24,16 +24,24 @@ export const navbar = {
       path: '#testimonial',
       offset: '81',
     },
+  ],
+  navMenu_th: [
     {
-      id: 4,
-      label: 'Pricing',
-      path: '#pricing',
+      id: 1,
+      label: 'หน้าแรก',
+      path: '#home',
+      offset: '84',
+    },
+    {
+      id: 2,
+      label: 'ฟีเจอร์',
+      path: '#features',
       offset: '81',
     },
     {
-      id: 5,
-      label: 'Team Members',
-      path: '#team',
+      id: 3,
+      label: 'Testimonial',
+      path: '#testimonial',
       offset: '81',
     },
   ],
@@ -81,38 +89,74 @@ import featureIcon4 from 'common/assets/image/appModern/icon4.svg';
 export const features = {
   slogan: 'KEY FEATURES',
   title: 'Why you choose our app',
-  items: [
+  items_th: [
     {
       id: 1,
       color: '#F55767',
       icon: featureIcon1,
-      title: 'App Development',
-      description:
-        'We are specialized at custom Saas Application Development and special features.',
+      title: 'Marathon',
+      subtitle: 'ประสบการณ์ใหม่',
+      description: 'ค้นหาการวิ่งมาราธอนครั้งแรกของคุณ',
     },
     {
       id: 2,
       color: '#ff4742',
       icon: featureIcon2,
-      title: '10 Times Award',
-      description:
-        'We are globally recognised for our services and won a lot of prices around the world .',
+      title: 'Relationship',
+      subtitle: 'ค้นพบเพื่อนใหม่',
+      description: 'ค้นหาเพื่อนใหม่กับสังคมใหม่แห่งการแชร์ของเรา',
     },
     {
       id: 3,
       color: '#fb5781',
       icon: featureIcon3,
-      title: 'Cloud Storage',
-      description:
-        'LiteSpeed Web Server known for its high performance and low resource consumption.',
+      title: 'New way',
+      subtitle: 'การดำเนินการที่ดีกว่า',
+      description: 'สะดวกสบายมากขึ้นกับระบบการลงทะเบียน เช็คอิน และเช็คเอ้าท์',
     },
     {
       id: 4,
       color: '#f18e47',
       icon: featureIcon4,
-      title: 'Customization',
+      title: 'Simply',
+      subtitle: 'ออกเดินทางไปกับเพื่อนของคุณ',
+      description: 'หาเพื่อนร่วมเดินทางท่องเที่ยว ก่อนกิจกรรมของคุณจะเริ่ม',
+    },
+  ],
+  items_en: [
+    {
+      id: 1,
+      color: '#F55767',
+      icon: featureIcon1,
+      title: 'Marathon',
+      subtitle: 'New Experiences',
+      description: 'Find your first marathon with our community',
+    },
+    {
+      id: 2,
+      color: '#ff4742',
+      icon: featureIcon2,
+      title: 'Relationship',
+      subtitle: 'Discover new companies',
+      description: 'Find new friends with our sharing community',
+    },
+    {
+      id: 3,
+      color: '#fb5781',
+      icon: featureIcon3,
+      title: 'New way',
+      subtitle: 'Better processes',
       description:
-        'Client Satisfaction is our first priority and We are best at it. Keep In Touch for the best output. ',
+        'More convinient with our registering, checking in and chekcing out processes',
+    },
+    {
+      id: 4,
+      color: '#f18e47',
+      icon: featureIcon4,
+      title: 'Simply',
+      subtitle: 'Get along with new friends',
+      description:
+        'Find new companies and get along on the trip before your marathon',
     },
   ],
 };

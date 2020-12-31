@@ -62,10 +62,10 @@ const AppModern = () => {
             <DashboardFeatures />
             <Testimonial />
             <ProductSlide />
-            <DesignedAndBuilt />
+            {/* <DesignedAndBuilt />
             <PricingPolicy />
             <TeamPortfolio />
-            <Newsletter />
+            <Newsletter /> */}
           </ContentWrapper>
           <Footer />
         </AppWrapper>

@@ -13,38 +13,64 @@ import { SectionHeader } from '../appModern.style';
 import SectionWrapper, { FeatureWrapper } from './features.style';
 
 import { features } from 'common/data/AppModern';
+import { useSelector } from 'react-redux';
+import { Typography } from '@material-ui/core';
+import { LocalizationContext } from '../../../pages/_app';
 
 const Features = () => {
-  const { slogan, title, items } = features;
+  const { slogan, title, items_th, items_en } = features;
+  const lang = useSelector((state) => state.layout.lang);
+  const { t } = React.useContext(LocalizationContext);
 
   return (
     <SectionWrapper id="features">
       <Container>
         <SectionHeader>
           <Fade up>
-            <Heading as="h5" content={slogan} />
-            <Heading content={title} />
+            <Heading as="h5" content={t('keyfeatures.keyfeatures')} />
+            <Heading content={t('keyfeatures.title')} />
           </Fade>
         </SectionHeader>
         <FeatureWrapper>
-          {items.map((item) => (
-            <Fade up delay={100 * item.id} key={`feature-key${item.id}`}>
-              <FeatureBlock
-                style={{ '--color': `${item.color}` }}
-                icon={
-                  <Fragment>
-                    <Icon className="plus" icon={plus} />
-                    <Icon className="circle" icon={mediaRecordOutline} />
-                    <Image src={item.icon} alt={item.title} />
-                    <Icon className="star" icon={starOutline} />
-                  </Fragment>
-                }
-                iconPosition="left"
-                title={<Heading as="h3" content={item.title} />}
-                description={<Text content={item.description} />}
-              />
-            </Fade>
-          ))}
+          {lang === 'th' &&
+            items_th.map((item) => (
+              <Fade up delay={100 * item.id} key={`feature-key${item.id}`}>
+                <FeatureBlock
+                  style={{ '--color': `${item.color}` }}
+                  icon={
+                    <Fragment>
+                      <Icon className="plus" icon={plus} />
+                      <Icon className="circle" icon={mediaRecordOutline} />
+                      <Image src={item.icon} alt={item.title} />
+                      <Icon className="star" icon={starOutline} />
+                    </Fragment>
+                  }
+                  iconPosition="left"
+                  title={<Heading as="h3" content={item.title} />}
+                  subtitle={<Heading as="h4" content={item.subtitle} />}
+                  description={<Text content={item.description} />}
+                />
+              </Fade>
+            ))}
+          {lang === 'en' &&
+            items_en.map((item) => (
+              <Fade up delay={100 * item.id} key={`feature-key${item.id}`}>
+                <FeatureBlock
+                  style={{ '--color': `${item.color}` }}
+                  icon={
+                    <Fragment>
+                      <Icon className="plus" icon={plus} />
+                      <Icon className="circle" icon={mediaRecordOutline} />
+                      <Image src={item.icon} alt={item.title} />
+                      <Icon className="star" icon={starOutline} />
+                    </Fragment>
+                  }
+                  iconPosition="left"
+                  title={<Heading as="h3" content={item.title} />}
+                  description={<Text content={item.description} />}
+                />
+              </Fade>
+            ))}
         </FeatureWrapper>
       </Container>
     </SectionWrapper>

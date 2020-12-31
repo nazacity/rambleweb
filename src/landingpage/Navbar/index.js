@@ -6,7 +6,7 @@ import AnchorLink from 'react-anchor-link-smooth-scroll';
 import { Icon } from 'react-icons-kit';
 import { menu } from 'react-icons-kit/feather/menu';
 import { x } from 'react-icons-kit/feather/x';
-import { search } from 'react-icons-kit/feather/search';
+// import { search } from 'react-icons-kit/feather/search';
 import Logo from 'common/components/UIElements/Logo';
 import Button from 'common/components/Button';
 import Container from 'common/components/UI/Container';
@@ -14,15 +14,28 @@ import useOnClickOutside from 'common/hooks/useOnClickOutside';
 import NavbarWrapper, { MenuArea, MobileMenu, Search } from './navbar.style';
 import LogoImage from 'assets/logo/ramble.png';
 import LogoImageAlt from 'assets/logo/ramble.png';
+import { useScrollTrigger, IconButton } from '@material-ui/core';
 
 import { navbar } from 'common/data/AppModern';
+import { useSelector, useDispatch } from 'react-redux';
+import { setTh, setEn } from '../../../redux/actions/layoutActions';
+import { LocalizationContext } from '../../../pages/_app';
 
-const Navbar = () => {
-  const { navMenu } = navbar;
+const Navbar = (props) => {
+  const { t } = React.useContext(LocalizationContext);
+  const { window } = props;
+  const lang = useSelector((state) => state.layout.lang);
+  const dispatch = useDispatch();
+  const { navMenu_th, navMenu_en } = navbar;
   const [state, setState] = useState({
     search: '',
     searchToggle: false,
     mobileMenu: false,
+  });
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+    target: window ? window() : undefined,
   });
 
   const searchRef = useRef(null);
@@ -48,31 +61,9 @@ const Navbar = () => {
     }
   };
 
-  const handleOnChange = (event) => {
-    setState({
-      ...state,
-      search: event.target.value,
-    });
-  };
-
-  const handleSearchForm = (event) => {
-    event.preventDefault();
-
-    if (state.search !== '') {
-      console.log('search data: ', state.search);
-
-      setState({
-        ...state,
-        search: '',
-      });
-    } else {
-      console.log('Please fill this field.');
-    }
-  };
-
   const scrollItems = [];
 
-  navMenu.forEach((item) => {
+  navMenu_th.forEach((item) => {
     scrollItems.push(item.path.slice(1));
   });
 
@@ -100,30 +91,72 @@ const Navbar = () => {
         />
         {/* end of logo */}
 
-        <MenuArea className={state.searchToggle ? 'active' : ''}>
-          <ScrollSpyMenu className="menu" menuItems={navMenu} offset={-84} />
+        <MenuArea>
+          <ScrollSpyMenu
+            className="menu"
+            menuItems={lang === 'th' ? navMenu_th : lang === 'en' && navMenu_en}
+            offset={-84}
+          />
           {/* end of main menu */}
 
-          <Search className="search" ref={searchRef}>
-            <form onSubmit={handleSearchForm}>
-              <input
-                type="text"
-                value={state.search}
-                placeholder="Enter your keyword"
-                onChange={handleOnChange}
-              />
-            </form>
-            <Button
-              className="text"
-              variant="textButton"
-              icon={<Icon icon={state.searchToggle ? x : search} />}
-              onClick={() => toggleHandler('search')}
-            />
-          </Search>
           {/* end of search */}
+          <div style={{ margin: 'auto 20px' }}>
+            <IconButton
+              size="small"
+              style={
+                trigger
+                  ? {
+                      border: lang === 'th' ? '2px solid #000' : undefined,
+                      fontSize: 14,
+                      width: 40,
+                      height: 40,
+                      color: '#000',
+                      marginRight: 30,
+                    }
+                  : {
+                      border: lang === 'th' ? '2px solid #fff' : undefined,
+                      fontSize: 14,
+                      width: 40,
+                      height: 40,
+                      color: '#fff',
+                      marginRight: 30,
+                    }
+              }
+              onClick={() => {
+                dispatch(setTh());
+              }}
+            >
+              TH
+            </IconButton>
+            <IconButton
+              size="small"
+              style={
+                trigger
+                  ? {
+                      border: lang === 'en' ? '2px solid #000' : undefined,
+                      fontSize: 14,
+                      width: 40,
+                      height: 40,
+                      color: '#000',
+                    }
+                  : {
+                      border: lang === 'en' ? '2px solid #fff' : undefined,
+                      fontSize: 14,
+                      width: 40,
+                      height: 40,
+                      color: '#fff',
+                    }
+              }
+              onClick={() => {
+                dispatch(setEn());
+              }}
+            >
+              EN
+            </IconButton>
+          </div>
 
           <AnchorLink href="#trail" offset={84}>
-            <Button className="trail" title="Try for Free" />
+            <Button className="trail" title={t('banner.getstarted')} />
           </AnchorLink>
 
           <Button
@@ -153,17 +186,30 @@ const Navbar = () => {
             offset={-84}
             currentClassName="active"
           >
-            {navMenu.map((menu, index) => (
-              <li key={`menu_key${index}`}>
-                <AnchorLink
-                  href={menu.path}
-                  offset={menu.offset}
-                  onClick={handleRemoveMenu}
-                >
-                  {menu.label}
-                </AnchorLink>
-              </li>
-            ))}
+            {lang === 'th'
+              ? navMenu_th.map((menu, index) => (
+                  <li key={`menu_key${index}`}>
+                    <AnchorLink
+                      href={menu.path}
+                      offset={menu.offset}
+                      onClick={handleRemoveMenu}
+                    >
+                      {menu.label}
+                    </AnchorLink>
+                  </li>
+                ))
+              : lang === 'en' &&
+                navMenu_en.map((menu, index) => (
+                  <li key={`menu_key${index}`}>
+                    <AnchorLink
+                      href={menu.path}
+                      offset={menu.offset}
+                      onClick={handleRemoveMenu}
+                    >
+                      {menu.label}
+                    </AnchorLink>
+                  </li>
+                ))}
           </Scrollspy>
           <Button title="Try for Free" />
         </Container>
