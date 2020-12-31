@@ -58,6 +58,16 @@ export default function MyApp(props) {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
         <link rel="icon" href="./assets/icon/ramble144.png" />
+        <link rel="apple-touch-icon" href="./assets/icon/ramble144.png" />
+        <meta
+          name="description"
+          content="Ramble marathon sharing community find your first marathon."
+        />
+        <meta
+          property="og:description"
+          content="Ramble marathon sharing community find your first marathon."
+        />
+        <meta property="og:image" content="./assets/icon/ramble256.png" />
       </Head>
       <MuiPickersUtilsProvider utils={MomentUtils}>
         <LocalizationContext.Provider value={localizationContext}>
