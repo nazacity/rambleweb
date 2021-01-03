@@ -38,8 +38,6 @@ const ActivityDetail = ({
         `/api/partners/editactivity/${activityDetail._id}`,
         data
       );
-
-      console.log(res);
       if (res.status === 200) {
         if (reset) {
           reset(res.data);
@@ -63,15 +61,23 @@ const ActivityDetail = ({
     switch (value) {
       case 0:
         return (
-          <Detail
-            activityDetail={activityDetail}
-            editActivity={editActivity}
-            editMode={editMode}
-            setEditMode={setEditMode}
-          />
+          <div style={{ width: 800, margin: 'auto' }}>
+            <Detail
+              activityDetail={activityDetail}
+              editActivity={editActivity}
+              editMode={editMode}
+              setEditMode={setEditMode}
+            />
+          </div>
         );
       case 1:
-        return <Report />;
+        return (
+          <Report
+            activityDetailId={activityDetail._id}
+            loadingFalse={loadingFalse}
+            loadingTrue={loadingTrue}
+          />
+        );
       case 2:
         return (
           <Coupon activityDetail={activityDetail} editActivity={editActivity} />
@@ -84,11 +90,7 @@ const ActivityDetail = ({
   };
 
   return (
-    <div
-      style={{
-        width: 800,
-      }}
-    >
+    <div>
       <AppBar position="static" color="default">
         <Toolbar>
           <IconButton

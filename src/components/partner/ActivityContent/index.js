@@ -38,15 +38,13 @@ export default function FullScreenDialog({}) {
         );
       case 1:
         return (
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <ActivityDetail
-              activityDetail={activityDetail}
-              setActivityDetail={setActivityDetail}
-              setState={setState}
-              loadingTrue={loadingTrue}
-              loadingFalse={loadingFalse}
-            />
-          </div>
+          <ActivityDetail
+            activityDetail={activityDetail}
+            setActivityDetail={setActivityDetail}
+            setState={setState}
+            loadingTrue={loadingTrue}
+            loadingFalse={loadingFalse}
+          />
         );
     }
   };
