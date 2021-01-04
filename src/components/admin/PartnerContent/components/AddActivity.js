@@ -63,7 +63,6 @@ const AddActivity = ({
     unregister,
     control,
     errors,
-    formState: { dirty },
     reset,
   } = useForm({ defaultValues });
   const [activityDetail, setActivityDetail] = useState({

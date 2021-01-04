@@ -16,7 +16,7 @@ const Title = ({ control, errors }) => {
           label="Latitude"
           variant="outlined"
           rules={{
-            required: 'กรุณา Latitude',
+            required: 'กรุณาใส่ Latitude',
           }}
           error={errors.location?.lat && true}
           helperText={errors.location?.lat?.message}
@@ -33,7 +33,7 @@ const Title = ({ control, errors }) => {
           label="Longtitude"
           variant="outlined"
           rules={{
-            required: 'กรุณา Longtitude',
+            required: 'กรุณาใส่ Longtitude',
           }}
           error={errors.location?.lng && true}
           helperText={errors.location?.lng?.message}
@@ -50,7 +50,7 @@ const Title = ({ control, errors }) => {
           label="Province"
           variant="outlined"
           rules={{
-            required: 'กรุณา Province',
+            required: 'กรุณาใส่ Province',
           }}
           error={errors.location?.province && true}
           helperText={errors.location?.province?.message}
@@ -89,7 +89,7 @@ const Title = ({ control, errors }) => {
           label="Place Name"
           variant="outlined"
           rules={{
-            required: 'กรุณา Place Name',
+            required: 'กรุณาใส่ Place Name',
           }}
           error={errors.location?.place_name && true}
           helperText={errors.location?.place_name?.message}
