@@ -16,6 +16,7 @@ import ShirtStyle from './addactivity/ShirtStyle';
 import ActivityDetail from './addactivity/ActivityPreview';
 import Condition from './addactivity/Condition';
 import Gifts from './addactivity/Gifts';
+import SenderAddress from './addactivity/SenderAddress';
 import { post } from 'utils/request';
 
 import moment from 'moment';
@@ -237,6 +238,12 @@ const AddActivity = ({
             activityDetail={activityDetail}
           />
           <Condition
+            control={control}
+            errors={errors}
+            unregister={unregister}
+            activityDetail={activityDetail}
+          />
+          <SenderAddress
             control={control}
             errors={errors}
             unregister={unregister}

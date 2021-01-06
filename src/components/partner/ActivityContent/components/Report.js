@@ -1,16 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import { get } from 'utils/request';
+import React, { useEffect, useState, useRef } from 'react';
+import { get, post } from 'utils/request';
 import MaterialTable from 'material-table';
-import { Avatar, IconButton, Button, Typography } from '@material-ui/core';
+import {
+  Avatar,
+  IconButton,
+  Button,
+  Typography,
+  Dialog,
+} from '@material-ui/core';
+import AddressPrint from './report/AddressPrint';
+import ReactToPrint, { PrintContextConsumer } from 'react-to-print';
+import PrintIcon from '@material-ui/icons/Print';
+import ReportFilter from './report/ReportFilter';
+import CSVReader from 'react-csv-reader';
 
-const Report = ({ activityDetailId, loadingTrue, loadingFalse }) => {
+const Report = ({ activityDetail, loadingTrue, loadingFalse }) => {
   const [data, setData] = useState([]);
-  const fetchUserActivities = async (data, reset) => {
+  const [printDialog, setPrintDialog] = useState(false);
+  const [printData, setPrintData] = useState({});
+
+  const handlePrintDialogClose = () => {
+    setPrintData({});
+    setPrintDialog(false);
+  };
+  const printRef = useRef();
+  const fetchUserActivities = async () => {
     loadingTrue();
     try {
-      const res = await get(`/api/partners/useractivities/${activityDetailId}`);
+      const res = await get(
+        `/api/partners/useractivities/${activityDetail._id}`
+      );
 
-      console.log(res);
       if (res.status === 200) {
         setData(res.data.user_activities);
       }
@@ -20,8 +40,6 @@ const Report = ({ activityDetailId, loadingTrue, loadingFalse }) => {
       loadingFalse();
     }
   };
-
-  console.log(data);
 
   useEffect(() => {
     fetchUserActivities();
@@ -37,24 +55,37 @@ const Report = ({ activityDetailId, loadingTrue, loadingFalse }) => {
         </IconButton>
       ),
       editable: 'never',
+      filtering: false,
+      export: false,
     },
     {
-      title: 'หมายเลข',
-      field: 'content_no',
+      title: 'id',
+      field: '_id',
+      filtering: false,
+      render: (rowData) => <div />,
     },
     {
-      title: 'ชื่อ',
+      title: 'contest_no',
+      field: 'contest_no',
+    },
+    {
+      title: 'first_name',
       field: 'user.first_name',
       editable: 'never',
     },
     {
-      title: 'ชื่อ',
+      title: 'last_name',
       field: 'user.last_name',
       editable: 'never',
     },
     {
-      title: 'คอร์สวิ่ง',
-      field: 'size',
+      title: 'idcard',
+      field: 'user.idcard',
+      editable: 'never',
+    },
+    {
+      title: 'course_title',
+      field: 'activity.course.title',
       render: (rowData) => (
         <div>
           <Typography>{rowData.activity.course.title}</Typography>
@@ -63,8 +94,8 @@ const Report = ({ activityDetailId, loadingTrue, loadingFalse }) => {
       editable: 'never',
     },
     {
-      title: 'เสื้อ',
-      field: 'size',
+      title: 'shirt_size',
+      field: 'size.size',
       render: (rowData) => (
         <div>
           <Typography>{rowData.size.size}</Typography>
@@ -74,10 +105,19 @@ const Report = ({ activityDetailId, loadingTrue, loadingFalse }) => {
       editable: 'never',
     },
     {
-      title: 'ที่อยู่จัดส่ง',
-      field: 'address',
+      title: 'address',
+      field: 'address.address',
       render: (rowData) => (
         <div>
+          <IconButton
+            onClick={() => {
+              setPrintData(rowData);
+              setPrintDialog(true);
+            }}
+            style={{ margin: 'auto' }}
+          >
+            <PrintIcon />
+          </IconButton>
           <Typography>{rowData.address.address}</Typography>
           <Typography>{rowData.address.province}</Typography>
           <Typography>{rowData.address.zip}</Typography>
@@ -85,11 +125,98 @@ const Report = ({ activityDetailId, loadingTrue, loadingFalse }) => {
         </div>
       ),
       editable: 'never',
+      filtering: false,
+      export: false,
     },
   ];
 
+  const handleForce = async (data, fileInfo) => {
+    loadingTrue();
+    try {
+      let newData = [];
+      await data.map(async (item) => {
+        const res = await post(
+          `/api/partners/updatconstestuseractivities/${item.id}`,
+          {
+            contest_no: `${item.contest_no}`,
+          }
+        );
+        newData.push(res.data);
+      });
+
+      await fetchUserActivities();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const papaparseOptions = {
+    header: true,
+    dynamicTyping: true,
+    skipEmptyLines: true,
+    transformHeader: (header) => header.toLowerCase().replace(/\W/g, '_'),
+  };
+
   return (
     <div>
+      <ReportFilter
+        loadingTrue={loadingTrue}
+        loadingFalse={loadingFalse}
+        activityDetail={activityDetail}
+        setData={setData}
+        data={data}
+      />
+      <div
+        style={{
+          textAlign: 'center',
+          padding: 15,
+          margin: '10px auto',
+          width: '100vw',
+        }}
+      >
+        <Typography>อัพเดทข้อมูล จาก CSV</Typography>
+        <CSVReader
+          inputStyle={{
+            padding: 10,
+            display: 'block',
+            margin: '15px auto',
+            border: '1px solid #ccc',
+            borderRadius: 5,
+            width: 300,
+          }}
+          onFileLoaded={handleForce}
+          parserOptions={papaparseOptions}
+        />
+      </div>
+      <Dialog open={printDialog} onClose={handlePrintDialogClose} width="md">
+        <div
+          style={{
+            margin: 40,
+          }}
+        >
+          <AddressPrint
+            ref={printRef}
+            data={printData}
+            senderAddress={activityDetail.senderAddress}
+          />
+        </div>
+        <ReactToPrint
+          trigger={() => (
+            <div
+              style={{
+                margin: '5px auto',
+                display: 'flex',
+                justifyContent: 'center',
+              }}
+            >
+              <Button variant="contained" color="secondary">
+                พิมพ์
+              </Button>
+            </div>
+          )}
+          content={() => printRef.current}
+        />
+      </Dialog>
       <MaterialTable
         columns={columnTitle}
         data={data}
@@ -113,7 +240,10 @@ const Report = ({ activityDetailId, loadingTrue, loadingFalse }) => {
           pageSize: 15,
           pageSizeOptions: [15],
           paginationType: 'stepped',
-          search: false,
+          search: true,
+          filtering: true,
+          exportButton: true,
+          exportFileName: activityDetail.title,
         }}
         style={{
           boxShadow: 'none',

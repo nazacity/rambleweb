@@ -292,6 +292,28 @@ const ActivityPreview = ({ activityDetail }) => {
       <div style={{ paddingLeft: 20 }}>
         <ReactMarkdown source={activityDetail.condition} />
       </div>
+      <div style={{ margin: '20px auto' }}>
+        <div style={{ display: 'flex' }}>
+          <Typography variant="h4">ที่อยู่ผู้จัดส่ง</Typography>
+        </div>
+        <div style={{ paddingLeft: 20 }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Typography>{activityDetail.senderAddress.name}</Typography>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Typography>{activityDetail.senderAddress.address}</Typography>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Typography>{activityDetail.senderAddress.province}</Typography>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Typography>{activityDetail.senderAddress.zip}</Typography>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Typography>{activityDetail.senderAddress.phone_number}</Typography>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -13,6 +13,7 @@ import Rules1 from './editactivity/Rules1';
 import MoreDetail from './editactivity/MoreDetail';
 import Condition from './editactivity/Condition';
 import Gifts from './editactivity/Gifts';
+import SenderAddress from './editactivity/SenderAddress';
 
 const Detail = ({ activityDetail, editMode, setEditMode, editActivity }) => {
   return (
@@ -96,6 +97,13 @@ const Detail = ({ activityDetail, editMode, setEditMode, editActivity }) => {
         activityDetail={activityDetail}
         editActivity={editActivity}
       />
+      <SenderAddress
+        setEditMode={setEditMode}
+        editMode={editMode.senderAddress}
+        activityDetail={activityDetail}
+        editActivity={editActivity}
+      />
+      <div style={{ margin: 50 }} />
     </Fragment>
   );
 };

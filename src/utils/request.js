@@ -31,7 +31,7 @@ const getURL = (ctx) => {
   if (ctx) {
     return serverRuntimeConfig.backendAPIHost;
   } else {
-    return process.env.NEXT_PUBLIC_API_HOST || 'http://192.168.1.6:5000';
+    return process.env.NEXT_PUBLIC_API_HOST || 'https://api.ramble-club.com';
   }
 };
 

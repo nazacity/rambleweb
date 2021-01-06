@@ -90,7 +90,7 @@ const Title = ({ editMode, setEditMode, activityDetail, editActivity }) => {
             multiline={true}
             rows={5}
           />
-        </div>{' '}
+        </div>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <IconButton type="submit">
             <Save />

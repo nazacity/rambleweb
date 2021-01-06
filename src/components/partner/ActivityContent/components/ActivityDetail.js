@@ -29,6 +29,7 @@ const ActivityDetail = ({
     rules1: false,
     moredetail: false,
     condition: false,
+    senderAddress: false,
   });
 
   const editActivity = async (data, reset) => {
@@ -73,9 +74,9 @@ const ActivityDetail = ({
       case 1:
         return (
           <Report
-            activityDetailId={activityDetail._id}
             loadingFalse={loadingFalse}
             loadingTrue={loadingTrue}
+            activityDetail={activityDetail}
           />
         );
       case 2:

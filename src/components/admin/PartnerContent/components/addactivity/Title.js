@@ -3,10 +3,6 @@ import { TextField } from '@material-ui/core';
 import { Controller } from 'react-hook-form';
 
 const Title = ({ control, errors }) => {
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setActivityDetail({ ...activityDetail, [name]: value });
-  };
   return (
     <div>
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: 20 }}>

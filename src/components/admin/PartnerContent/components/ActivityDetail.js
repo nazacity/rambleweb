@@ -15,6 +15,7 @@ import Rules1 from './editactivity/Rules1';
 import MoreDetail from './editactivity/MoreDetail';
 import Condition from './editactivity/Condition';
 import Gifts from './editactivity/Gifts';
+import SenderAddress from './editactivity/SenderAddress';
 
 import { post } from 'utils/request';
 
@@ -42,6 +43,7 @@ const ActivityDetail = ({
   });
 
   const editActivity = async (data, reset) => {
+    console.log(data);
     loadingTrue();
     try {
       const res = await post(
@@ -49,7 +51,6 @@ const ActivityDetail = ({
         data
       );
 
-      console.log(res);
       if (res.status === 200) {
         if (reset) {
           reset(res.data);
@@ -158,6 +159,13 @@ const ActivityDetail = ({
         activityDetail={activityDetail}
         editActivity={editActivity}
       />
+      <SenderAddress
+        setEditMode={setEditMode}
+        editMode={editMode.senderAddress}
+        activityDetail={activityDetail}
+        editActivity={editActivity}
+      />
+      <div style={{ margin: 50 }} />
     </div>
   );
 };

@@ -15,7 +15,7 @@ import Rules1 from '../../PartnerContent/components/editactivity/Rules1';
 import MoreDetail from '../../PartnerContent/components/editactivity/MoreDetail';
 import Condition from '../../PartnerContent/components/editactivity/Condition';
 import Gifts from '../../PartnerContent/components/editactivity/Gifts';
-
+import SenderAddress from '../../PartnerContent/components/editactivity/SenderAddress';
 import { post } from 'utils/request';
 
 const ActivityDetail = ({
@@ -155,6 +155,12 @@ const ActivityDetail = ({
       <Condition
         setEditMode={setEditMode}
         editMode={editMode.condition}
+        activityDetail={activityDetail}
+        editActivity={editActivity}
+      />
+      <SenderAddress
+        setEditMode={setEditMode}
+        editMode={editMode.senderAddress}
         activityDetail={activityDetail}
         editActivity={editActivity}
       />
