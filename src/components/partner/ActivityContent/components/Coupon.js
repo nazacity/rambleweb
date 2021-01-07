@@ -49,71 +49,75 @@ const Coupon = ({ activityDetail, editActivity }) => {
   };
   if (editMode) {
     return (
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div style={{ display: 'flex' }}>
-          <Typography variant="h4">คูปอง</Typography>
-          <div style={{ flex: 1 }} />
-          <IconButton type="submit">
-            <Save />
-          </IconButton>
-          <IconButton
-            onClick={() => {
-              setEditMode(false);
-            }}
-          >
-            <Close />
-          </IconButton>
-          <IconButton onClick={addCourse}>
-            <Add />
-          </IconButton>
-        </div>
-        {indexes.map((index) => {
-          return (
-            <div name="coupons" key={index}>
-              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <IconButton
+      <div style={{ width: 800, margin: '20px auto' }}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div style={{ display: 'flex' }}>
+            <Typography variant="h4">คูปอง</Typography>
+            <div style={{ flex: 1 }} />
+            <IconButton type="submit">
+              <Save />
+            </IconButton>
+            <IconButton
+              onClick={() => {
+                setEditMode(false);
+              }}
+            >
+              <Close />
+            </IconButton>
+            <IconButton onClick={addCourse}>
+              <Add />
+            </IconButton>
+          </div>
+          {indexes.map((index) => {
+            return (
+              <div name="coupons" key={index}>
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  <IconButton
+                    variant="outlined"
+                    color="primary"
+                    onClick={removeCourse(index)}
+                    disabled={index === 0}
+                  >
+                    <HighlightOff />
+                  </IconButton>
+                </div>
+                <Controller
+                  as={TextField}
+                  name={`coupons[${index}].description`}
+                  control={control}
+                  defaultValue=""
+                  label={`coupon description ${index + 1}`}
                   variant="outlined"
-                  color="primary"
-                  onClick={removeCourse(index)}
-                  disabled={index === 0}
-                >
-                  <HighlightOff />
-                </IconButton>
+                  // disabled={loading}
+                  style={{
+                    width: '100%',
+                    margin: '1vh auto',
+                  }}
+                />
+                <Controller
+                  as={TextField}
+                  name={`coupons[${index}].coupon_picture_url`}
+                  control={control}
+                  defaultValue=""
+                  label={`coupon picture url ${
+                    index + 1
+                  } กว้าง 600 px สูง 300 px`}
+                  variant="outlined"
+                  // disabled={loading}
+                  style={{
+                    width: '100%',
+                    margin: '1vh auto',
+                  }}
+                />
               </div>
-              <Controller
-                as={TextField}
-                name={`coupons[${index}].description`}
-                control={control}
-                defaultValue=""
-                label={`coupon description ${index + 1}`}
-                variant="outlined"
-                // disabled={loading}
-                style={{
-                  width: '100%',
-                  margin: '1vh auto',
-                }}
-              />
-              <Controller
-                as={TextField}
-                name={`coupons[${index}].coupon_picture_url`}
-                control={control}
-                defaultValue=""
-                label={`coupon picture url ${index + 1}`}
-                variant="outlined"
-                // disabled={loading}
-                style={{
-                  width: '100%',
-                  margin: '1vh auto',
-                }}
-              />
-            </div>
-          );
-        })}
-      </form>
+            );
+          })}
+        </form>
+      </div>
     );
   }
   return (
-    <div style={{ margin: '20px auto' }}>
+    <div style={{ margin: '20px auto', width: 800 }}>
       <div style={{ display: 'flex' }}>
         <Typography variant="h4">คูปอง</Typography>
         <div style={{ flex: 1 }} />

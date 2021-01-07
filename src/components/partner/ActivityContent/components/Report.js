@@ -80,7 +80,7 @@ const Report = ({ activityDetail, loadingTrue, loadingFalse }) => {
     },
     {
       title: 'idcard',
-      field: 'user.idcard',
+      field: 'idcard',
       editable: 'never',
     },
     {
@@ -157,6 +157,28 @@ const Report = ({ activityDetail, loadingTrue, loadingFalse }) => {
     transformHeader: (header) => header.toLowerCase().replace(/\W/g, '_'),
   };
 
+  const updatePrintedState = async () => {
+    if (!printData.printed) {
+      loadingTrue();
+      try {
+        const res = await get(
+          `/api/partners/updateprintstate/${printData._id}`
+        );
+
+        if (res.status === 200) {
+          const newData = data;
+          const index = data.findIndex((item) => item._id === res.data._id);
+          newData[index] = res.data;
+          setData(newData);
+        }
+        loadingFalse();
+      } catch (error) {
+        console.log(error);
+        loadingFalse();
+      }
+    }
+  };
+
   return (
     <div>
       <ReportFilter
@@ -209,7 +231,11 @@ const Report = ({ activityDetail, loadingTrue, loadingFalse }) => {
                 justifyContent: 'center',
               }}
             >
-              <Button variant="contained" color="secondary">
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => updatePrintedState()}
+              >
                 พิมพ์
               </Button>
             </div>
@@ -244,6 +270,14 @@ const Report = ({ activityDetail, loadingTrue, loadingFalse }) => {
           filtering: true,
           exportButton: true,
           exportFileName: activityDetail.title,
+          rowStyle: (rowData) => {
+            if (!rowData.printed) {
+              return {
+                backgroundColor: '#fff9c4',
+                color: '#c62828',
+              };
+            }
+          },
         }}
         style={{
           boxShadow: 'none',

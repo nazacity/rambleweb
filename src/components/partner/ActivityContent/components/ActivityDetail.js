@@ -4,6 +4,7 @@ import { ArrowBack } from '@material-ui/icons';
 
 import { post } from 'utils/request';
 import Detail from './Detail';
+import Announcement from './Announcement';
 import Report from './Report';
 import Coupon from './Coupon';
 import QrcodeGenerator from './QrcodeGenerator';
@@ -85,6 +86,13 @@ const ActivityDetail = ({
         );
       case 3:
         return <QrcodeGenerator activityDetail={activityDetail} />;
+      case 4:
+        return (
+          <Announcement
+            activityDetail={activityDetail}
+            setActivityDetail={setActivityDetail}
+          />
+        );
       default:
         return <div>Content is Not Found</div>;
     }
@@ -112,6 +120,7 @@ const ActivityDetail = ({
             <Tab label="รายงาน" />
             <Tab label="คูปอง" />
             <Tab label="Qrcode Generator" />
+            <Tab label="ประกาศ" />
           </Tabs>
         </Toolbar>
       </AppBar>

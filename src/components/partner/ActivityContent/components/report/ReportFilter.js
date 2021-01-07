@@ -24,7 +24,11 @@ const ReportFilter = ({
     // loadingTrue();
     try {
       const res = await get(
-        `/api/partners/filtereduseractivities/${activityDetail._id}?course=${data.course.value}&size=${data.size.value}`
+        `/api/partners/filtereduseractivities/${activityDetail._id}?${
+          data.course.value && 'course=' + data.course.value
+        }${data.size.value && '&size=' + data.size.value}${
+          data.idcard && '&idcard=' + data.idcard
+        }`
       );
 
       if (res.status === 200) {
@@ -82,14 +86,14 @@ const ReportFilter = ({
             label="คอร์ส"
             variant="outlined"
             // disabled={loading}
-            defaultValue=""
-            rules={{
-              required: 'กรุณาเลือกคอร์สวิ่ง',
-            }}
+            defaultValue={{ label: 'ทั้งหมด', value: '' }}
             render={({ onChange, value }) => (
               <Select
                 value={value}
-                options={filterData.courses}
+                options={[
+                  { label: 'ทั้งหมด', value: '' },
+                  ...filterData.courses,
+                ]}
                 onChange={(e) => {
                   onChange(e);
                 }}
@@ -125,14 +129,11 @@ const ReportFilter = ({
             label="ไซส์เสื้อ"
             variant="outlined"
             // disabled={loading}
-            defaultValue=""
-            rules={{
-              required: 'ไซส์เสื้อ',
-            }}
+            defaultValue={{ label: 'ทั้งหมด', value: '' }}
             render={({ onChange, value }) => (
               <Select
                 value={value}
-                options={filterData.sizes}
+                options={[{ label: 'ทั้งหมด', value: '' }, ...filterData.sizes]}
                 onChange={(e) => {
                   onChange(e);
                 }}
@@ -154,11 +155,17 @@ const ReportFilter = ({
               />
             )}
           />
-          {errors.size?.message && (
-            <Typography style={{ color: '#d9534f' }}>
-              {errors.size?.message}
-            </Typography>
-          )}
+        </div>
+        <div style={{ marginLeft: 50 }}>
+          <Controller
+            as={TextField}
+            name="idcard"
+            control={control}
+            defaultValue=""
+            label="รหัสบัตรประชาชน"
+            variant="outlined"
+            style={{ width: 300 }}
+          />
         </div>
         <div style={{ marginLeft: 10 }}>
           <IconButton onClick={handleSubmit(onSubmit)}>
