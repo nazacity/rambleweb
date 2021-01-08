@@ -7,7 +7,7 @@ import { post } from 'utils/request';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import 'moment/locale/th';
-import AnnoucementCard from './announcement/AnnoucementCard';
+import AnnoucementCard from '../announcement/AnnoucementCard';
 
 const Announcement = ({ activityDetail, setActivityDetail }) => {
   const [editMode, setEditMode] = useState(false);

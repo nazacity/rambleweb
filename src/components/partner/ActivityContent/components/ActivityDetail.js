@@ -3,11 +3,12 @@ import { IconButton, AppBar, Tabs, Tab, Toolbar } from '@material-ui/core';
 import { ArrowBack } from '@material-ui/icons';
 
 import { post } from 'utils/request';
-import Detail from './Detail';
-import Announcement from './Announcement';
-import Report from './Report';
-import Coupon from './Coupon';
-import QrcodeGenerator from './QrcodeGenerator';
+import Detail from './activitydetail/Detail';
+import Announcement from './activitydetail/Announcement';
+import UserReport from './activitydetail/UserReport';
+import Report from './activitydetail/Report';
+import Coupon from './activitydetail/Coupon';
+import QrcodeGenerator from './activitydetail/QrcodeGenerator';
 
 const ActivityDetail = ({
   activityDetail,
@@ -63,6 +64,12 @@ const ActivityDetail = ({
     switch (value) {
       case 0:
         return (
+          <div>
+            <Report />
+          </div>
+        );
+      case 1:
+        return (
           <div style={{ width: 800, margin: 'auto' }}>
             <Detail
               activityDetail={activityDetail}
@@ -72,21 +79,21 @@ const ActivityDetail = ({
             />
           </div>
         );
-      case 1:
+      case 2:
         return (
-          <Report
+          <UserReport
             loadingFalse={loadingFalse}
             loadingTrue={loadingTrue}
             activityDetail={activityDetail}
           />
         );
-      case 2:
+      case 3:
         return (
           <Coupon activityDetail={activityDetail} editActivity={editActivity} />
         );
-      case 3:
-        return <QrcodeGenerator activityDetail={activityDetail} />;
       case 4:
+        return <QrcodeGenerator activityDetail={activityDetail} />;
+      case 5:
         return (
           <Announcement
             activityDetail={activityDetail}
@@ -116,8 +123,9 @@ const ActivityDetail = ({
             textColor="primary"
             variant="fullWidth"
           >
-            <Tab label="รายละเอียด" />
             <Tab label="รายงาน" />
+            <Tab label="รายละเอียด" />
+            <Tab label="ผู้สมัคร" />
             <Tab label="คูปอง" />
             <Tab label="Qrcode Generator" />
             <Tab label="ประกาศ" />

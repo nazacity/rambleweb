@@ -8,13 +8,13 @@ import {
   Typography,
   Dialog,
 } from '@material-ui/core';
-import AddressPrint from './report/AddressPrint';
+import AddressPrint from '../report/AddressPrint';
 import ReactToPrint, { PrintContextConsumer } from 'react-to-print';
 import PrintIcon from '@material-ui/icons/Print';
-import ReportFilter from './report/ReportFilter';
+import ReportFilter from '../report/ReportFilter';
 import CSVReader from 'react-csv-reader';
 
-const Report = ({ activityDetail, loadingTrue, loadingFalse }) => {
+const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
   const [data, setData] = useState([]);
   const [printDialog, setPrintDialog] = useState(false);
   const [printData, setPrintData] = useState({});
@@ -287,4 +287,4 @@ const Report = ({ activityDetail, loadingTrue, loadingFalse }) => {
   );
 };
 
-export default Report;
+export default UserReport;
