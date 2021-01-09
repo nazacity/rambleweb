@@ -18,6 +18,20 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
   const [data, setData] = useState([]);
   const [printDialog, setPrintDialog] = useState(false);
   const [printData, setPrintData] = useState({});
+  const [sizeLookup, setSizeLookup] = useState({});
+
+  const convertSizeLookup = () => {
+    let data = {};
+    activityDetail.size.map((item) => {
+      data = { ...data, [item.size]: item.size };
+    });
+
+    setSizeLookup(data);
+  };
+
+  useEffect(() => {
+    convertSizeLookup();
+  }, []);
 
   const handlePrintDialogClose = () => {
     setPrintData({});
@@ -103,30 +117,57 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
         </div>
       ),
       editable: 'never',
+      lookup: sizeLookup,
     },
     {
       title: 'address',
       field: 'address.address',
       render: (rowData) => (
         <div>
-          <IconButton
-            onClick={() => {
-              setPrintData(rowData);
-              setPrintDialog(true);
-            }}
-            style={{ margin: 'auto' }}
-          >
-            <PrintIcon />
-          </IconButton>
-          <Typography>{rowData.address.address}</Typography>
+          {rowData.state !== 'waiting_payment' && (
+            <IconButton
+              onClick={() => {
+                setPrintData(rowData);
+                setPrintDialog(true);
+              }}
+              style={{ margin: 'auto' }}
+            >
+              <PrintIcon />
+            </IconButton>
+          )}
+          <Typography>
+            {rowData.address.address === 'At event'
+              ? 'รับที่งาน'
+              : rowData.address.address}
+          </Typography>
           <Typography>{rowData.address.province}</Typography>
           <Typography>{rowData.address.zip}</Typography>
-          <Typography>{rowData.user.phone_number}</Typography>
+          <Typography>
+            {rowData.address.address === 'At event'
+              ? rowData.user.phone_number
+              : rowData.address.phone_number}
+          </Typography>
         </div>
       ),
       editable: 'never',
       filtering: false,
       export: false,
+    },
+    {
+      title: 'state',
+      field: 'state',
+      render: (rowData) => (
+        <div>
+          <Typography>
+            {rowData.state === 'waiting_payment' ? 'รอการชำระ' : 'ชำระแล้ว'}
+          </Typography>
+        </div>
+      ),
+      editable: 'never',
+      lookup: {
+        waiting_payment: 'รอการชำระ',
+        upcoming: 'ชำระแล้ว',
+      },
     },
   ];
 
@@ -193,7 +234,7 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
           textAlign: 'center',
           padding: 15,
           margin: '10px auto',
-          width: '100vw',
+          width: '100%',
         }}
       >
         <Typography>อัพเดทข้อมูล จาก CSV</Typography>
@@ -271,6 +312,12 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
           exportButton: true,
           exportFileName: activityDetail.title,
           rowStyle: (rowData) => {
+            if (rowData.state === 'waiting_payment') {
+              return {
+                backgroundColor: '#ef9a9a',
+                color: '#fff',
+              };
+            }
             if (!rowData.printed) {
               return {
                 backgroundColor: '#fff9c4',
