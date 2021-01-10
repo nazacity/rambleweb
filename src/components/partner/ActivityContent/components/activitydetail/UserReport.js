@@ -9,16 +9,34 @@ import {
   Dialog,
 } from '@material-ui/core';
 import AddressPrint from '../report/AddressPrint';
-import ReactToPrint, { PrintContextConsumer } from 'react-to-print';
+import ReactToPrint from 'react-to-print';
 import PrintIcon from '@material-ui/icons/Print';
 import ReportFilter from '../report/ReportFilter';
 import CSVReader from 'react-csv-reader';
+import CheckDialog from '../report/CheckDialog';
 
 const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
   const [data, setData] = useState([]);
   const [printDialog, setPrintDialog] = useState(false);
   const [printData, setPrintData] = useState({});
   const [sizeLookup, setSizeLookup] = useState({});
+  const [courseLookup, setCourseLookup] = useState({});
+  const [rowData, setRowData] = useState({});
+  const [checkDialogOpen, setCheckDialogOpen] = useState(false);
+
+  const handleCheckDialogClose = () => {
+    setRowData({});
+    setCheckDialogOpen(courseLookup);
+  };
+
+  const convertCourseLookup = () => {
+    let data = {};
+    activityDetail.courses.map((item) => {
+      data = { ...data, [item._id]: item.title };
+    });
+
+    setCourseLookup(data);
+  };
 
   const convertSizeLookup = () => {
     let data = {};
@@ -30,6 +48,7 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
   };
 
   useEffect(() => {
+    convertCourseLookup();
     convertSizeLookup();
   }, []);
 
@@ -99,13 +118,9 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
     },
     {
       title: 'course_title',
-      field: 'activity.course.title',
-      render: (rowData) => (
-        <div>
-          <Typography>{rowData.activity.course.title}</Typography>
-        </div>
-      ),
+      field: 'activity.course._id',
       editable: 'never',
+      lookup: courseLookup,
     },
     {
       title: 'shirt_size',
@@ -222,6 +237,13 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
 
   return (
     <div>
+      <CheckDialog
+        open={checkDialogOpen}
+        handleClose={handleCheckDialogClose}
+        rowData={rowData}
+        data={data}
+        setData={setData}
+      />
       <ReportFilter
         loadingTrue={loadingTrue}
         loadingFalse={loadingFalse}
@@ -288,21 +310,16 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
         columns={columnTitle}
         data={data}
         title=""
-        editable={{
-          onRowUpdate: (newData, oldData) =>
-            new Promise(async (resolve) => {
-              if (!oldData || newData === oldData) {
-                resolve();
-                return;
-              }
-              try {
-                resolve();
-              } catch (error) {
-                console.log(error.message);
-                resolve();
-              }
-            }),
-        }}
+        actions={[
+          {
+            icon: 'check',
+            tooltip: 'Check in and Check out',
+            onClick: (event, rowData) => {
+              setRowData(rowData);
+              setCheckDialogOpen(true);
+            },
+          },
+        ]}
         options={{
           pageSize: 15,
           pageSizeOptions: [15],
