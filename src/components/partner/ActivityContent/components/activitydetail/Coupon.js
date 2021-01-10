@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { IconButton, TextField, Typography } from '@material-ui/core';
+import { IconButton, TextField, Typography, Card } from '@material-ui/core';
 import { HighlightOff, Add, Edit, Save, Close } from '@material-ui/icons';
 import ModalImage from 'react-modal-image';
+import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
 
 const Coupon = ({ activityDetail, editActivity }) => {
+  const shadowStyles = useFadedShadowStyles();
   const [editMode, setEditMode] = useState(false);
   const { handleSubmit, unregister, control, reset } = useForm({
     defaultValues: {
@@ -49,7 +51,10 @@ const Coupon = ({ activityDetail, editActivity }) => {
   };
   if (editMode) {
     return (
-      <div style={{ width: 800, margin: '20px auto' }}>
+      <Card
+        style={{ padding: 20, borderRadius: 10, marginTop: 50 }}
+        className={shadowStyles.root}
+      >
         <form onSubmit={handleSubmit(onSubmit)}>
           <div style={{ display: 'flex' }}>
             <Typography variant="h4">คูปอง</Typography>
@@ -113,11 +118,14 @@ const Coupon = ({ activityDetail, editActivity }) => {
             );
           })}
         </form>
-      </div>
+      </Card>
     );
   }
   return (
-    <div style={{ margin: '20px auto', width: 800 }}>
+    <Card
+      style={{ padding: 20, borderRadius: 10, marginTop: 50 }}
+      className={shadowStyles.root}
+    >
       <div style={{ display: 'flex' }}>
         <Typography variant="h4">คูปอง</Typography>
         <div style={{ flex: 1 }} />
@@ -129,7 +137,7 @@ const Coupon = ({ activityDetail, editActivity }) => {
           <Edit />
         </IconButton>
       </div>
-      <div style={{ paddingLeft: 20 }}>
+      <div>
         {activityDetail.coupons.map((item, index) => {
           return (
             <div key={index}>
@@ -150,7 +158,7 @@ const Coupon = ({ activityDetail, editActivity }) => {
           );
         })}
       </div>
-    </div>
+    </Card>
   );
 };
 

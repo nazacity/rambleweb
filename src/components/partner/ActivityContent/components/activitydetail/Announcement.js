@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { IconButton, TextField, Typography } from '@material-ui/core';
+import {
+  IconButton,
+  TextField,
+  Typography,
+  Card,
+  Button,
+} from '@material-ui/core';
 import { HighlightOff, Add, Edit, Save, Close } from '@material-ui/icons';
 import ModalImage from 'react-modal-image';
 import { post } from 'utils/request';
@@ -8,9 +14,10 @@ import { useSelector } from 'react-redux';
 import moment from 'moment';
 import 'moment/locale/th';
 import AnnoucementCard from '../announcement/AnnoucementCard';
+import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
 
 const Announcement = ({ activityDetail, setActivityDetail }) => {
-  const [editMode, setEditMode] = useState(false);
+  const shadowStyles = useFadedShadowStyles();
   const { handleSubmit, unregister, control, reset, errors } = useForm({});
   const lang = useSelector((state) => state.layout.lang);
   moment.locale(lang);
@@ -27,98 +34,103 @@ const Announcement = ({ activityDetail, setActivityDetail }) => {
     reset();
     setEditMode(false);
   };
-  if (editMode) {
-    return (
-      <div style={{ width: 800, margin: '20px auto' }}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div style={{ display: 'flex' }}>
-            <Typography variant="h4">ประกาศ</Typography>
-            <div style={{ flex: 1 }} />
-            <IconButton type="submit">
-              <Add />
-            </IconButton>
-            <IconButton
-              onClick={() => {
-                setEditMode(false);
-              }}
-            >
-              <Close />
-            </IconButton>
-          </div>
-          <div
-            style={{ display: 'flex', alignItems: 'center', marginBottom: 20 }}
-          >
-            <Controller
-              as={TextField}
-              name="title"
-              control={control}
-              defaultValue=""
-              label="Title"
-              variant="outlined"
-              rules={{
-                required: 'กรุณาใส่ title',
-              }}
-              error={errors.title && true}
-              helperText={errors.title?.message}
-              // disabled={loading}
-              style={{ width: '100%' }}
-            />
-          </div>
-          <div
-            style={{ display: 'flex', alignItems: 'center', marginBottom: 20 }}
-          >
-            <Controller
-              as={TextField}
-              name="description"
-              control={control}
-              defaultValue=""
-              label="Description"
-              variant="outlined"
-              rules={{
-                required: 'กรุณาใส่ Description',
-              }}
-              error={errors.description && true}
-              helperText={errors.description?.message}
-              // disabled={loading}
-              style={{ width: '100%' }}
-              multiline={true}
-              rows={3}
-            />
-          </div>
-          <div
-            style={{ display: 'flex', alignItems: 'center', marginBottom: 20 }}
-          >
-            <Controller
-              as={TextField}
-              name="picture_url"
-              control={control}
-              defaultValue=""
-              label="picture url กว้าง 300 px สูง 300 px"
-              variant="outlined"
-              error={errors.title && true}
-              helperText={errors.title?.message}
-              // disabled={loading}
-              style={{ width: '100%' }}
-            />
-          </div>
-        </form>
-      </div>
-    );
-  }
+
   return (
-    <div style={{ margin: '20px auto', width: 800 }}>
+    <Card
+      style={{ padding: 20, borderRadius: 10 }}
+      className={shadowStyles.root}
+    >
       <div style={{ display: 'flex' }}>
         <Typography variant="h4">ประกาศ</Typography>
         <div style={{ flex: 1 }} />
-        <IconButton
-          onClick={() => {
-            setEditMode(true);
-          }}
-        >
-          <Add />
-        </IconButton>
       </div>
-      <div style={{ paddingLeft: 20 }}>
+      <Card style={{ padding: 5, marginBottom: 20 }}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div style={{ marginBottom: 20 }}>
+            <div>
+              <Controller
+                name="picture_url"
+                control={control}
+                defaultValue=""
+                render={({ onChange, value }) => {
+                  return (
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <TextField
+                        label="picture url 300x300"
+                        variant="outlined"
+                        error={errors.picture_url && true}
+                        helperText={errors.picture_url?.message}
+                        onChange={onChange}
+                        style={{ width: '100%', marginBottom: 10 }}
+                      />
+                      {value !== '' && (
+                        <img
+                          src={value}
+                          style={{
+                            height: 100,
+                            width: 100,
+                            borderRadius: 5,
+                            marginBottom: 10,
+                          }}
+                        />
+                      )}
+                    </div>
+                  );
+                }}
+              />
+            </div>
+            <div>
+              <Controller
+                as={TextField}
+                name="title"
+                control={control}
+                defaultValue=""
+                label="Title"
+                variant="outlined"
+                rules={{
+                  required: 'กรุณาใส่ title',
+                }}
+                error={errors.title && true}
+                helperText={errors.title?.message}
+                // disabled={loading}
+                style={{ width: '100%', marginBottom: 10 }}
+              />
+              <Controller
+                as={TextField}
+                name="description"
+                control={control}
+                defaultValue=""
+                label="Description"
+                variant="outlined"
+                rules={{
+                  required: 'กรุณาใส่ Description',
+                }}
+                error={errors.description && true}
+                helperText={errors.description?.message}
+                // disabled={loading}
+                style={{ width: '100%', marginBottom: 10 }}
+                multiline={true}
+                rows={3}
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                style={{ width: '100%', borderRadius: 5 }}
+                type="submit"
+              >
+                ประกาศ
+              </Button>
+            </div>
+          </div>
+        </form>
+      </Card>
+      <div>
         {activityDetail.announcement.length > 0 &&
           activityDetail.announcement
             .sort((a, b) => {
@@ -135,7 +147,7 @@ const Announcement = ({ activityDetail, setActivityDetail }) => {
               );
             })}
       </div>
-    </div>
+    </Card>
   );
 };
 

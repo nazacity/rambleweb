@@ -42,7 +42,7 @@ const AnnoucementCard = ({ item, setActivityDetail, activityDetail }) => {
 
   if (editMode) {
     return (
-      <div style={{ width: 800, margin: '20px auto' }}>
+      <div style={{ width: 300, margin: '20px auto' }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div style={{ display: 'flex' }}>
             <div style={{ flex: 1 }} />
@@ -118,62 +118,61 @@ const AnnoucementCard = ({ item, setActivityDetail, activityDetail }) => {
     );
   }
   return (
-    <div
-      style={{
-        width: 600,
-        borderRadius: 20,
-        margin: 20,
-        display: 'flex',
-        border: '1px solid black',
-      }}
-    >
-      <img
-        src={
-          item.picture_url
-            ? item.picture_url
-            : activityDetail.activity_picture_url
-        }
-        style={{
-          width: 200,
-          height: 200,
-          borderBottomLeftRadius: 20,
-          borderTopLeftRadius: 20,
-        }}
-      />
+    <div>
       <div
         style={{
-          margin: 20,
+          width: 400,
+          borderRadius: 5,
           display: 'flex',
-          flexDirection: 'column',
-          position: 'relative',
-          flex: 1,
+          border: '1px solid black',
         }}
       >
+        <img
+          src={
+            item.picture_url
+              ? item.picture_url
+              : activityDetail.activity_picture_url
+          }
+          style={{
+            width: 100,
+            height: 100,
+            borderBottomLeftRadius: 5,
+            borderTopLeftRadius: 5,
+          }}
+        />
         <div
           style={{
+            margin: 5,
             display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
+            flexDirection: 'column',
+            position: 'relative',
+            flex: 1,
           }}
         >
-          <Typography variant="h6">{item.title}</Typography>
-          <Typography variant="body1">
-            {moment(item.createdAt).fromNow()}
-          </Typography>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <Typography variant="h6">{item.title}</Typography>
+            <Typography variant="body1">
+              {moment(item.createdAt).fromNow()}
+            </Typography>
+          </div>
+          <Typography variant="body1">{item.description}</Typography>
         </div>
-        <Typography variant="body1">{item.description}</Typography>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <IconButton
-          style={{ position: 'absolute', bottom: -10, right: 20 }}
           onClick={() => {
             setEditMode(true);
           }}
         >
           <Edit />
         </IconButton>
-        <IconButton
-          style={{ position: 'absolute', bottom: -10, right: -20 }}
-          onClick={onDelete}
-        >
+        <IconButton onClick={onDelete}>
           <DeleteIcon />
         </IconButton>
       </div>

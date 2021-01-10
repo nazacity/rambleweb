@@ -64,8 +64,19 @@ const ActivityDetail = ({
     switch (value) {
       case 0:
         return (
-          <div>
-            <Report />
+          <div
+            style={{
+              width: '100%',
+              margin: 'auto',
+            }}
+          >
+            <Report
+              activityDetail={activityDetail}
+              loadingFalse={loadingFalse}
+              loadingTrue={loadingTrue}
+              setActivityDetail={setActivityDetail}
+              editActivity={editActivity}
+            />
           </div>
         );
       case 1:
@@ -87,19 +98,8 @@ const ActivityDetail = ({
             activityDetail={activityDetail}
           />
         );
-      case 3:
-        return (
-          <Coupon activityDetail={activityDetail} editActivity={editActivity} />
-        );
       case 4:
         return <QrcodeGenerator activityDetail={activityDetail} />;
-      case 5:
-        return (
-          <Announcement
-            activityDetail={activityDetail}
-            setActivityDetail={setActivityDetail}
-          />
-        );
       default:
         return <div>Content is Not Found</div>;
     }
@@ -126,9 +126,7 @@ const ActivityDetail = ({
             <Tab label="รายงาน" />
             <Tab label="รายละเอียด" />
             <Tab label="ผู้สมัคร" />
-            <Tab label="คูปอง" />
             <Tab label="Qrcode Generator" />
-            <Tab label="ประกาศ" />
           </Tabs>
         </Toolbar>
       </AppBar>
