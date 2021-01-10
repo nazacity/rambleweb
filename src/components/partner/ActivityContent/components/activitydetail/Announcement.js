@@ -1,14 +1,6 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import {
-  IconButton,
-  TextField,
-  Typography,
-  Card,
-  Button,
-} from '@material-ui/core';
-import { HighlightOff, Add, Edit, Save, Close } from '@material-ui/icons';
-import ModalImage from 'react-modal-image';
+import { TextField, Typography, Card, Button } from '@material-ui/core';
 import { post } from 'utils/request';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
@@ -44,7 +36,7 @@ const Announcement = ({ activityDetail, setActivityDetail }) => {
         <Typography variant="h4">ประกาศ</Typography>
         <div style={{ flex: 1 }} />
       </div>
-      <Card style={{ padding: 5, marginBottom: 20 }}>
+      <Card style={{ padding: 10, marginBottom: 20 }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div style={{ marginBottom: 20 }}>
             <div>

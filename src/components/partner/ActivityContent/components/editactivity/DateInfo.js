@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Typography, IconButton } from '@material-ui/core';
+import { Typography, IconButton, Card } from '@material-ui/core';
 import { Edit, Save, Close } from '@material-ui/icons';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 
@@ -24,7 +24,7 @@ const DateInfo = ({ activityDetail, editMode, setEditMode, editActivity }) => {
 
   if (editMode) {
     return (
-      <div>
+      <Card style={{ padding: 20, marginBottom: 20 }}>
         <div
           style={{ display: 'flex', alignItems: 'center', marginBottom: 20 }}
         >
@@ -83,12 +83,12 @@ const DateInfo = ({ activityDetail, editMode, setEditMode, editActivity }) => {
             <Close />
           </IconButton>
         </div>
-      </div>
+      </Card>
     );
   }
 
   return (
-    <React.Fragment>
+    <Card style={{ padding: 20, marginBottom: 20 }}>
       <div style={{ margin: '20px auto' }}>
         <Typography variant="h4">วันงาน</Typography>
 
@@ -119,7 +119,7 @@ const DateInfo = ({ activityDetail, editMode, setEditMode, editActivity }) => {
       >
         <Edit />
       </IconButton>
-    </React.Fragment>
+    </Card>
   );
 };
 

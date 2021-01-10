@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { IconButton, Typography } from '@material-ui/core';
+import { IconButton, Typography, Card } from '@material-ui/core';
 import { Edit, Save, Close } from '@material-ui/icons';
 import ReactMarkdown from 'react-markdown';
 import dynamic from 'next/dynamic';
@@ -40,40 +40,42 @@ const MoreDetail = ({
   };
   if (editMode) {
     return (
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div style={{ display: 'flex' }}>
-          <Typography variant="h4">รายละเอียดเพิ่มเติม</Typography>
-          <div style={{ flex: 1 }} />
-          <IconButton type="submit">
-            <Save />
-          </IconButton>
-          <IconButton
-            onClick={() => {
-              setEditMode({ ...editMode, moredetail: false });
-            }}
-          >
-            <Close />
-          </IconButton>
-        </div>
-        <Controller
-          name="more_detail"
-          control={control}
-          render={({ onChange, onBlur, value }) => (
-            <MdEditor
-              value={value}
-              style={{ height: '500px' }}
-              renderHTML={(text) => <ReactMarkdown source={text} />}
-              onChange={({ html, text }) => {
-                onChange(text);
+      <Card style={{ padding: 20, marginBottom: 20 }}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div style={{ display: 'flex' }}>
+            <Typography variant="h4">รายละเอียดเพิ่มเติม</Typography>
+            <div style={{ flex: 1 }} />
+            <IconButton type="submit">
+              <Save />
+            </IconButton>
+            <IconButton
+              onClick={() => {
+                setEditMode({ ...editMode, moredetail: false });
               }}
-            />
-          )}
-        />
-      </form>
+            >
+              <Close />
+            </IconButton>
+          </div>
+          <Controller
+            name="more_detail"
+            control={control}
+            render={({ onChange, onBlur, value }) => (
+              <MdEditor
+                value={value}
+                style={{ height: '500px' }}
+                renderHTML={(text) => <ReactMarkdown source={text} />}
+                onChange={({ html, text }) => {
+                  onChange(text);
+                }}
+              />
+            )}
+          />
+        </form>
+      </Card>
     );
   }
   return (
-    <div style={{ margin: '20px auto' }}>
+    <Card style={{ padding: 20, marginBottom: 20 }}>
       <div style={{ display: 'flex' }}>
         <Typography variant="h4">รายละเอียดเพิ่มเติม</Typography>
         <div style={{ flex: 1 }} />
@@ -86,7 +88,7 @@ const MoreDetail = ({
         </IconButton>
       </div>
       <ReactMarkdown source={activityDetail.more_detail} />
-    </div>
+    </Card>
   );
 };
 

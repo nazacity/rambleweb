@@ -67,7 +67,6 @@ const ActivityDetail = ({
           <div
             style={{
               width: '100%',
-              margin: 'auto',
             }}
           >
             <Report
@@ -81,7 +80,15 @@ const ActivityDetail = ({
         );
       case 1:
         return (
-          <div style={{ width: 800, margin: 'auto' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              margin: 50,
+            }}
+          >
             <Detail
               activityDetail={activityDetail}
               editActivity={editActivity}
@@ -98,7 +105,7 @@ const ActivityDetail = ({
             activityDetail={activityDetail}
           />
         );
-      case 4:
+      case 3:
         return <QrcodeGenerator activityDetail={activityDetail} />;
       default:
         return <div>Content is Not Found</div>;

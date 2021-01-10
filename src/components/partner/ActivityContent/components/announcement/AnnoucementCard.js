@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { IconButton, TextField, Typography } from '@material-ui/core';
+import {
+  IconButton,
+  TextField,
+  Typography,
+  Card,
+  Button,
+} from '@material-ui/core';
 import { Edit, Save, Close } from '@material-ui/icons';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { post, Delete } from 'utils/request';
@@ -42,79 +48,102 @@ const AnnoucementCard = ({ item, setActivityDetail, activityDetail }) => {
 
   if (editMode) {
     return (
-      <div style={{ width: 300, margin: '20px auto' }}>
+      <Card style={{ padding: 10, marginBottom: 20 }}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div style={{ display: 'flex' }}>
-            <div style={{ flex: 1 }} />
-            <IconButton type="submit">
-              <Save />
-            </IconButton>
-            <IconButton
-              onClick={() => {
-                setEditMode(false);
-              }}
-            >
-              <Close />
-            </IconButton>
-          </div>
-          <div
-            style={{ display: 'flex', alignItems: 'center', marginBottom: 20 }}
-          >
-            <Controller
-              as={TextField}
-              name="title"
-              control={control}
-              defaultValue=""
-              label="Title"
-              variant="outlined"
-              rules={{
-                required: 'กรุณาใส่ title',
-              }}
-              error={errors.title && true}
-              helperText={errors.title?.message}
-              // disabled={loading}
-              style={{ width: '100%' }}
-            />
-          </div>
-          <div
-            style={{ display: 'flex', alignItems: 'center', marginBottom: 20 }}
-          >
-            <Controller
-              as={TextField}
-              name="description"
-              control={control}
-              defaultValue=""
-              label="Description"
-              variant="outlined"
-              rules={{
-                required: 'กรุณาใส่ Description',
-              }}
-              error={errors.description && true}
-              helperText={errors.description?.message}
-              // disabled={loading}
-              style={{ width: '100%' }}
-              multiline={true}
-              rows={3}
-            />
-          </div>
-          <div
-            style={{ display: 'flex', alignItems: 'center', marginBottom: 20 }}
-          >
-            <Controller
-              as={TextField}
-              name="picture_url"
-              control={control}
-              defaultValue=""
-              label="picture url กว้าง 300 px สูง 300 px"
-              variant="outlined"
-              error={errors.title && true}
-              helperText={errors.title?.message}
-              // disabled={loading}
-              style={{ width: '100%' }}
-            />
+          <div style={{ marginBottom: 20 }}>
+            <div>
+              <Controller
+                name="picture_url"
+                control={control}
+                render={({ onChange, value }) => {
+                  return (
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <TextField
+                        value={value}
+                        label="picture url 300x300"
+                        variant="outlined"
+                        error={errors.picture_url && true}
+                        helperText={errors.picture_url?.message}
+                        onChange={onChange}
+                        style={{ width: '100%', marginBottom: 10 }}
+                      />
+                      {value !== '' && (
+                        <img
+                          src={value}
+                          style={{
+                            height: 100,
+                            width: 100,
+                            borderRadius: 5,
+                            marginBottom: 10,
+                          }}
+                        />
+                      )}
+                    </div>
+                  );
+                }}
+              />
+            </div>
+            <div>
+              <Controller
+                as={TextField}
+                name="title"
+                control={control}
+                defaultValue=""
+                label="Title"
+                variant="outlined"
+                rules={{
+                  required: 'กรุณาใส่ title',
+                }}
+                error={errors.title && true}
+                helperText={errors.title?.message}
+                // disabled={loading}
+                style={{ width: '100%', marginBottom: 10 }}
+              />
+              <Controller
+                as={TextField}
+                name="description"
+                control={control}
+                defaultValue=""
+                label="Description"
+                variant="outlined"
+                rules={{
+                  required: 'กรุณาใส่ Description',
+                }}
+                error={errors.description && true}
+                helperText={errors.description?.message}
+                // disabled={loading}
+                style={{ width: '100%', marginBottom: 10 }}
+                multiline={true}
+                rows={3}
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                style={{ width: '100%', borderRadius: 5, marginBottom: 10 }}
+                type="submit"
+              >
+                ประกาศ
+              </Button>
+              <Button
+                variant="outlined"
+                color="primary"
+                style={{ width: '100%', borderRadius: 5 }}
+                onClick={() => {
+                  setEditMode(false);
+                }}
+              >
+                ยกเลิก
+              </Button>
+            </div>
           </div>
         </form>
-      </div>
+      </Card>
     );
   }
   return (

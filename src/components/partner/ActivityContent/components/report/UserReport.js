@@ -179,6 +179,7 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
           },
         }}
         className={shadowStyles.root}
+        style={{ borderRadius: 10 }}
       />
     </div>
   );

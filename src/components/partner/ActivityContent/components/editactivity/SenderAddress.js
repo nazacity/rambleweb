@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, Typography, IconButton } from '@material-ui/core';
+import { TextField, Typography, IconButton, Card } from '@material-ui/core';
 import { Edit, Save, Close } from '@material-ui/icons';
 import { useForm, Controller } from 'react-hook-form';
 
@@ -34,124 +34,146 @@ const SenderAddress = ({
   };
   if (editMode) {
     return (
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div style={{ display: 'flex' }}>
-          <Typography variant="h4">ที่อยู่ผู้ส่ง</Typography>
-          <div style={{ flex: 1 }} />
-          <IconButton type="submit">
-            <Save />
-          </IconButton>
-          <IconButton
-            onClick={() => {
-              setEditMode({ ...editMode, senderAddress: false });
-            }}
-          >
-            <Close />
-          </IconButton>
-        </div>
-        <div>
-          <div
-            style={{ display: 'flex', alignItems: 'center', marginBottom: 20 }}
-          >
-            <Controller
-              as={TextField}
-              name="senderAddress[name]"
-              control={control}
-              defaultValue=""
-              label="ชื่อผู้ส่ง"
-              variant="outlined"
-              rules={{
-                required: 'กรุณาใส่ชื่อผู้ส่ง',
+      <Card style={{ padding: 20, marginBottom: 20 }}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div style={{ display: 'flex' }}>
+            <Typography variant="h4">ที่อยู่ผู้ส่ง</Typography>
+            <div style={{ flex: 1 }} />
+            <IconButton type="submit">
+              <Save />
+            </IconButton>
+            <IconButton
+              onClick={() => {
+                setEditMode({ ...editMode, senderAddress: false });
               }}
-              error={errors.senderAddress?.name && true}
-              helperText={errors.senderAddress?.name.message}
-              // disabled={loading}
-              style={{ width: '100%' }}
-            />
+            >
+              <Close />
+            </IconButton>
           </div>
-          <div
-            style={{ display: 'flex', alignItems: 'center', marginBottom: 20 }}
-          >
-            <Controller
-              as={TextField}
-              name="senderAddress[address]"
-              control={control}
-              defaultValue=""
-              label="ที่อยู่ผู้ส่ง"
-              variant="outlined"
-              rules={{
-                required: 'กรุณาใส่ที่อยู่ผู้ส่ง',
+          <div>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                marginBottom: 20,
               }}
-              error={errors.senderAddress?.address && true}
-              helperText={errors.senderAddress?.address.message}
-              // disabled={loading}
-              style={{ width: '100%' }}
-            />
-          </div>
-          <div
-            style={{ display: 'flex', alignItems: 'center', marginBottom: 20 }}
-          >
-            <Controller
-              as={TextField}
-              name="senderAddress[province]"
-              control={control}
-              defaultValue=""
-              label="จังหวัด"
-              variant="outlined"
-              rules={{
-                required: 'กรุณาใส่จังหวัด',
+            >
+              <Controller
+                as={TextField}
+                name="senderAddress[name]"
+                control={control}
+                defaultValue=""
+                label="ชื่อผู้ส่ง"
+                variant="outlined"
+                rules={{
+                  required: 'กรุณาใส่ชื่อผู้ส่ง',
+                }}
+                error={errors.senderAddress?.name && true}
+                helperText={errors.senderAddress?.name.message}
+                // disabled={loading}
+                style={{ width: '100%' }}
+              />
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                marginBottom: 20,
               }}
-              error={errors.senderAddress?.province && true}
-              helperText={errors.senderAddress?.province?.message}
-              // disabled={loading}
-              style={{ width: '100%' }}
-            />
-          </div>
-          <div
-            style={{ display: 'flex', alignItems: 'center', marginBottom: 20 }}
-          >
-            <Controller
-              as={TextField}
-              name="senderAddress[zip]"
-              control={control}
-              defaultValue=""
-              label="รหัสไปรษณีย์"
-              variant="outlined"
-              rules={{
-                required: 'กรุณาใส่รหัสไปรษณีย์',
+            >
+              <Controller
+                as={TextField}
+                name="senderAddress[address]"
+                control={control}
+                defaultValue=""
+                label="ที่อยู่ผู้ส่ง"
+                variant="outlined"
+                rules={{
+                  required: 'กรุณาใส่ที่อยู่ผู้ส่ง',
+                }}
+                error={errors.senderAddress?.address && true}
+                helperText={errors.senderAddress?.address.message}
+                // disabled={loading}
+                style={{ width: '100%' }}
+              />
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                marginBottom: 20,
               }}
-              error={errors.senderAddress?.zip && true}
-              helperText={errors.senderAddress?.zip?.message}
-              // disabled={loading}
-              style={{ width: '100%' }}
-            />
-          </div>
-          <div
-            style={{ display: 'flex', alignItems: 'center', marginBottom: 20 }}
-          >
-            <Controller
-              as={TextField}
-              name="senderAddress[phone_number]"
-              control={control}
-              defaultValue=""
-              label="เบอร์โทรศัพท์"
-              variant="outlined"
-              rules={{
-                required: 'กรุณาใส่เบอร์โทรศัพท์',
+            >
+              <Controller
+                as={TextField}
+                name="senderAddress[province]"
+                control={control}
+                defaultValue=""
+                label="จังหวัด"
+                variant="outlined"
+                rules={{
+                  required: 'กรุณาใส่จังหวัด',
+                }}
+                error={errors.senderAddress?.province && true}
+                helperText={errors.senderAddress?.province?.message}
+                // disabled={loading}
+                style={{ width: '100%' }}
+              />
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                marginBottom: 20,
               }}
-              error={errors.senderAddress?.phone_number && true}
-              helperText={errors.senderAddress?.phone_number?.message}
-              // disabled={loading}
-              style={{ width: '100%' }}
-            />
+            >
+              <Controller
+                as={TextField}
+                name="senderAddress[zip]"
+                control={control}
+                defaultValue=""
+                label="รหัสไปรษณีย์"
+                variant="outlined"
+                rules={{
+                  required: 'กรุณาใส่รหัสไปรษณีย์',
+                }}
+                error={errors.senderAddress?.zip && true}
+                helperText={errors.senderAddress?.zip?.message}
+                // disabled={loading}
+                style={{ width: '100%' }}
+              />
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                marginBottom: 20,
+              }}
+            >
+              <Controller
+                as={TextField}
+                name="senderAddress[phone_number]"
+                control={control}
+                defaultValue=""
+                label="เบอร์โทรศัพท์"
+                variant="outlined"
+                rules={{
+                  required: 'กรุณาใส่เบอร์โทรศัพท์',
+                }}
+                error={errors.senderAddress?.phone_number && true}
+                helperText={errors.senderAddress?.phone_number?.message}
+                // disabled={loading}
+                style={{ width: '100%' }}
+              />
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </Card>
     );
   }
 
   return (
-    <React.Fragment>
+    <Card style={{ padding: 20, marginBottom: 20 }}>
       <div style={{ display: 'flex' }}>
         <Typography variant="h4">ที่อยู่ผู้ส่ง</Typography>
         <div style={{ flex: 1 }} />
@@ -178,7 +200,7 @@ const SenderAddress = ({
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <Typography>{activityDetail.senderAddress.phone_number}</Typography>
       </div>
-    </React.Fragment>
+    </Card>
   );
 };
 

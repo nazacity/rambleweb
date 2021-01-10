@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ModalImage from 'react-modal-image';
-import { TextField, IconButton } from '@material-ui/core';
+import { TextField, IconButton, Card } from '@material-ui/core';
 import { Edit, Save, Close } from '@material-ui/icons';
 
 const Banner = ({ activityDetail, editMode, setEditMode, editActivity }) => {
@@ -22,7 +22,7 @@ const Banner = ({ activityDetail, editMode, setEditMode, editActivity }) => {
 
   if (editMode) {
     return (
-      <div style={{ marginBottom: 40 }}>
+      <Card style={{ padding: 20, marginBottom: 20 }}>
         <TextField
           label="Image Url"
           onChange={handleChange}
@@ -64,12 +64,12 @@ const Banner = ({ activityDetail, editMode, setEditMode, editActivity }) => {
             <Close />
           </IconButton>
         </div>
-      </div>
+      </Card>
     );
   }
 
   return (
-    <div style={{ marginBottom: 40 }}>
+    <Card style={{ padding: 20, marginBottom: 20 }}>
       <div
         style={{
           height: 600,
@@ -93,7 +93,7 @@ const Banner = ({ activityDetail, editMode, setEditMode, editActivity }) => {
       >
         <Edit />
       </IconButton>
-    </div>
+    </Card>
   );
 };
 

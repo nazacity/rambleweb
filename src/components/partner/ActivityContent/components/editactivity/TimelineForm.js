@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { IconButton, TextField, Typography } from '@material-ui/core';
+import { IconButton, TextField, Typography, Card } from '@material-ui/core';
 import TimelineDisplay from '../activitydetail/TimelineDisplay';
 
 import { HighlightOff, Add, Edit, Save, Close } from '@material-ui/icons';
@@ -65,87 +65,89 @@ const TimelineForm = ({
 
   if (editMode) {
     return (
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div style={{ display: 'flex' }}>
-          <Typography variant="h4">รายละเอียดกำหนดการ</Typography>
-          <div style={{ flex: 1 }} />
-          <IconButton type="submit">
-            <Save />
-          </IconButton>
-          <IconButton
-            onClick={() => {
-              setEditMode({ ...editMode, timeline: false });
-            }}
-          >
-            <Close />
-          </IconButton>
-          <IconButton onClick={addCourse}>
-            <Add />
-          </IconButton>
-        </div>
-        {indexes.map((index) => {
-          return (
-            <div name={'timeline'} key={index}>
-              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <IconButton
+      <Card style={{ padding: 20, marginBottom: 20 }}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div style={{ display: 'flex' }}>
+            <Typography variant="h4">รายละเอียดกำหนดการ</Typography>
+            <div style={{ flex: 1 }} />
+            <IconButton type="submit">
+              <Save />
+            </IconButton>
+            <IconButton
+              onClick={() => {
+                setEditMode({ ...editMode, timeline: false });
+              }}
+            >
+              <Close />
+            </IconButton>
+            <IconButton onClick={addCourse}>
+              <Add />
+            </IconButton>
+          </div>
+          {indexes.map((index) => {
+            return (
+              <div name={'timeline'} key={index}>
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  <IconButton
+                    variant="outlined"
+                    color="primary"
+                    onClick={removeCourse(index)}
+                    disabled={index === 0}
+                  >
+                    <HighlightOff />
+                  </IconButton>
+                </div>
+                <Controller
+                  as={TextField}
+                  name={`timeline[${index}].time`}
+                  control={control}
+                  defaultValue=""
+                  label="Timeline"
                   variant="outlined"
-                  color="primary"
-                  onClick={removeCourse(index)}
-                  disabled={index === 0}
-                >
-                  <HighlightOff />
-                </IconButton>
+                  // disabled={loading}
+                  style={{
+                    width: '100%',
+                    margin: '1vh auto',
+                    height: '50px',
+                  }}
+                />
+                <Controller
+                  as={TextField}
+                  name={`timeline[${index}].title`}
+                  control={control}
+                  defaultValue=""
+                  label="Timeline Title"
+                  variant="outlined"
+                  // disabled={loading}
+                  style={{
+                    width: '100%',
+                    margin: '1vh auto',
+                    height: '50px',
+                  }}
+                />
+                <Controller
+                  as={TextField}
+                  name={`timeline[${index}].description`}
+                  control={control}
+                  defaultValue=""
+                  label="Description"
+                  variant="outlined"
+                  // disabled={loading}
+                  style={{
+                    width: '100%',
+                    margin: '1vh auto',
+                    height: '50px',
+                  }}
+                />
               </div>
-              <Controller
-                as={TextField}
-                name={`timeline[${index}].time`}
-                control={control}
-                defaultValue=""
-                label="Timeline"
-                variant="outlined"
-                // disabled={loading}
-                style={{
-                  width: '100%',
-                  margin: '1vh auto',
-                  height: '50px',
-                }}
-              />
-              <Controller
-                as={TextField}
-                name={`timeline[${index}].title`}
-                control={control}
-                defaultValue=""
-                label="Timeline Title"
-                variant="outlined"
-                // disabled={loading}
-                style={{
-                  width: '100%',
-                  margin: '1vh auto',
-                  height: '50px',
-                }}
-              />
-              <Controller
-                as={TextField}
-                name={`timeline[${index}].description`}
-                control={control}
-                defaultValue=""
-                label="Description"
-                variant="outlined"
-                // disabled={loading}
-                style={{
-                  width: '100%',
-                  margin: '1vh auto',
-                  height: '50px',
-                }}
-              />
-            </div>
-          );
-        })}
-      </form>
+            );
+          })}
+        </form>
+      </Card>
     );
   }
   return (
-    <div style={{ margin: '20px auto' }}>
+    <Card style={{ padding: 20, marginBottom: 20 }}>
       <div style={{ display: 'flex' }}>
         <Typography variant="h4">รายละเอียดกำหนดการ</Typography>
         <div style={{ flex: 1 }} />
@@ -158,7 +160,7 @@ const TimelineForm = ({
         </IconButton>
       </div>
       <TimelineDisplay data={activityDetail.timeline} />
-    </div>
+    </Card>
   );
 };
 

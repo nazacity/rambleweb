@@ -20,6 +20,7 @@ const Report = ({
           maxWidth: 1200,
           minWidth: 900,
           margin: 50,
+          marginRight: 0,
         }}
       >
         <div style={{ display: 'flex' }}>

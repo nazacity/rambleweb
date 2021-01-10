@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { IconButton, TextField, Typography } from '@material-ui/core';
+import { IconButton, TextField, Typography, Card } from '@material-ui/core';
 import { HighlightOff, Add, Edit, Save, Close } from '@material-ui/icons';
 
 const ShirtStyle = ({
@@ -61,71 +61,73 @@ const ShirtStyle = ({
 
   if (editMode) {
     return (
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div style={{ display: 'flex' }}>
-          <Typography variant="h4">Size</Typography>
-          <div style={{ flex: 1 }} />
-          <IconButton type="submit">
-            <Save />
-          </IconButton>
-          <IconButton
-            onClick={() => {
-              setEditMode({ ...editMode, size: false });
-            }}
-          >
-            <Close />
-          </IconButton>
-          <IconButton onClick={addCourse}>
-            <Add />
-          </IconButton>
-        </div>
-        {indexes.map((index) => {
-          return (
-            <div name="courses" key={index}>
-              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <IconButton
+      <Card style={{ padding: 20, marginBottom: 20 }}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div style={{ display: 'flex' }}>
+            <Typography variant="h4">Size</Typography>
+            <div style={{ flex: 1 }} />
+            <IconButton type="submit">
+              <Save />
+            </IconButton>
+            <IconButton
+              onClick={() => {
+                setEditMode({ ...editMode, size: false });
+              }}
+            >
+              <Close />
+            </IconButton>
+            <IconButton onClick={addCourse}>
+              <Add />
+            </IconButton>
+          </div>
+          {indexes.map((index) => {
+            return (
+              <div name="courses" key={index}>
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  <IconButton
+                    variant="outlined"
+                    color="primary"
+                    onClick={removeCourse(index)}
+                    disabled={index === 0}
+                  >
+                    <HighlightOff />
+                  </IconButton>
+                </div>
+                <Controller
+                  as={TextField}
+                  name={`size[${index}].size`}
+                  control={control}
+                  defaultValue=""
+                  label="Size"
                   variant="outlined"
-                  color="primary"
-                  onClick={removeCourse(index)}
-                  disabled={index === 0}
-                >
-                  <HighlightOff />
-                </IconButton>
+                  // disabled={loading}
+                  style={{
+                    width: '100%',
+                    margin: '1vh auto',
+                  }}
+                />
+                <Controller
+                  as={TextField}
+                  name={`size[${index}].description`}
+                  control={control}
+                  defaultValue=""
+                  label="Size Description"
+                  variant="outlined"
+                  // disabled={loading}
+                  style={{
+                    width: '100%',
+                    margin: '1vh auto',
+                  }}
+                />
               </div>
-              <Controller
-                as={TextField}
-                name={`size[${index}].size`}
-                control={control}
-                defaultValue=""
-                label="Size"
-                variant="outlined"
-                // disabled={loading}
-                style={{
-                  width: '100%',
-                  margin: '1vh auto',
-                }}
-              />
-              <Controller
-                as={TextField}
-                name={`size[${index}].description`}
-                control={control}
-                defaultValue=""
-                label="Size Description"
-                variant="outlined"
-                // disabled={loading}
-                style={{
-                  width: '100%',
-                  margin: '1vh auto',
-                }}
-              />
-            </div>
-          );
-        })}
-      </form>
+            );
+          })}
+        </form>
+      </Card>
     );
   }
   return (
-    <div style={{ margin: '20px auto' }}>
+    <Card style={{ padding: 20, marginBottom: 20 }}>
       <div style={{ display: 'flex' }}>
         <Typography variant="h4">ไซส์เสื้อ</Typography>
         <div style={{ flex: 1 }} />
@@ -146,7 +148,7 @@ const ShirtStyle = ({
           </div>
         );
       })}
-    </div>
+    </Card>
   );
 };
 

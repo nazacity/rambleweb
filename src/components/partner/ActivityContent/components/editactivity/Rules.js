@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { IconButton, TextField, Typography } from '@material-ui/core';
+import { IconButton, TextField, Typography, Card } from '@material-ui/core';
 import { HighlightOff, Add, Edit, Save, Close } from '@material-ui/icons';
 import RuleDetails from './RuleDetail';
 
@@ -75,77 +75,79 @@ const Rules = ({ editMode, setEditMode, activityDetail, editActivity }) => {
 
   if (editMode) {
     return (
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div style={{ display: 'flex' }}>
-          <Typography variant="h4">Rules</Typography>
-          <div style={{ flex: 1 }} />
-          <IconButton type="submit">
-            <Save />
-          </IconButton>
-          <IconButton
-            onClick={() => {
-              setEditMode({ ...editMode, rules: false });
-            }}
-          >
-            <Close />
-          </IconButton>
-          <IconButton onClick={addCourse}>
-            <Add />
-          </IconButton>
-        </div>
-        {indexes.map((index) => {
-          return (
-            <div name="courses" key={index}>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'flex-end',
-                  alignItems: 'center',
-                }}
-              >
-                <Typography variant="h6">Rule {index + 1}</Typography>
-                <div style={{ flex: 1 }} />
-                <IconButton
-                  variant="outlined"
-                  color="primary"
-                  onClick={removeCourse(index)}
-                  disabled={index === 0}
-                >
-                  <HighlightOff />
-                </IconButton>
-              </div>
-              <div style={{ display: 'flex' }}>
-                <Controller
-                  as={TextField}
-                  name={`rules[${index}].title`}
-                  control={control}
-                  defaultValue=""
-                  label={`Rule ${index + 1}`}
-                  variant="outlined"
-                  // disabled={loading}
+      <Card style={{ padding: 20, marginBottom: 20 }}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div style={{ display: 'flex' }}>
+            <Typography variant="h4">Rules</Typography>
+            <div style={{ flex: 1 }} />
+            <IconButton type="submit">
+              <Save />
+            </IconButton>
+            <IconButton
+              onClick={() => {
+                setEditMode({ ...editMode, rules: false });
+              }}
+            >
+              <Close />
+            </IconButton>
+            <IconButton onClick={addCourse}>
+              <Add />
+            </IconButton>
+          </div>
+          {indexes.map((index) => {
+            return (
+              <div name="courses" key={index}>
+                <div
                   style={{
-                    width: '100%',
-                    margin: '1vh auto',
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    alignItems: 'center',
                   }}
+                >
+                  <Typography variant="h6">Rule {index + 1}</Typography>
+                  <div style={{ flex: 1 }} />
+                  <IconButton
+                    variant="outlined"
+                    color="primary"
+                    onClick={removeCourse(index)}
+                    disabled={index === 0}
+                  >
+                    <HighlightOff />
+                  </IconButton>
+                </div>
+                <div style={{ display: 'flex' }}>
+                  <Controller
+                    as={TextField}
+                    name={`rules[${index}].title`}
+                    control={control}
+                    defaultValue=""
+                    label={`Rule ${index + 1}`}
+                    variant="outlined"
+                    // disabled={loading}
+                    style={{
+                      width: '100%',
+                      margin: '1vh auto',
+                    }}
+                  />
+                </div>
+                <RuleDetails
+                  control={control}
+                  errors={errors}
+                  unregister={unregister}
+                  ruleIndex={`rules[${index}]`}
+                  index={index}
+                  activityDetail={activityDetail}
                 />
               </div>
-              <RuleDetails
-                control={control}
-                errors={errors}
-                unregister={unregister}
-                ruleIndex={`rules[${index}]`}
-                index={index}
-                activityDetail={activityDetail}
-              />
-            </div>
-          );
-        })}
-      </form>
+            );
+          })}
+        </form>
+      </Card>
     );
   }
 
   return (
-    <div style={{ margin: '20px auto' }}>
+    <Card style={{ padding: 20, marginBottom: 20 }}>
       <div style={{ display: 'flex' }}>
         <Typography variant="h4">กติการางวัล</Typography>
         <div style={{ flex: 1 }} />
@@ -195,7 +197,7 @@ const Rules = ({ editMode, setEditMode, activityDetail, editActivity }) => {
           );
         })}
       </div>
-    </div>
+    </Card>
   );
 };
 
