@@ -134,7 +134,7 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
   ];
 
   return (
-    <div>
+    <div className={shadowStyles.root}>
       <CheckDialog
         open={checkDialogOpen}
         handleClose={handleCheckDialogClose}
@@ -157,8 +157,8 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
           },
         ]}
         options={{
-          pageSize: 15,
-          pageSizeOptions: [15],
+          pageSize: 50,
+          pageSizeOptions: [50],
           paginationType: 'stepped',
           search: true,
           filtering: true,
@@ -178,7 +178,6 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
             }
           },
         }}
-        className={shadowStyles.root}
         style={{ borderRadius: 10 }}
       />
     </div>

@@ -321,8 +321,8 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
           },
         ]}
         options={{
-          pageSize: 15,
-          pageSizeOptions: [15],
+          pageSize: 50,
+          pageSizeOptions: [50],
           paginationType: 'stepped',
           search: true,
           filtering: true,
