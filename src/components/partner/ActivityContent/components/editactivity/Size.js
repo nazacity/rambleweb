@@ -131,13 +131,13 @@ const ShirtStyle = ({
       <div style={{ display: 'flex' }}>
         <Typography variant="h4">ไซส์เสื้อ</Typography>
         <div style={{ flex: 1 }} />
-        <IconButton
+        {/* <IconButton
           onClick={() => {
             setEditMode({ ...editMode, size: true });
           }}
         >
           <Edit />
-        </IconButton>
+        </IconButton> */}
       </div>
       {activityDetail.size.map((size, index) => {
         return (

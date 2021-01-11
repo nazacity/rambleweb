@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { IconButton, TextField, Typography, Card } from '@material-ui/core';
+import {
+  IconButton,
+  TextField,
+  Typography,
+  Card,
+  CardActionArea,
+} from '@material-ui/core';
 import { HighlightOff, Add, Edit, Save, Close } from '@material-ui/icons';
 import ModalImage from 'react-modal-image';
 import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
@@ -52,27 +58,44 @@ const Coupon = ({ activityDetail, editActivity }) => {
   if (editMode) {
     return (
       <Card
-        style={{ padding: 20, borderRadius: 10, marginTop: 50 }}
+        style={{ borderRadius: 10, marginTop: 50 }}
         className={shadowStyles.root}
       >
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div style={{ display: 'flex' }}>
-            <Typography variant="h4">คูปอง</Typography>
-            <div style={{ flex: 1 }} />
-            <IconButton type="submit">
-              <Save />
-            </IconButton>
-            <IconButton
-              onClick={() => {
-                setEditMode(false);
-              }}
-            >
-              <Close />
-            </IconButton>
-            <IconButton onClick={addCourse}>
-              <Add />
-            </IconButton>
-          </div>
+        <div
+          style={{
+            display: 'flex',
+            backgroundColor: '#8a1776',
+            padding: 10,
+            height: 50,
+          }}
+        >
+          <Typography
+            variant="h5"
+            color="primary"
+            style={{ color: '#fff', textAlign: 'center' }}
+          >
+            คูปอง
+          </Typography>
+          <div style={{ flex: 1 }} />
+          <IconButton
+            onClick={handleSubmit(onSubmit)}
+            style={{ color: '#fff' }}
+          >
+            <Save />
+          </IconButton>
+          <IconButton
+            onClick={() => {
+              setEditMode(false);
+            }}
+            style={{ color: '#fff' }}
+          >
+            <Close />
+          </IconButton>
+          <IconButton onClick={addCourse} style={{ color: '#fff' }}>
+            <Add />
+          </IconButton>
+        </div>
+        <div style={{ padding: 20 }}>
           {indexes.map((index) => {
             return (
               <div name="coupons" key={index}>
@@ -117,19 +140,33 @@ const Coupon = ({ activityDetail, editActivity }) => {
               </div>
             );
           })}
-        </form>
+        </div>
       </Card>
     );
   }
   return (
     <Card
-      style={{ padding: 20, borderRadius: 10, marginTop: 50 }}
+      style={{ borderRadius: 10, marginTop: 50 }}
       className={shadowStyles.root}
     >
-      <div style={{ display: 'flex' }}>
-        <Typography variant="h4">คูปอง</Typography>
+      <div
+        style={{
+          display: 'flex',
+          backgroundColor: '#8a1776',
+          padding: 10,
+          height: 50,
+        }}
+      >
+        <Typography
+          variant="h5"
+          color="primary"
+          style={{ color: '#fff', textAlign: 'center' }}
+        >
+          คูปอง
+        </Typography>
         <div style={{ flex: 1 }} />
         <IconButton
+          style={{ color: '#fff' }}
           onClick={() => {
             setEditMode(true);
           }}
@@ -137,24 +174,35 @@ const Coupon = ({ activityDetail, editActivity }) => {
           <Edit />
         </IconButton>
       </div>
-      <div>
+
+      <div style={{ padding: 10 }}>
         {activityDetail.coupons.map((item, index) => {
           return (
-            <div key={index}>
-              <Typography variant="h5">{item.description}</Typography>
-              <div
+            <Card key={index} style={{ margin: 20 }}>
+              <CardActionArea
                 style={{
-                  width: 300,
-                  height: 200,
-                  overflow: 'hidden',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
                 }}
               >
-                <ModalImage
-                  small={item.coupon_picture_url}
-                  large={item.coupon_picture_url}
-                />
-              </div>
-            </div>
+                <div
+                  style={{
+                    width: 300,
+                    height: 200,
+                    overflow: 'hidden',
+                  }}
+                >
+                  <ModalImage
+                    small={item.coupon_picture_url}
+                    large={item.coupon_picture_url}
+                  />
+                </div>
+                <Typography variant="body1" color="primary">
+                  {item.description}
+                </Typography>
+              </CardActionArea>
+            </Card>
           );
         })}
       </div>

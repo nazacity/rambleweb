@@ -129,13 +129,13 @@ const Gifts = ({ editMode, setEditMode, activityDetail, editActivity }) => {
       <div style={{ display: 'flex' }}>
         <Typography variant="h4">รางวัลของที่ระลึก</Typography>
         <div style={{ flex: 1 }} />
-        <IconButton
+        {/* <IconButton
           onClick={() => {
             setEditMode({ ...editMode, gifts: true });
           }}
         >
           <Edit />
-        </IconButton>
+        </IconButton> */}
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
         {activityDetail.gifts.map((item, index) => {

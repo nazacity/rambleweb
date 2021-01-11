@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ResponsiveBar } from '@nivo/bar';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, Typography } from '@material-ui/core';
@@ -9,75 +9,43 @@ const useStyles = makeStyles(({ palette }) => ({
   card: {
     borderRadius: 12,
     textAlign: 'center',
-    width: '47%',
     height: 400,
   },
 }));
 
-const AgeRangeReport = ({ activityDetail }) => {
+const CourseReport = ({ activityDetail }) => {
   const styles = useStyles();
   const shadowStyles = useFadedShadowStyles();
+  const [data, setData] = useState([]);
 
-  const data = [
-    {
-      age: '20down',
-      'อายุ <20':
-        activityDetail.report_infomation.age_20 === 0
-          ? 0.5
-          : activityDetail.report_infomation.age_20,
-      // 'อายุ <20': 120,
-    },
-    {
-      age: '20-30',
-      'อายุ 20-30':
-        activityDetail.report_infomation.age_20_30 === 0
-          ? 0.5
-          : activityDetail.report_infomation.age_20_30,
-      // 'อายุ 20-30': 134,
-    },
-    {
-      age: '30-40',
-      'อายุ 30-40':
-        activityDetail.report_infomation.age_30_40 === 0
-          ? 0.5
-          : activityDetail.report_infomation.age_30_40,
-      // 'อายุ 30-40': 176,
-    },
-    {
-      age: '40-50',
-      'อายุ 40-50':
-        activityDetail.report_infomation.age_40_50 === 0
-          ? 0.5
-          : activityDetail.report_infomation.age_40_50,
-      // 'อายุ 40-50': 120,
-    },
-    {
-      age: '50up',
-      'อายุ >50':
-        activityDetail.report_infomation.age_50 === 0
-          ? 0.5
-          : activityDetail.report_infomation.age_50,
-      // 'อายุ >50': 160,
-    },
-  ];
+  const convertData = () => {
+    const newData = activityDetail.courses.map((item) => {
+      return {
+        course: item.title,
+        register_no: item.register_no === 0 ? 0.5 : item.register_no,
+      };
+    });
+
+    setData(newData);
+  };
+
+  useEffect(() => {
+    convertData();
+  }, []);
+  console.log(data);
+
   return (
     <Card className={cx(styles.card, shadowStyles.root)}>
       <div style={{ backgroundColor: '#8a1776', padding: 10, height: 50 }}>
         <Typography variant="h5" color="primary" style={{ color: '#fff' }}>
-          ยอดผู้สมัครตามช่วงอายุ
+          ยอดผู้สมัครตามประเภทการแข่งขัน
         </Typography>
       </div>
       <div style={{ height: 350 }}>
         <ResponsiveBar
           data={data}
-          keys={[
-            'อายุ <20',
-            'อายุ 20-30',
-            'อายุ 30-40',
-            'อายุ 40-50',
-            'อายุ >50',
-          ]}
-          indexBy="age"
+          keys={['register_no']}
+          indexBy="course"
           margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
           padding={0.3}
           valueScale={{ type: 'linear' }}
@@ -140,4 +108,4 @@ const AgeRangeReport = ({ activityDetail }) => {
   );
 };
 
-export default AgeRangeReport;
+export default CourseReport;

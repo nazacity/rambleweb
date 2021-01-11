@@ -76,13 +76,13 @@ const Rules = ({ editMode, setEditMode, activityDetail, editActivity }) => {
       <div style={{ display: 'flex' }}>
         <Typography variant="h4">กฏ</Typography>
         <div style={{ flex: 1 }} />
-        <IconButton
+        {/* <IconButton
           onClick={() => {
             setEditMode({ ...editMode, rules1: true });
           }}
         >
           <Edit />
-        </IconButton>
+        </IconButton> */}
       </div>
       <ReactMarkdown source={activityDetail.rules1} />
     </Card>

@@ -151,13 +151,13 @@ const Rules = ({ editMode, setEditMode, activityDetail, editActivity }) => {
       <div style={{ display: 'flex' }}>
         <Typography variant="h4">กติการางวัล</Typography>
         <div style={{ flex: 1 }} />
-        <IconButton
+        {/* <IconButton
           onClick={() => {
             setEditMode({ ...editMode, rules: true });
           }}
         >
           <Edit />
-        </IconButton>
+        </IconButton> */}
       </div>
       <div style={{ paddingLeft: 20 }}>
         {activityDetail.rules.map((item, index) => {

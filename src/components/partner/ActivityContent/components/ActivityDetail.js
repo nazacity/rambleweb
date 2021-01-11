@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { IconButton, AppBar, Tabs, Tab, Toolbar } from '@material-ui/core';
-import { ArrowBack } from '@material-ui/icons';
 
 import { post } from 'utils/request';
 import Detail from './activitydetail/Detail';
-import Announcement from './activitydetail/Announcement';
 import UserReport from './activitydetail/UserReport';
 import Report from './activitydetail/Report';
-import Coupon from './activitydetail/Coupon';
 import QrcodeGenerator from './activitydetail/QrcodeGenerator';
+import SpeedDial from './activitydetail/SpeedDial';
+import BackButton from './activitydetail/BackButton';
+import ReportPrint from './report/ReportPrint';
 
 const ActivityDetail = ({
   activityDetail,
@@ -34,6 +33,14 @@ const ActivityDetail = ({
     senderAddress: false,
   });
 
+  const [qrcodeGeneratorModalOpen, setQrcodeGeneratorModalOpen] = useState(
+    false
+  );
+
+  const handleQrcodeGeneratorModalClose = () => {
+    setQrcodeGeneratorModalOpen();
+  };
+
   const editActivity = async (data, reset) => {
     loadingTrue();
     try {
@@ -55,10 +62,6 @@ const ActivityDetail = ({
   };
 
   const [value, setValue] = useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
 
   const stateContent = () => {
     switch (value) {
@@ -106,7 +109,7 @@ const ActivityDetail = ({
           />
         );
       case 3:
-        return <QrcodeGenerator activityDetail={activityDetail} />;
+        return <ReportPrint activityDetail={activityDetail} />;
       default:
         return <div>Content is Not Found</div>;
     }
@@ -114,30 +117,19 @@ const ActivityDetail = ({
 
   return (
     <div>
-      <AppBar position="static" color="default">
-        <Toolbar>
-          <IconButton
-            onClick={() => {
-              setState(0);
-            }}
-          >
-            <ArrowBack />
-          </IconButton>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            variant="fullWidth"
-          >
-            <Tab label="รายงาน" />
-            <Tab label="รายละเอียด" />
-            <Tab label="ผู้สมัคร" />
-            <Tab label="Qrcode Generator" />
-          </Tabs>
-        </Toolbar>
-      </AppBar>
       {stateContent()}
+      <SpeedDial
+        setValue={setValue}
+        setState={setState}
+        setQrcodeGeneratorModalOpen={setQrcodeGeneratorModalOpen}
+        activityDetail={activityDetail}
+      />
+      <QrcodeGenerator
+        open={qrcodeGeneratorModalOpen}
+        handleClose={handleQrcodeGeneratorModalClose}
+        activityDetail={activityDetail}
+      />
+      <BackButton setState={setState} />
     </div>
   );
 };

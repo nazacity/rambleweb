@@ -48,7 +48,6 @@ const signin = () => {
   const onSubmit = async (data) => {
     dispatch(setLoading(true));
     try {
-      console.log(data);
       const res = await axios.post(`${api}/employees/login`, {
         username: data.username,
         password: data.password,

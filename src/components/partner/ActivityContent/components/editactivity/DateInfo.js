@@ -111,14 +111,14 @@ const DateInfo = ({ activityDetail, editMode, setEditMode, editActivity }) => {
           </Typography>
         </div>
       </div>
-      <IconButton
+      {/* <IconButton
         style={{ left: '50%', transform: 'translateX(-50%)' }}
         onClick={() => {
           setEditMode({ ...editMode, dateinfo: true });
         }}
       >
         <Edit />
-      </IconButton>
+      </IconButton> */}
     </Card>
   );
 };

@@ -67,13 +67,13 @@ const Condition = ({ editMode, setEditMode, activityDetail, editActivity }) => {
       <div style={{ display: 'flex' }}>
         <Typography variant="h4">ข้อตกลง และเงื่อนไข</Typography>
         <div style={{ flex: 1 }} />
-        <IconButton
+        {/* <IconButton
           onClick={() => {
             setEditMode({ ...editMode, condition: true });
           }}
         >
           <Edit />
-        </IconButton>
+        </IconButton> */}
       </div>
       <ReactMarkdown source={activityDetail.condition} />
     </Card>

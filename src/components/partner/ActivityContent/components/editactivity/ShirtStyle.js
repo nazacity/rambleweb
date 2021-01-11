@@ -134,13 +134,13 @@ const ShirtStyle = ({
       <div style={{ display: 'flex' }}>
         <Typography variant="h4">แบบเสื้อ</Typography>
         <div style={{ flex: 1 }} />
-        <IconButton
+        {/* <IconButton
           onClick={() => {
             setEditMode({ ...editMode, shirtstyle: true });
           }}
         >
           <Edit />
-        </IconButton>
+        </IconButton> */}
       </div>
       <div
         style={{

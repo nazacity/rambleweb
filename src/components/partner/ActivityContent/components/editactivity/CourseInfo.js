@@ -158,13 +158,13 @@ const CourseInfo = ({
       <div style={{ display: 'flex' }}>
         <Typography variant="h4">คอร์สวิ่ง</Typography>
         <div style={{ flex: 1 }} />
-        <IconButton
+        {/* <IconButton
           onClick={() => {
             setEditMode({ ...editMode, courses: true });
           }}
         >
           <Edit />
-        </IconButton>
+        </IconButton> */}
       </div>
       {activityDetail.courses.map((item, index) => {
         return (

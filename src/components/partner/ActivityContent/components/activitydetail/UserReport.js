@@ -135,6 +135,16 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
       lookup: sizeLookup,
     },
     {
+      title: 'gender',
+      field: 'user.gender',
+      editable: 'never',
+      editable: 'never',
+      lookup: {
+        male: 'ชาย',
+        female: 'หญิง',
+      },
+    },
+    {
       title: 'address',
       field: 'address.address',
       render: (rowData) => (

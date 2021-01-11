@@ -177,13 +177,13 @@ const SenderAddress = ({
       <div style={{ display: 'flex' }}>
         <Typography variant="h4">ที่อยู่ผู้ส่ง</Typography>
         <div style={{ flex: 1 }} />
-        <IconButton
+        {/* <IconButton
           onClick={() => {
             setEditMode({ ...editMode, senderAddress: true });
           }}
         >
           <Edit />
-        </IconButton>
+        </IconButton> */}
       </div>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <Typography>{activityDetail.senderAddress.name}</Typography>

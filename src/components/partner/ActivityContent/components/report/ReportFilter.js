@@ -74,6 +74,7 @@ const ReportFilter = ({
         padding: 30,
         borderBottom: '1px solid black',
         alignItems: 'center',
+        paddingLeft: 100,
       }}
     >
       <Typography variant="h4">Filter</Typography>

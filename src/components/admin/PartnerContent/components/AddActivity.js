@@ -49,6 +49,13 @@ const defaultValues = {
   size: [],
   condition: '',
   gifts: [],
+  senderAddress: {
+    name: '',
+    address: '',
+    province: '',
+    zip: '',
+    phone_number: '',
+  },
 };
 
 const AddActivity = ({
@@ -104,7 +111,7 @@ const AddActivity = ({
         return { ...item, id: `${index + 1}` };
       });
       const size = activityDetail.size.map((item, index) => {
-        return { ...item, id: `${index + 1}` };
+        return { ...item, id: `${index + 1}`, size: item.size.toUpperCase() };
       });
 
       let gifts = [];
@@ -143,6 +150,7 @@ const AddActivity = ({
         size: size,
         condition: activityDetail.condition,
         gifts: activityDetail.gifts,
+        senderAddress: activityDetail.senderAddress,
       };
 
       const res = await post('/api/employees/createactivity', data);

@@ -6,6 +6,8 @@ import {
   Typography,
   Card,
   Button,
+  Dialog,
+  CardActionArea,
 } from '@material-ui/core';
 import { Edit, Save, Close } from '@material-ui/icons';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -16,11 +18,15 @@ import 'moment/locale/th';
 
 const AnnoucementCard = ({ item, setActivityDetail, activityDetail }) => {
   const [editMode, setEditMode] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const { handleSubmit, unregister, control, reset, errors } = useForm({
     defaultValues: item,
   });
   const lang = useSelector((state) => state.layout.lang);
   moment.locale(lang);
+  const handleDialogClose = () => {
+    setDialogOpen(false);
+  };
 
   const onSubmit = async (data) => {
     const res = await post(`/api/partners/announcement/${item._id}`, {
@@ -148,51 +154,65 @@ const AnnoucementCard = ({ item, setActivityDetail, activityDetail }) => {
   }
   return (
     <div>
-      <div
+      <Card
         style={{
-          width: 400,
           borderRadius: 5,
           display: 'flex',
-          border: '1px solid black',
+          cursor: 'pointer',
+        }}
+        onClick={() => {
+          if (item.description.length > 80) {
+            setDialogOpen(true);
+          }
         }}
       >
-        <img
-          src={
-            item.picture_url
-              ? item.picture_url
-              : activityDetail.activity_picture_url
-          }
+        <CardActionArea
           style={{
-            width: 100,
-            height: 100,
-            borderBottomLeftRadius: 5,
-            borderTopLeftRadius: 5,
-          }}
-        />
-        <div
-          style={{
-            margin: 5,
             display: 'flex',
-            flexDirection: 'column',
-            position: 'relative',
-            flex: 1,
           }}
         >
+          <img
+            src={
+              item.picture_url
+                ? item.picture_url
+                : activityDetail.activity_picture_url
+            }
+            style={{
+              width: 100,
+              height: 100,
+              borderBottomLeftRadius: 5,
+              borderTopLeftRadius: 5,
+            }}
+          />
           <div
             style={{
+              margin: 5,
               display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
+              flexDirection: 'column',
+              position: 'relative',
+              flex: 1,
             }}
           >
-            <Typography variant="h6">{item.title}</Typography>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <Typography variant="h6">{item.title}</Typography>
+              <Typography variant="body1">
+                {moment(item.createdAt).fromNow()}
+              </Typography>
+            </div>
             <Typography variant="body1">
-              {moment(item.createdAt).fromNow()}
+              {item.description.length > 80
+                ? item.description.substring(0, 80) + '...'
+                : item.description}
             </Typography>
           </div>
-          <Typography variant="body1">{item.description}</Typography>
-        </div>
-      </div>
+        </CardActionArea>
+      </Card>
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <IconButton
           onClick={() => {
@@ -205,6 +225,37 @@ const AnnoucementCard = ({ item, setActivityDetail, activityDetail }) => {
           <DeleteIcon />
         </IconButton>
       </div>
+      <Dialog
+        open={dialogOpen}
+        onClose={handleDialogClose}
+        maxWidth="sm"
+        fullWidth
+      >
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: 20,
+          }}
+        >
+          <img
+            src={
+              item.picture_url
+                ? item.picture_url
+                : activityDetail.activity_picture_url
+            }
+            style={{
+              width: 200,
+              height: 200,
+              borderRadius: 10,
+            }}
+          />
+          <Typography variant="h6">{item.title}</Typography>
+          <Typography variant="body1">{item.description}</Typography>
+        </div>
+      </Dialog>
     </div>
   );
 };

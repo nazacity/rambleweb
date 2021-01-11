@@ -122,14 +122,14 @@ const Title = ({ editMode, setEditMode, activityDetail, editActivity }) => {
           {activityDetail.description}
         </Typography>
       </div>
-      <IconButton
+      {/* <IconButton
         style={{ left: '50%', transform: 'translateX(-50%)' }}
         onClick={() => {
           setEditMode({ ...editMode, title: true });
         }}
       >
         <Edit />
-      </IconButton>
+      </IconButton> */}
     </Card>
   );
 };

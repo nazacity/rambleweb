@@ -79,13 +79,13 @@ const MoreDetail = ({
       <div style={{ display: 'flex' }}>
         <Typography variant="h4">รายละเอียดเพิ่มเติม</Typography>
         <div style={{ flex: 1 }} />
-        <IconButton
+        {/* <IconButton
           onClick={() => {
             setEditMode({ ...editMode, moredetail: true });
           }}
         >
           <Edit />
-        </IconButton>
+        </IconButton> */}
       </div>
       <ReactMarkdown source={activityDetail.more_detail} />
     </Card>

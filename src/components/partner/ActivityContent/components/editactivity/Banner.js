@@ -85,14 +85,14 @@ const Banner = ({ activityDetail, editMode, setEditMode, editActivity }) => {
           large={activityDetail.activity_picture_url}
         />
       </div>
-      <IconButton
+      {/* <IconButton
         style={{ left: '50%', transform: 'translateX(-50%)' }}
         onClick={() => {
           setEditMode({ ...editMode, banner: true });
         }}
       >
         <Edit />
-      </IconButton>
+      </IconButton> */}
     </Card>
   );
 };

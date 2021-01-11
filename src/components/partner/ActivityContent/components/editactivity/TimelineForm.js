@@ -151,13 +151,13 @@ const TimelineForm = ({
       <div style={{ display: 'flex' }}>
         <Typography variant="h4">รายละเอียดกำหนดการ</Typography>
         <div style={{ flex: 1 }} />
-        <IconButton
+        {/* <IconButton
           onClick={() => {
             setEditMode({ ...editMode, timeline: true });
           }}
         >
           <Edit />
-        </IconButton>
+        </IconButton> */}
       </div>
       <TimelineDisplay data={activityDetail.timeline} />
     </Card>

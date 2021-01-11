@@ -192,14 +192,14 @@ const Location = ({ editMode, setEditMode, activityDetail, editActivity }) => {
         </div>
       </div>
       <div>
-        <IconButton
+        {/* <IconButton
           style={{ left: '50%', transform: 'translateX(-50%)' }}
           onClick={() => {
             setEditMode({ ...editMode, location: true });
           }}
         >
           <Edit />
-        </IconButton>
+        </IconButton> */}
       </div>
     </Card>
   );
