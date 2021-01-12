@@ -6,8 +6,8 @@ module.exports = {
     'registering',
     'end_register',
     'actual_date',
-    'finished',
-    'cancel',
+    // 'finished',
+    // 'cancel',
   ],
   user_activity_state: ['upcoming', 'actual_date', 'finished', 'cancel'],
 };

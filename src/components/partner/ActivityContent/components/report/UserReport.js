@@ -131,7 +131,11 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
       render: (rowData) => (
         <div>
           <Typography>
-            {rowData.state === 'waiting_payment' ? 'รอการชำระ' : 'ชำระแล้ว'}
+            {rowData.state === 'waiting_payment' && 'รอการชำระ'}
+            {rowData.state === 'cancel' && 'ยกเลิก'}
+            {rowData.state !== 'waiting_payment' &&
+              rowData.state !== 'cancel' &&
+              'ชำระแล้ว'}
           </Typography>
         </div>
       ),
@@ -139,6 +143,7 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
       lookup: {
         waiting_payment: 'รอการชำระ',
         upcoming: 'ชำระแล้ว',
+        cancel: 'ยกเลิก',
       },
     },
   ];
@@ -156,19 +161,19 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
         columns={columnTitle}
         data={data}
         title=""
-        actions={[
-          {
-            icon: 'check',
-            tooltip: 'Check in and Check out',
-            onClick: (event, rowData) => {
-              setRowData(rowData);
-              setCheckDialogOpen(true);
-            },
-          },
-        ]}
+        // actions={[
+        //   {
+        //     icon: 'check',
+        //     tooltip: 'Check in and Check out',
+        //     onClick: (event, rowData) => {
+        //       setRowData(rowData);
+        //       setCheckDialogOpen(true);
+        //     },
+        //   },
+        // ]}
         options={{
-          pageSize: 50,
-          pageSizeOptions: [50],
+          pageSize: 10,
+          pageSizeOptions: [10],
           paginationType: 'stepped',
           search: true,
           filtering: true,

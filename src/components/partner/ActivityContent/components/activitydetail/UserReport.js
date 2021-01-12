@@ -23,6 +23,7 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
   const [courseLookup, setCourseLookup] = useState({});
   const [rowData, setRowData] = useState({});
   const [checkDialogOpen, setCheckDialogOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleCheckDialogClose = () => {
     setRowData({});
@@ -96,6 +97,7 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
       field: '_id',
       filtering: false,
       render: (rowData) => <div />,
+      editable: 'never',
     },
     {
       title: 'contest_no',
@@ -119,7 +121,6 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
     {
       title: 'course_title',
       field: 'activity.course._id',
-      editable: 'never',
       lookup: courseLookup,
     },
     {
@@ -128,10 +129,8 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
       render: (rowData) => (
         <div>
           <Typography>{rowData.size.size}</Typography>
-          <Typography>{rowData.size.description}</Typography>
         </div>
       ),
-      editable: 'never',
       lookup: sizeLookup,
     },
     {
@@ -184,14 +183,18 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
       render: (rowData) => (
         <div>
           <Typography>
-            {rowData.state === 'waiting_payment' ? 'รอการชำระ' : 'ชำระแล้ว'}
+            {rowData.state === 'waiting_payment' && 'รอการชำระ'}
+            {rowData.state === 'cancel' && 'ยกเลิก'}
+            {rowData.state !== 'waiting_payment' &&
+              rowData.state !== 'cancel' &&
+              'ชำระแล้ว'}
           </Typography>
         </div>
       ),
-      editable: 'never',
       lookup: {
         waiting_payment: 'รอการชำระ',
         upcoming: 'ชำระแล้ว',
+        cancel: 'ยกเลิก',
       },
     },
   ];
@@ -244,6 +247,8 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
       }
     }
   };
+
+  console.log(data);
 
   return (
     <div>
@@ -317,19 +322,59 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
         />
       </Dialog>
       <MaterialTable
+        loading={loading}
         columns={columnTitle}
         data={data}
         title=""
-        actions={[
-          {
-            icon: 'check',
-            tooltip: 'Check in and Check out',
-            onClick: (event, rowData) => {
-              setRowData(rowData);
-              setCheckDialogOpen(true);
+        actions={
+          activityDetail.state === 'actual_date' && [
+            {
+              icon: 'check',
+              tooltip: 'Check in and Check out',
+              onClick: (event, rowData) => {
+                setRowData(rowData);
+                setCheckDialogOpen(true);
+              },
             },
-          },
-        ]}
+          ]
+        }
+        editable={
+          activityDetail.state !== 'end_activity' && {
+            onRowUpdate: (newData, oldData) =>
+              new Promise(async (resolve, reject) => {
+                if (newData === oldData) {
+                  resolve();
+                  return;
+                } else {
+                  const createData = newData;
+                  delete createData.announcement;
+                  try {
+                    setLoading(true);
+                    const res = await post(
+                      `/api/partners/edituseractivity/${newData._id}`,
+                      createData
+                    );
+                    if (res.status === 200) {
+                      const updatedData = data;
+                      const index = data.findIndex(
+                        (item) => item._id === res.data._id
+                      );
+
+                      updatedData[index] = res.data;
+
+                      setData(updatedData);
+                    }
+                    setLoading(false);
+                    resolve();
+                  } catch (error) {
+                    setLoading(false);
+                    console.log(error);
+                    resolve();
+                  }
+                }
+              }),
+          }
+        }
         options={{
           pageSize: 50,
           pageSizeOptions: [50],
