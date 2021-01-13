@@ -5,8 +5,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
 import { Row, Item } from '@mui-treasury/components/flex';
 import { Info, InfoSubtitle, InfoTitle } from '@mui-treasury/components/info';
 import { useNewsInfoStyles } from '@mui-treasury/styles/info/news';
@@ -18,12 +16,12 @@ moment.locale('th');
 
 const useStyles = makeStyles(() => ({
   card: {
-    minWidth: 200,
     position: 'relative',
     boxShadow: '0 8px 24px 0 rgba(0,0,0,0.12)',
     overflow: 'visible',
     borderRadius: '1.5rem',
     transition: '0.4s',
+    marginBottom: 20,
     cursor: 'pointer',
     '&:hover': {
       transform: 'translateY(-2px)',
@@ -61,16 +59,9 @@ const useStyles = makeStyles(() => ({
       background: 'linear-gradient(to top, #014a7d, rgba(0,0,0,0))',
     },
   },
-  content: {
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
-    zIndex: 1,
-    padding: '1.5rem 1.5rem 1rem',
-  },
   avatar: {
-    width: 48,
-    height: 48,
+    width: 60,
+    height: 60,
   },
   tag: {
     display: 'inline-block',
@@ -90,8 +81,9 @@ const useStyles = makeStyles(() => ({
   author: {
     zIndex: 1,
     position: 'relative',
-    borderBottomLeftRadius: '1.5rem',
-    borderBottomRightRadius: '1.5rem',
+    borderRadius: 10,
+    display: 'flex',
+    alignItems: 'center',
   },
   shadow: {
     transition: '0.2s',
@@ -132,7 +124,7 @@ const ActivitiesCard = React.memo(function News3Card({
               borderRadius: '0.5rem',
               padding: '2px 0.5rem',
               color: '#fff',
-              marginBottom: '0.5rem',
+              marginBottom: 5,
             }}
           >
             ก่อนเปิดรับสมัคร
@@ -143,7 +135,6 @@ const ActivitiesCard = React.memo(function News3Card({
           <div
             style={{
               display: 'inline-block',
-              // fontFamily: "'Sen', sans-serif",
               backgroundColor: '#64dd17',
               borderRadius: '0.5rem',
               padding: '2px 0.5rem',
@@ -221,54 +212,25 @@ const ActivitiesCard = React.memo(function News3Card({
     }
   };
   return (
-    <>
-      <NoSsr>
-        <GoogleFontLoader fonts={[{ font: 'Sen', weights: [400, 800] }]} />
-      </NoSsr>
-      <Card
-        className={styles.card}
-        onClick={() => {
-          setActivityDetail(activity);
-          setState(1);
-        }}
-      >
-        <Box className={styles.main} minHeight={300} position={'relative'}>
-          <CardMedia
-            classes={mediaStyles}
-            image={activity.activity_picture_url}
-          />
-          <div className={styles.content}>
-            {/* <div className={styles.tag}>Fashion</div> */}
-            {activityState(activity.state)}
-            <Typography variant={'h2'} className={styles.title}>
-              {activity.title}
-            </Typography>
-          </div>
-        </Box>
-        <Row
-          className={styles.author}
-          m={0}
-          p={3}
-          pt={2}
-          gap={2}
-          bgcolor={'common.white'}
-        >
-          {/* <Item>
-            <Avatar
-              className={styles.avatar}
-              src={'https://i.pravatar.cc/300?img=13'}
-            />
-          </Item> */}
-          <Info position={'middle'} useStyles={useNewsInfoStyles}>
-            <InfoTitle>{activity.location.province}</InfoTitle>
-            <InfoTitle>{activity.location.place_name}</InfoTitle>
-            <InfoSubtitle>
-              {moment(activity.actual_date).format('DD MMMM YYYY')}
-            </InfoSubtitle>
-          </Info>
-        </Row>
-      </Card>
-    </>
+    <Card
+      className={styles.card}
+      onClick={() => {
+        setActivityDetail(activity);
+        setState(1);
+      }}
+    >
+      <Row className={styles.author} m={0} gap={2} bgcolor={'common.white'}>
+        <Avatar className={styles.avatar} src={activity.activity_picture_url} />
+        <Info position={'middle'} useStyles={useNewsInfoStyles}>
+          {activityState(activity.state)}
+          <InfoTitle>{activity.location.province}</InfoTitle>
+          <InfoTitle>{activity.location.place_name}</InfoTitle>
+          <InfoSubtitle>
+            {moment(activity.actual_date).format('DD MMMM YYYY')}
+          </InfoSubtitle>
+        </Info>
+      </Row>
+    </Card>
   );
 });
 export default ActivitiesCard;

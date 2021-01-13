@@ -10,17 +10,6 @@ import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
 import { useGutterBorderedGridStyles } from '@mui-treasury/styles/grid/gutterBordered';
 
 const useStyles = makeStyles(({ palette }) => ({
-  card: {
-    borderRadius: 12,
-    textAlign: 'center',
-    width: '47%',
-    height: 400,
-  },
-  avatar: {
-    width: 120,
-    height: 120,
-    margin: 'auto',
-  },
   heading: {
     fontSize: 18,
     fontWeight: 'bold',
@@ -52,6 +41,7 @@ const useStyles = makeStyles(({ palette }) => ({
 
 export const RegisteredReport = React.memo(function ProfileCard({
   activityDetail,
+  mobile,
 }) {
   const styles = useStyles();
   const shadowStyles = useFadedShadowStyles();
@@ -60,10 +50,22 @@ export const RegisteredReport = React.memo(function ProfileCard({
     height: '50%',
   });
   return (
-    <Card className={cx(styles.card, shadowStyles.root)}>
+    <Card
+      className={shadowStyles.root}
+      style={{
+        borderRadius: 12,
+        textAlign: 'center',
+        width: mobile ? undefined : '47%',
+        height: 400,
+      }}
+    >
       <CardContent>
         <Avatar
-          className={styles.avatar}
+          style={{
+            width: mobile ? 60 : 120,
+            height: mobile ? 60 : 120,
+            margin: 'auto',
+          }}
           src={activityDetail.activity_picture_url}
         />
         <h3 className={styles.heading}>{activityDetail.title}</h3>

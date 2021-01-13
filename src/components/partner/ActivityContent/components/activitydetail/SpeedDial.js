@@ -5,7 +5,7 @@ import PrintIcon from '@material-ui/icons/Print';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { AppBar, Icon } from '@material-ui/core';
+import { AppBar, Icon, Hidden } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { loadCSS } from 'fg-loadcss';
 
@@ -104,26 +104,91 @@ export default function SpeedDials({
     },
   ];
 
+  const actions_mobile = [
+    {
+      icon: <AssessmentIcon />,
+      name: 'Report',
+      onClick: () => {
+        setValue(0);
+        handleClose();
+      },
+    },
+    {
+      icon: <Icon className="fas fa-running" />,
+      name: 'Activity Detail',
+      onClick: () => {
+        setValue(1);
+        handleClose();
+      },
+    },
+    {
+      icon: <AccountCircleIcon />,
+      name: 'User Management',
+      onClick: () => {
+        setValue(2);
+        handleClose();
+      },
+    },
+    {
+      icon: <Icon className="fas fa-qrcode" />,
+      name: 'Qrcode Generator',
+      onClick: () => {
+        setQrcodeGeneratorModalOpen(true);
+        handleClose();
+      },
+    },
+    {
+      icon: <ArrowBackIcon />,
+      name: 'Back',
+      onClick: () => {
+        setState(0);
+        handleClose();
+      },
+    },
+  ];
+
   return (
     <AppBar position="fixed">
-      <SpeedDial
-        ariaLabel="SpeedDial example"
-        className={classes.speedDial}
-        icon={<MenuIcon />}
-        onClose={handleClose}
-        onOpen={handleOpen}
-        open={open}
-        direction="left"
-      >
-        {actions.map((action) => (
-          <SpeedDialAction
-            key={action.name}
-            icon={action.icon}
-            tooltipTitle={action.name}
-            onClick={action.onClick}
-          />
-        ))}
-      </SpeedDial>
+      <Hidden smDown>
+        <SpeedDial
+          ariaLabel="SpeedDial example"
+          className={classes.speedDial}
+          icon={<MenuIcon />}
+          onClose={handleClose}
+          onOpen={handleOpen}
+          open={open}
+          direction="left"
+        >
+          {actions.map((action) => (
+            <SpeedDialAction
+              key={action.name}
+              icon={action.icon}
+              tooltipTitle={action.name}
+              onClick={action.onClick}
+            />
+          ))}
+        </SpeedDial>
+      </Hidden>
+      <Hidden mdUp>
+        <SpeedDial
+          ariaLabel="SpeedDial example"
+          className={classes.speedDial}
+          icon={<MenuIcon />}
+          onClose={handleClose}
+          onOpen={handleOpen}
+          open={open}
+          direction="left"
+        >
+          {actions_mobile.map((action) => (
+            <SpeedDialAction
+              key={action.name}
+              icon={action.icon}
+              tooltipTitle={action.name}
+              onClick={action.onClick}
+            />
+          ))}
+        </SpeedDial>
+      </Hidden>
     </AppBar>
   );
 }

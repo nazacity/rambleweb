@@ -32,7 +32,7 @@ const AppModern = () => {
     <ThemeProvider theme={theme}>
       <>
         <Head>
-          <title>App Modern | A next js landing page</title>
+          <title>Ramble Ruunner Sharing Community</title>
           <meta name="Description" content="React next landing page" />
           <meta name="theme-color" content="#2563FF" />
           <meta
@@ -58,10 +58,10 @@ const AppModern = () => {
           <ContentWrapper>
             <Banner />
             <Features />
-            {/* <AppSlider /> */}
-            {/* <DashboardFeatures /> */}
-            {/* <ProductSlide /> */}
-            {/* <Testimonial /> */}
+            <AppSlider />
+            <DashboardFeatures />
+            <ProductSlide />
+            <Testimonial />
             <GetStarted />
             {/* <DesignedAndBuilt /> */}
             {/* <PricingPolicy /> */}

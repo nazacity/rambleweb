@@ -1,13 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import ActivitiesCardListView from './activities/ActivitiesCardListView';
 import ActivitiesCardModuleView from './activities/ActivitiesCardModuleView';
-import {
-  Grid,
-  Typography,
-  Card,
-  Collapse,
-  IconButton,
-} from '@material-ui/core';
+import { Grid, Typography, Card, Hidden, IconButton } from '@material-ui/core';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { activity_state } from 'constants/activity';
 import ExpandLess from '@material-ui/icons/ExpandLess';
@@ -150,8 +144,6 @@ const Activities = ({ activities, setState, setActivityDetail }) => {
     registering: [],
     end_register: [],
     actual_date: [],
-    finished: [],
-    cancel: [],
   });
   const convertData = () => {
     const pre_register = activities.filter(
@@ -166,17 +158,17 @@ const Activities = ({ activities, setState, setActivityDetail }) => {
     const actual_date = activities.filter(
       (item) => item.state === 'actual_date'
     );
-    const finished = activities.filter((item) => item.state === 'finished');
-    const cancel = activities.filter((item) => item.state === 'cancel');
+    // const finished = activities.filter((item) => item.state === 'finished');
+    // const cancel = activities.filter((item) => item.state === 'cancel');
 
     setActivitiesByState({
       pre_register: pre_register,
       registering: registering,
       end_register: end_register,
       actual_date: actual_date,
-      finished: finished,
+      // finished: finished,
       // finished: [...activities, ...activities, ...activities],
-      cancel: cancel,
+      // cancel: cancel,
       // cancel: [...activities, ...activities, ...activities],
     });
   };
@@ -187,7 +179,7 @@ const Activities = ({ activities, setState, setActivityDetail }) => {
   const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
-    console.log(removed);
+
     result.splice(endIndex, 0, removed);
 
     return result;
@@ -235,131 +227,304 @@ const Activities = ({ activities, setState, setActivityDetail }) => {
           </ToggleButtonGroup>
         </div>
         <Card style={{ paddingBottom: 40 }}>
-          {view === 'list' && (
-            <Fragment>
-              <div style={{ display: 'flex' }}>
-                {activity_state.map((item) => {
-                  return (
-                    <DragDropContext
-                      onDragEnd={(result) => onDragEnd(result, item)}
-                      key={item}
-                    >
-                      <div>
-                        {activityState(item)}
-                        <Droppable droppableId={item}>
-                          {(provided) => (
-                            <div
-                              ref={provided.innerRef}
-                              {...provided.droppableProps}
-                              style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                              }}
-                            >
-                              {activitiesByState[item].map(
-                                (activity, index) => {
-                                  return (
-                                    <Draggable
-                                      draggableId={activity._id}
-                                      index={index}
-                                      key={activity._id}
-                                    >
-                                      {(provided) => (
-                                        <div
-                                          key={activity._id}
-                                          {...provided.draggableProps}
-                                          {...provided.dragHandleProps}
-                                          ref={provided.innerRef}
-                                        >
-                                          <ActivitiesCardListView
-                                            activity={activity}
-                                            setState={setState}
-                                            setActivityDetail={
-                                              setActivityDetail
-                                            }
-                                          />
-                                        </div>
-                                      )}
-                                    </Draggable>
-                                  );
-                                }
-                              )}
-                              {provided.placeholder}
-                            </div>
-                          )}
-                        </Droppable>
-                      </div>
-                    </DragDropContext>
-                  );
-                })}
-              </div>
-              <div>
-                {activityState('finished')}
-                <Collapse in={open.finished} collapsedHeight={80}>
-                  <Grid
-                    container
-                    spacing={2}
-                    style={{ width: 320 * 4, paddingLeft: 10 }}
-                  >
-                    {activitiesByState.finished.map((activity, index) => {
-                      return (
-                        <Grid item xs={3} key={activity._id}>
-                          <ActivitiesCardListView
-                            activity={activity}
-                            setState={setState}
-                            setActivityDetail={setActivityDetail}
-                          />
-                        </Grid>
-                      );
-                    })}
-                  </Grid>
-                </Collapse>
-              </div>
-              <div>
-                {activityState('cancel')}
-                <Collapse in={open.cancel} collapsedHeight={80}>
-                  <Grid
-                    container
-                    spacing={2}
-                    style={{ width: 320 * 4, paddingLeft: 10 }}
-                  >
-                    {activitiesByState.cancel.map((activity, index) => {
-                      return (
-                        <Grid item xs={3} key={activity._id}>
-                          <ActivitiesCardListView
-                            activity={activity}
-                            setState={setState}
-                            setActivityDetail={setActivityDetail}
-                          />
-                        </Grid>
-                      );
-                    })}
-                  </Grid>
-                </Collapse>
-              </div>
-            </Fragment>
-          )}
-          {view === 'module' && (
-            <Fragment>
-              <Grid
-                container
-                spacing={2}
-                style={{ padding: 20, width: 320 * 4 }}
-              >
-                {activities.length > 0 &&
-                  activities.map((item, index) => (
-                    <Grid key={item._id} item xs={4}>
-                      <ActivitiesCardModuleView
-                        activity={item}
-                        setState={setState}
-                        setActivityDetail={setActivityDetail}
-                      />
-                    </Grid>
-                  ))}
-              </Grid>
-            </Fragment>
-          )}
+          <Hidden mdDown>
+            {view === 'list' && (
+              <Fragment>
+                <div style={{ display: 'flex' }}>
+                  {activity_state.map((item) => {
+                    return (
+                      <DragDropContext
+                        onDragEnd={(result) => onDragEnd(result, item)}
+                        key={item}
+                      >
+                        <div>
+                          {activityState(item)}
+                          <Droppable droppableId={item}>
+                            {(provided) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.droppableProps}
+                                style={{
+                                  display: 'flex',
+                                  flexDirection: 'column',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                {activitiesByState[item].map(
+                                  (activity, index) => {
+                                    return (
+                                      <Draggable
+                                        draggableId={activity._id}
+                                        index={index}
+                                        key={activity._id}
+                                      >
+                                        {(provided) => (
+                                          <div
+                                            key={activity._id}
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}
+                                            ref={provided.innerRef}
+                                          >
+                                            <ActivitiesCardListView
+                                              activity={activity}
+                                              setState={setState}
+                                              setActivityDetail={
+                                                setActivityDetail
+                                              }
+                                            />
+                                          </div>
+                                        )}
+                                      </Draggable>
+                                    );
+                                  }
+                                )}
+                                {provided.placeholder}
+                              </div>
+                            )}
+                          </Droppable>
+                        </div>
+                      </DragDropContext>
+                    );
+                  })}
+                </div>
+              </Fragment>
+            )}
+            {view === 'module' && (
+              <Fragment>
+                <Grid
+                  container
+                  spacing={2}
+                  style={{ padding: 20, width: 320 * 4 }}
+                >
+                  {activities.length > 0 &&
+                    activities.map((item, index) => (
+                      <Grid key={item._id} item xs={4}>
+                        <ActivitiesCardModuleView
+                          activity={item}
+                          setState={setState}
+                          setActivityDetail={setActivityDetail}
+                        />
+                      </Grid>
+                    ))}
+                </Grid>
+              </Fragment>
+            )}
+          </Hidden>
+          <Hidden xsDown lgUp>
+            {view === 'list' && (
+              <Fragment>
+                <div style={{ display: 'flex' }}>
+                  {activity_state.slice(0, 2).map((item) => {
+                    return (
+                      <DragDropContext
+                        onDragEnd={(result) => onDragEnd(result, item)}
+                        key={item}
+                      >
+                        <div>
+                          {activityState(item)}
+                          <Droppable droppableId={item}>
+                            {(provided) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.droppableProps}
+                                style={{
+                                  display: 'flex',
+                                  flexDirection: 'column',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                {activitiesByState[item].map(
+                                  (activity, index) => {
+                                    return (
+                                      <Draggable
+                                        draggableId={activity._id}
+                                        index={index}
+                                        key={activity._id}
+                                      >
+                                        {(provided) => (
+                                          <div
+                                            key={activity._id}
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}
+                                            ref={provided.innerRef}
+                                          >
+                                            <ActivitiesCardListView
+                                              activity={activity}
+                                              setState={setState}
+                                              setActivityDetail={
+                                                setActivityDetail
+                                              }
+                                            />
+                                          </div>
+                                        )}
+                                      </Draggable>
+                                    );
+                                  }
+                                )}
+                                {provided.placeholder}
+                              </div>
+                            )}
+                          </Droppable>
+                        </div>
+                      </DragDropContext>
+                    );
+                  })}
+                </div>
+                <div style={{ display: 'flex' }}>
+                  {activity_state.slice(2).map((item) => {
+                    return (
+                      <DragDropContext
+                        onDragEnd={(result) => onDragEnd(result, item)}
+                        key={item}
+                      >
+                        <div>
+                          {activityState(item)}
+                          <Droppable droppableId={item}>
+                            {(provided) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.droppableProps}
+                                style={{
+                                  display: 'flex',
+                                  flexDirection: 'column',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                {activitiesByState[item].map(
+                                  (activity, index) => {
+                                    return (
+                                      <Draggable
+                                        draggableId={activity._id}
+                                        index={index}
+                                        key={activity._id}
+                                      >
+                                        {(provided) => (
+                                          <div
+                                            key={activity._id}
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}
+                                            ref={provided.innerRef}
+                                          >
+                                            <ActivitiesCardListView
+                                              activity={activity}
+                                              setState={setState}
+                                              setActivityDetail={
+                                                setActivityDetail
+                                              }
+                                            />
+                                          </div>
+                                        )}
+                                      </Draggable>
+                                    );
+                                  }
+                                )}
+                                {provided.placeholder}
+                              </div>
+                            )}
+                          </Droppable>
+                        </div>
+                      </DragDropContext>
+                    );
+                  })}
+                </div>
+              </Fragment>
+            )}
+            {view === 'module' && (
+              <Fragment>
+                <Grid container spacing={2} style={{ padding: 20 }}>
+                  {activities.length > 0 &&
+                    activities.map((item, index) => (
+                      <Grid key={item._id} item xs={6}>
+                        <ActivitiesCardModuleView
+                          activity={item}
+                          setState={setState}
+                          setActivityDetail={setActivityDetail}
+                        />
+                      </Grid>
+                    ))}
+                </Grid>
+              </Fragment>
+            )}
+          </Hidden>
+          <Hidden smUp>
+            {view === 'list' && (
+              <Fragment>
+                <div>
+                  {activity_state.map((item) => {
+                    return (
+                      <DragDropContext
+                        onDragEnd={(result) => onDragEnd(result, item)}
+                        key={item}
+                      >
+                        <div>
+                          {activityState(item)}
+                          <Droppable droppableId={item}>
+                            {(provided) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.droppableProps}
+                                style={{
+                                  display: 'flex',
+                                  flexDirection: 'column',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                {activitiesByState[item].map(
+                                  (activity, index) => {
+                                    return (
+                                      <Draggable
+                                        draggableId={activity._id}
+                                        index={index}
+                                        key={activity._id}
+                                      >
+                                        {(provided) => (
+                                          <div
+                                            key={activity._id}
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}
+                                            ref={provided.innerRef}
+                                          >
+                                            <ActivitiesCardListView
+                                              activity={activity}
+                                              setState={setState}
+                                              setActivityDetail={
+                                                setActivityDetail
+                                              }
+                                            />
+                                          </div>
+                                        )}
+                                      </Draggable>
+                                    );
+                                  }
+                                )}
+                                {provided.placeholder}
+                              </div>
+                            )}
+                          </Droppable>
+                        </div>
+                      </DragDropContext>
+                    );
+                  })}
+                </div>
+              </Fragment>
+            )}
+            {view === 'module' && (
+              <Fragment>
+                <Grid container spacing={2} style={{ padding: 20 }}>
+                  {activities.length > 0 &&
+                    activities.map((item, index) => (
+                      <Grid key={item._id} item xs={12}>
+                        <ActivitiesCardModuleView
+                          activity={item}
+                          setState={setState}
+                          setActivityDetail={setActivityDetail}
+                        />
+                      </Grid>
+                    ))}
+                </Grid>
+              </Fragment>
+            )}
+          </Hidden>
         </Card>
       </div>
     </div>

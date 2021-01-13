@@ -13,7 +13,7 @@ const useStyles = makeStyles(({ palette }) => ({
   },
 }));
 
-const ShirtReport = ({ activityDetail }) => {
+const ShirtReport = ({ activityDetail, mobile }) => {
   const styles = useStyles();
   const shadowStyles = useFadedShadowStyles();
   const [maleData, setMaleData] = useState([]);
@@ -75,7 +75,13 @@ const ShirtReport = ({ activityDetail }) => {
           ยอดเสื้อตามประเภทการแข่งขัน
         </Typography>
       </div>
-      <div style={{ height: 500, display: 'flex' }}>
+      <div
+        style={{
+          height: mobile ? undefined : 500,
+          display: 'flex',
+          flexDirection: mobile ? 'column' : 'row',
+        }}
+      >
         <div
           style={{
             display: 'flex',
@@ -83,7 +89,8 @@ const ShirtReport = ({ activityDetail }) => {
             paddingTop: 20,
             alignItems: 'center',
             flexDirection: 'column',
-            width: '50%',
+            width: mobile ? undefined : '50%',
+            height: mobile ? 400 : undefined,
           }}
         >
           <Typography variant="h5" style={{ color: '#42a5f5' }}>
@@ -168,7 +175,8 @@ const ShirtReport = ({ activityDetail }) => {
             paddingTop: 20,
             alignItems: 'center',
             flexDirection: 'column',
-            width: '50%',
+            width: mobile ? undefined : '50%',
+            height: mobile ? 400 : undefined,
           }}
         >
           <Typography variant="h5" style={{ color: '#f48fb1' }}>

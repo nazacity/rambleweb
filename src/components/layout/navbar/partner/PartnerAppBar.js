@@ -11,6 +11,11 @@ import {
   Button,
   Badge,
   Typography,
+  Hidden,
+  Collapse,
+  List,
+  ListItem,
+  ListItemText,
 } from '@material-ui/core';
 import { loadCSS } from 'fg-loadcss';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -92,6 +97,16 @@ const ElevateAppBar = (props) => {
     dispatch(setPartnerMenuIndex(newValue));
   };
 
+  const handleMenuClose = (event, newValue) => {
+    setMenuOpen(false);
+  };
+
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleClick = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   if (!user._id) {
     return <div />;
   }
@@ -103,28 +118,34 @@ const ElevateAppBar = (props) => {
           src="./assets/icon/ramble256.png"
           style={{ height: 80, marginRight: 20 }}
         />
-        <div
-          style={{
-            flexGrow: 1,
-            display: 'flex',
-            justifyContent: 'flex-start',
-          }}
-        >
-          <Tabs
-            value={partnerMenuIndex}
-            onChange={handleChange}
-            textColor="primary"
-            TabIndicatorProps={{ style: { backgroundColor: '#e5614c' } }}
-            className={classes.tabsStyle}
+        <Hidden smDown>
+          <div
+            style={{
+              flexGrow: 1,
+              display: 'flex',
+              justifyContent: 'flex-start',
+            }}
           >
-            <Tab label="กิจกรรม" className={classes.tabStyle} value={0} />
-            <Tab label="รายงาน" className={classes.tabStyle} value={1} />
-            <Tab label="ระบบโฆษณา CS" className={classes.tabStyle} value={2} />
-          </Tabs>
-        </div>
+            <Tabs
+              value={partnerMenuIndex}
+              onChange={handleChange}
+              textColor="primary"
+              TabIndicatorProps={{ style: { backgroundColor: '#e5614c' } }}
+              className={classes.tabsStyle}
+            >
+              <Tab label="กิจกรรม" className={classes.tabStyle} value={0} />
+              <Tab label="รายงาน" className={classes.tabStyle} value={1} />
+              {/* <Tab
+                label="ระบบโฆษณา CS"
+                className={classes.tabStyle}
+                value={2}
+              /> */}
+            </Tabs>
+          </div>
+        </Hidden>
+        <div style={{ flex: 1 }} />
         <div
           style={{
-            width: '30vw',
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'flex-end',
@@ -133,6 +154,11 @@ const ElevateAppBar = (props) => {
           aria-controls={open ? 'menu-list-grow' : undefined}
           aria-haspopup="true"
         >
+          <Hidden mdUp>
+            <IconButton onClick={handleClick}>
+              <MenuIcon />
+            </IconButton>
+          </Hidden>
           <IconButton
             onClick={() => {
               dispatch(setTh());
@@ -149,7 +175,6 @@ const ElevateAppBar = (props) => {
               <Notifications />
             </Badge>
           </IconButton>
-
           <div
             style={{
               height: 40,
@@ -190,6 +215,32 @@ const ElevateAppBar = (props) => {
           </Button>
         </div>
       </Toolbar>
+      <Hidden mdUp>
+        <Collapse in={menuOpen} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItem button className={classes.nested}>
+              <ListItemText
+                primary="กิจกรรม"
+                className={classes.menuList}
+                onClick={(e) => {
+                  handleChange(e, 0);
+                  handleMenuClose();
+                }}
+              />
+            </ListItem>
+            <ListItem button className={classes.nested}>
+              <ListItemText
+                primary="รายงาน"
+                className={classes.menuList}
+                onClick={(e) => {
+                  handleChange(e, 1);
+                  handleMenuClose();
+                }}
+              />
+            </ListItem>
+          </List>
+        </Collapse>
+      </Hidden>
       <UserMenu
         open={open}
         handleClose={handleClose}

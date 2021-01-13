@@ -102,6 +102,13 @@ const CourseReport = ({ activityDetail }) => {
           animate={true}
           motionStiffness={90}
           motionDamping={15}
+          axisBottom={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 20,
+            legendPosition: 'middle',
+            legendOffset: 32,
+          }}
         />
       </div>
     </Card>

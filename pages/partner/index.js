@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { userStateHandle } from '../../redux/actions/userActions';
 import { setLoading } from '../../redux/actions/layoutActions';
 import ActivityContent from 'components/partner/ActivityContent';
+import ReportContent from 'components/partner/ReportContent';
 
 // Partner Content
 
@@ -23,12 +24,14 @@ const index = ({ user }) => {
     switch (partnerIndexMenu) {
       case 0:
         return <ActivityContent />;
+      case 1:
+        return <ReportContent />;
       default:
         return <div>Coming Soon</div>;
     }
   };
 
-  return <div style={{ minWidth: 900 }}>{partnerMenuIndexContent()}</div>;
+  return <div>{partnerMenuIndexContent()}</div>;
 };
 
 export const getServerSideProps = async (ctx) => {

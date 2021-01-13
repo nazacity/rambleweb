@@ -5,17 +5,7 @@ import { Card, Typography } from '@material-ui/core';
 import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
 import cx from 'clsx';
 
-const useStyles = makeStyles(({ palette }) => ({
-  card: {
-    borderRadius: 12,
-    textAlign: 'center',
-    width: '47%',
-    height: 400,
-  },
-}));
-
-const AgeRangeReport = ({ activityDetail }) => {
-  const styles = useStyles();
+const AgeRangeReport = ({ activityDetail, mobile }) => {
   const shadowStyles = useFadedShadowStyles();
 
   const data = [
@@ -61,7 +51,15 @@ const AgeRangeReport = ({ activityDetail }) => {
     },
   ];
   return (
-    <Card className={cx(styles.card, shadowStyles.root)}>
+    <Card
+      className={shadowStyles.root}
+      style={{
+        borderRadius: 12,
+        textAlign: 'center',
+        height: 400,
+        width: mobile ? undefined : '47%',
+      }}
+    >
       <div style={{ backgroundColor: '#8a1776', padding: 10, height: 50 }}>
         <Typography variant="h5" color="primary" style={{ color: '#fff' }}>
           ยอดผู้สมัครตามช่วงอายุ

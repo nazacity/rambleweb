@@ -49,5 +49,5 @@ export default function FullScreenDialog({}) {
     }
   };
 
-  return <div style={{ zIndex: 50, minWidth: 800 }}>{stateContent()}</div>;
+  return <div>{stateContent()}</div>;
 }
