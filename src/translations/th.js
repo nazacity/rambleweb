@@ -2,7 +2,7 @@ const th = {
   adminnavigation: { partner: 'พาร์ทเนอร์' },
   banner: {
     headingtitle:
-      'The Revolution of Marathon Community เพื่อสร้างประสบการณ์ใหม่ๆ ให้คุณ',
+      'The Revolution of Runner Community เพื่อสร้างประสบการณ์ใหม่ๆ ให้คุณ',
     getstarted: 'เริ่มต้นกันเถอะ',
     watchvideo: 'ดูวิดีโอ',
     description:

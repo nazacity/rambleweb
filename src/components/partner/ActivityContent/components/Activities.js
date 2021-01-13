@@ -187,7 +187,6 @@ const Activities = ({ activities, setState, setActivityDetail }) => {
 
   const onDragEnd = (result, item) => {
     const { destination, source, draggable } = result;
-    console.log(!destination);
     if (!destination) {
       return;
     }
@@ -297,15 +296,20 @@ const Activities = ({ activities, setState, setActivityDetail }) => {
                   style={{ padding: 20, width: 320 * 4 }}
                 >
                   {activities.length > 0 &&
-                    activities.map((item, index) => (
-                      <Grid key={item._id} item xs={4}>
-                        <ActivitiesCardModuleView
-                          activity={item}
-                          setState={setState}
-                          setActivityDetail={setActivityDetail}
-                        />
-                      </Grid>
-                    ))}
+                    activities.map((item, index) => {
+                      if (item.state === 'finished' || item.state == 'cancel') {
+                        return;
+                      }
+                      return (
+                        <Grid key={item._id} item xs={4}>
+                          <ActivitiesCardModuleView
+                            activity={item}
+                            setState={setState}
+                            setActivityDetail={setActivityDetail}
+                          />
+                        </Grid>
+                      );
+                    })}
                 </Grid>
               </Fragment>
             )}
@@ -433,15 +437,20 @@ const Activities = ({ activities, setState, setActivityDetail }) => {
               <Fragment>
                 <Grid container spacing={2} style={{ padding: 20 }}>
                   {activities.length > 0 &&
-                    activities.map((item, index) => (
-                      <Grid key={item._id} item xs={6}>
-                        <ActivitiesCardModuleView
-                          activity={item}
-                          setState={setState}
-                          setActivityDetail={setActivityDetail}
-                        />
-                      </Grid>
-                    ))}
+                    activities.map((item, index) => {
+                      if (item.state === 'finished' || item.state == 'cancel') {
+                        return;
+                      }
+                      return (
+                        <Grid key={item._id} item xs={6}>
+                          <ActivitiesCardModuleView
+                            activity={item}
+                            setState={setState}
+                            setActivityDetail={setActivityDetail}
+                          />
+                        </Grid>
+                      );
+                    })}
                 </Grid>
               </Fragment>
             )}
@@ -512,15 +521,20 @@ const Activities = ({ activities, setState, setActivityDetail }) => {
               <Fragment>
                 <Grid container spacing={2} style={{ padding: 20 }}>
                   {activities.length > 0 &&
-                    activities.map((item, index) => (
-                      <Grid key={item._id} item xs={12}>
-                        <ActivitiesCardModuleView
-                          activity={item}
-                          setState={setState}
-                          setActivityDetail={setActivityDetail}
-                        />
-                      </Grid>
-                    ))}
+                    activities.map((item, index) => {
+                      if (item.state === 'finished' || item.state == 'cancel') {
+                        return;
+                      }
+                      return (
+                        <Grid key={item._id} item xs={12}>
+                          <ActivitiesCardModuleView
+                            activity={item}
+                            setState={setState}
+                            setActivityDetail={setActivityDetail}
+                          />
+                        </Grid>
+                      );
+                    })}
                 </Grid>
               </Fragment>
             )}

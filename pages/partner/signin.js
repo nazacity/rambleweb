@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   TextField,
@@ -9,6 +9,7 @@ import {
   IconButton,
   Button,
   FormHelperText,
+  Hidden,
 } from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -72,91 +73,196 @@ const signin = () => {
   };
 
   return (
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr 3fr',
-        height: '100vh',
-      }}
-    >
-      <div
-        style={{
-          padding: 20,
-          borderRight: '1px solid black',
-          boxShadow: '5px 0px 10px 0px rgba(0,0,0,0.27)',
-        }}
-      >
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Controller
-            as={TextField}
-            name="username"
-            control={control}
-            defaultValue=""
-            label="Username"
-            variant="outlined"
-            rules={{
-              required: 'กรุณาใส่ Username',
+    <Fragment>
+      <Hidden smDown>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 3fr',
+            height: '100vh',
+          }}
+        >
+          <div
+            style={{
+              padding: 20,
+              borderRight: '1px solid black',
+              boxShadow: '5px 0px 10px 0px rgba(0,0,0,0.27)',
             }}
-            error={errors.username && true}
-            helperText={errors.username?.message}
-            // disabled={loading}
-            style={{ width: '100%', marginBottom: 20 }}
-          />
-          <Controller
-            name="password"
-            control={control}
-            defaultValue=""
-            rules={{
-              required: 'กรุณาใส่ Password',
-            }}
-            render={({ onChange, value }) => (
-              <FormControl
-                style={{ width: '100%', marginBottom: 20 }}
-                variant="outlined"
-              >
-                <InputLabel
-                  htmlFor="outlined-adornment-password"
-                  error={errors.password && true}
-                >
-                  Password
-                </InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-password"
-                  type={showPassword ? 'text' : 'password'}
-                  value={value}
-                  onChange={onChange}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  labelWidth={70}
-                  error={errors.password && true}
-                />
-                <FormHelperText error={errors.password && true}>
-                  {errors.password?.message}
-                </FormHelperText>
-              </FormControl>
-            )}
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ width: '100%' }}
-            type="submit"
           >
-            Sign In
-          </Button>
-        </form>
-      </div>
-    </div>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Controller
+                as={TextField}
+                name="username"
+                control={control}
+                defaultValue=""
+                label="Username"
+                variant="outlined"
+                rules={{
+                  required: 'กรุณาใส่ Username',
+                }}
+                error={errors.username && true}
+                helperText={errors.username?.message}
+                // disabled={loading}
+                style={{ width: '100%', marginBottom: 20 }}
+              />
+              <Controller
+                name="password"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: 'กรุณาใส่ Password',
+                }}
+                render={({ onChange, value }) => (
+                  <FormControl
+                    style={{ width: '100%', marginBottom: 20 }}
+                    variant="outlined"
+                  >
+                    <InputLabel
+                      htmlFor="outlined-adornment-password"
+                      error={errors.password && true}
+                    >
+                      Password
+                    </InputLabel>
+                    <OutlinedInput
+                      id="outlined-adornment-password"
+                      type={showPassword ? 'text' : 'password'}
+                      value={value}
+                      onChange={onChange}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                          >
+                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                      labelWidth={70}
+                      error={errors.password && true}
+                    />
+                    <FormHelperText error={errors.password && true}>
+                      {errors.password?.message}
+                    </FormHelperText>
+                  </FormControl>
+                )}
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                style={{ width: '100%' }}
+                type="submit"
+              >
+                Sign In
+              </Button>
+            </form>
+          </div>
+          <div
+            style={{
+              backgroundImage:
+                'linear-gradient(   139deg,rgb(100, 43, 115) 0%,rgb(198, 66, 110) 100%)',
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              paddingTop: 100,
+              paddingBottom: 100,
+            }}
+          >
+            <img
+              src={require('../../public/assets/logo/ramblewhite.png')}
+              style={{ width: '50vw', margin: 50 }}
+            />
+          </div>
+        </div>
+      </Hidden>
+      <Hidden mdUp>
+        <div
+          style={{
+            padding: 20,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <img
+            src={require('../../public/assets/logo/ramble.png')}
+            style={{ width: '70vw', margin: 50 }}
+          />
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Controller
+              as={TextField}
+              name="username"
+              control={control}
+              defaultValue=""
+              label="Username"
+              variant="outlined"
+              rules={{
+                required: 'กรุณาใส่ Username',
+              }}
+              error={errors.username && true}
+              helperText={errors.username?.message}
+              // disabled={loading}
+              style={{ width: '100%', marginBottom: 20 }}
+            />
+            <Controller
+              name="password"
+              control={control}
+              defaultValue=""
+              rules={{
+                required: 'กรุณาใส่ Password',
+              }}
+              render={({ onChange, value }) => (
+                <FormControl
+                  style={{ width: '100%', marginBottom: 20 }}
+                  variant="outlined"
+                >
+                  <InputLabel
+                    htmlFor="outlined-adornment-password"
+                    error={errors.password && true}
+                  >
+                    Password
+                  </InputLabel>
+                  <OutlinedInput
+                    id="outlined-adornment-password"
+                    type={showPassword ? 'text' : 'password'}
+                    value={value}
+                    onChange={onChange}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    labelWidth={70}
+                    error={errors.password && true}
+                  />
+                  <FormHelperText error={errors.password && true}>
+                    {errors.password?.message}
+                  </FormHelperText>
+                </FormControl>
+              )}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ width: '100%' }}
+              type="submit"
+            >
+              Sign In
+            </Button>
+          </form>
+        </div>
+      </Hidden>
+    </Fragment>
   );
 };
 

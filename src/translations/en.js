@@ -2,7 +2,7 @@ const en = {
   adminnavigation: { partner: 'Partner' },
   banner: {
     headingtitle:
-      'The Revolution of Marathon Community to provide your new experiences',
+      'The Revolution of Runner Community to provide your new experiences',
     getstarted: 'Get Started',
     watchvideo: 'Watch Video',
     description:

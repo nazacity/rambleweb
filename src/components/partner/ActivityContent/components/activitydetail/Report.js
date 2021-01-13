@@ -7,6 +7,7 @@ import GenderReport from '../report/GenderReport';
 import Announcement from './Announcement';
 import Coupon from './Coupon';
 import CourseReport from '../report/CourseReport';
+import RevenueReport from '../report/RevenueReport';
 import { Hidden } from '@material-ui/core';
 
 const Report = ({
@@ -37,6 +38,9 @@ const Report = ({
             </div>
             <div style={{ marginTop: 50 }}>
               <CourseReport activityDetail={activityDetail} />
+            </div>
+            <div style={{ marginTop: 50 }}>
+              <RevenueReport activityDetail={activityDetail} />
             </div>
             <div style={{ marginTop: 50 }}>
               <UserReport
@@ -72,6 +76,9 @@ const Report = ({
           <CourseReport activityDetail={activityDetail} />
         </div>
         <div style={{ margin: '50px 20px 0' }}>
+          <RevenueReport activityDetail={activityDetail} />
+        </div>
+        <div style={{ margin: '50px 20px 0' }}>
           <UserReport
             activityDetail={activityDetail}
             loadingFalse={loadingFalse}
@@ -101,6 +108,9 @@ const Report = ({
         </div>
         <div style={{ margin: '50px 20px 0' }}>
           <CourseReport activityDetail={activityDetail} />
+        </div>
+        <div style={{ margin: '50px 20px 0' }}>
+          <RevenueReport activityDetail={activityDetail} mobile={true} />
         </div>
         <div style={{ margin: '50px 20px 0' }}>
           <UserReport

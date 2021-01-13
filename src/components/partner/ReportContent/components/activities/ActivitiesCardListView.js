@@ -9,12 +9,13 @@ import { Row, Item } from '@mui-treasury/components/flex';
 import { Info, InfoSubtitle, InfoTitle } from '@mui-treasury/components/info';
 import { useNewsInfoStyles } from '@mui-treasury/styles/info/news';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
-
+import { useGutterBorderedGridStyles } from '@mui-treasury/styles/grid/gutterBordered';
 import moment from 'moment';
 import 'moment/locale/th';
+import { Hidden } from '@material-ui/core';
 moment.locale('th');
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(({ palette }) => ({
   card: {
     position: 'relative',
     boxShadow: '0 8px 24px 0 rgba(0,0,0,0.12)',
@@ -102,6 +103,22 @@ const useStyles = makeStyles(() => ({
     width: '72%',
     backgroundColor: 'rgba(0,0,0,0.04)',
   },
+  statLabel: {
+    fontSize: 18,
+    color: palette.grey[500],
+    fontWeight: 500,
+    fontFamily:
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    margin: 0,
+  },
+  statValue: {
+    fontSize: 34,
+    fontWeight: 'bold',
+    marginBottom: 4,
+    letterSpacing: '1px',
+    lineHeight: 0.8,
+    textAlign: 'center',
+  },
 }));
 
 const ActivitiesCard = React.memo(function News3Card({
@@ -110,73 +127,12 @@ const ActivitiesCard = React.memo(function News3Card({
   setActivityDetail,
 }) {
   const styles = useStyles();
-  const mediaStyles = useCoverCardMediaStyles();
-
+  const borderedGridStyles = useGutterBorderedGridStyles({
+    borderColor: 'rgba(0, 0, 0, 0.08)',
+    height: '50%',
+  });
   const activityState = (state) => {
     switch (state) {
-      case 'pre_register':
-        return (
-          <div
-            style={{
-              display: 'inline-block',
-              // fontFamily: "'Sen', sans-serif",
-              backgroundColor: '#ffc400',
-              borderRadius: '0.5rem',
-              padding: '2px 0.5rem',
-              color: '#fff',
-              marginBottom: 5,
-            }}
-          >
-            ก่อนเปิดรับสมัคร
-          </div>
-        );
-      case 'registering':
-        return (
-          <div
-            style={{
-              display: 'inline-block',
-              backgroundColor: '#64dd17',
-              borderRadius: '0.5rem',
-              padding: '2px 0.5rem',
-              color: '#fff',
-              marginBottom: '0.5rem',
-            }}
-          >
-            ห้วงสมัคร
-          </div>
-        );
-      case 'end_register':
-        return (
-          <div
-            style={{
-              display: 'inline-block',
-              // fontFamily: "'Sen', sans-serif",
-              backgroundColor: '#29b6f6',
-              borderRadius: '0.5rem',
-              padding: '2px 0.5rem',
-              color: '#fff',
-              marginBottom: '0.5rem',
-            }}
-          >
-            ปิดรับสมัคร
-          </div>
-        );
-      case 'actual_date':
-        return (
-          <div
-            style={{
-              display: 'inline-block',
-              // fontFamily: "'Sen', sans-serif",
-              backgroundColor: '#2979ff',
-              borderRadius: '0.5rem',
-              padding: '2px 0.5rem',
-              color: '#fff',
-              marginBottom: '0.5rem',
-            }}
-          >
-            วันงาน
-          </div>
-        );
       case 'finished':
         return (
           <div
@@ -211,6 +167,7 @@ const ActivitiesCard = React.memo(function News3Card({
         );
     }
   };
+
   return (
     <Card
       className={styles.card}
@@ -229,6 +186,42 @@ const ActivitiesCard = React.memo(function News3Card({
             {moment(activity.actual_date).format('DD MMMM YYYY')}
           </InfoSubtitle>
         </Info>
+
+        <Hidden smDown>
+          <Card>
+            <Box display={'flex'}>
+              <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
+                <p className={styles.statLabel}>ผู้สมัคร</p>
+                <p className={styles.statValue}>
+                  {activity.report_infomation.participant_number}
+                </p>
+              </Box>
+              <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
+                <p className={styles.statLabel}>ผู้ชาย</p>
+                <p className={styles.statValue}>
+                  {activity.report_infomation.participant_male_number}
+                </p>
+              </Box>
+              <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
+                <p className={styles.statLabel}>ผู้หญิง</p>
+                <p className={styles.statValue}>
+                  {activity.report_infomation.participant_female_number}
+                </p>
+              </Box>
+            </Box>
+          </Card>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
+              <p className={styles.statLabel}>รายได้ทั้งหมด</p>
+              <p className={styles.statValue}>
+                {activity.courses.reduce(
+                  (sum, item) => sum + item.register_no * item.price,
+                  0
+                )}
+              </p>
+            </Box>
+          </div>
+        </Hidden>
       </Row>
     </Card>
   );

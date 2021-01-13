@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setLoading } from '../../../../redux/actions/layoutActions';
 
 import Activities from './components/Activities';
+import ReportPrint from '../ActivityContent/components/report/ReportPrint';
+import BackButton from '../ActivityContent/components/activitydetail/BackButton';
 // import ActivityDetail from './components/ActivityDetail';
 
 export default function FullScreenDialog({}) {
@@ -36,16 +38,13 @@ export default function FullScreenDialog({}) {
             setActivityDetail={setActivityDetail}
           />
         );
-      //   case 1:
-      //     return (
-      //       <ActivityDetail
-      //         activityDetail={activityDetail}
-      //         setActivityDetail={setActivityDetail}
-      //         setState={setState}
-      //         loadingTrue={loadingTrue}
-      //         loadingFalse={loadingFalse}
-      //       />
-      //     );
+      case 1:
+        return (
+          <div>
+            <BackButton setState={setState} />
+            <ReportPrint activityDetail={activityDetail} />
+          </div>
+        );
     }
   };
 

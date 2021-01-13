@@ -154,12 +154,7 @@ const ElevateAppBar = (props) => {
           aria-controls={open ? 'menu-list-grow' : undefined}
           aria-haspopup="true"
         >
-          <Hidden mdUp>
-            <IconButton onClick={handleClick}>
-              <MenuIcon />
-            </IconButton>
-          </Hidden>
-          <IconButton
+          {/* <IconButton
             onClick={() => {
               dispatch(setTh());
             }}
@@ -174,50 +169,89 @@ const ElevateAppBar = (props) => {
             <Badge badgeContent={4} color="error">
               <Notifications />
             </Badge>
-          </IconButton>
-          <div
-            style={{
-              height: 40,
-              border: '1px solid black',
-              margin: 'auto 10px',
-            }}
-          />
-          <Button
-            ref={anchorRef}
-            onClick={handleToggle}
-            style={{ borderRadius: 0 }}
-          >
-            <Avatar alt="Travis Howard" src={user.picture_url} />
-            <div>
-              <Typography
-                variant="h6"
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  color: 'black',
-                  marginLeft: 5,
-                }}
-              >
-                {user.display_name}
-              </Typography>
-              <Typography
-                variant="body2"
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  color: 'black',
-                  marginLeft: 5,
-                }}
-              >
-                {user.permission}
-              </Typography>
-            </div>
-          </Button>
+          </IconButton> */}
+          <Hidden mdUp>
+            <IconButton onClick={handleClick}>
+              <MenuIcon />
+            </IconButton>
+          </Hidden>
+          <Hidden smDown>
+            <div
+              style={{
+                height: 40,
+                border: '1px solid black',
+                margin: 'auto 10px',
+              }}
+            />
+            <Button
+              ref={anchorRef}
+              onClick={handleToggle}
+              style={{ borderRadius: 0 }}
+            >
+              <Avatar alt="Travis Howard" src={user.picture_url} />
+              <div>
+                <Typography
+                  variant="h6"
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    color: 'black',
+                    marginLeft: 5,
+                  }}
+                >
+                  {user.display_name}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    color: 'black',
+                    marginLeft: 5,
+                  }}
+                >
+                  {user.permission}
+                </Typography>
+              </div>
+            </Button>
+          </Hidden>
         </div>
       </Toolbar>
       <Hidden mdUp>
         <Collapse in={menuOpen} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
+            <ListItem
+              button
+              className={classes.nested}
+              ref={anchorRef}
+              onClick={handleToggle}
+            >
+              <Avatar alt="Travis Howard" src={user.picture_url} />
+              <div>
+                <Typography
+                  variant="h6"
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    color: 'black',
+                    marginLeft: 5,
+                  }}
+                >
+                  {user.display_name.toUpperCase()}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    color: 'black',
+                    marginLeft: 5,
+                  }}
+                >
+                  {user.permission}
+                </Typography>
+              </div>
+            </ListItem>
             <ListItem button className={classes.nested}>
               <ListItemText
                 primary="กิจกรรม"

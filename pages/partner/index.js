@@ -5,6 +5,7 @@ import { userStateHandle } from '../../redux/actions/userActions';
 import { setLoading } from '../../redux/actions/layoutActions';
 import ActivityContent from 'components/partner/ActivityContent';
 import ReportContent from 'components/partner/ReportContent';
+import ProfileContent from 'components/partner/ProfileContent';
 
 // Partner Content
 
@@ -26,6 +27,8 @@ const index = ({ user }) => {
         return <ActivityContent />;
       case 1:
         return <ReportContent />;
+      case 2:
+        return <ProfileContent />;
       default:
         return <div>Coming Soon</div>;
     }

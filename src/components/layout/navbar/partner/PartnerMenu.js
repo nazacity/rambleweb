@@ -6,10 +6,11 @@ import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signOut } from '../../../../../redux/actions/userActions';
 import { setLoading } from '../../../../../redux/actions/layoutActions';
 import { useRouter } from 'next/router';
+import { setPartnerMenuIndex } from '../../../../../redux/actions/navigationActions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,6 +31,9 @@ export default function MenuListComposition({
   const classes = useStyles();
   const dispatch = useDispatch();
   const route = useRouter();
+  const partnerMenuIndex = useSelector(
+    (state) => state.navigation.partnerMenuIndex
+  );
 
   const handleSignOut = () => {
     dispatch(setLoading(true));
@@ -38,6 +42,11 @@ export default function MenuListComposition({
       dispatch(signOut());
       route.push('/partner/signin');
     }, 200);
+  };
+
+  const handleMenuClick = (e, value) => {
+    dispatch(setPartnerMenuIndex(value));
+    handleClose(e);
   };
 
   return (
@@ -64,8 +73,14 @@ export default function MenuListComposition({
                   id="menu-list-grow"
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
+                  <MenuItem
+                    onClick={(e) => {
+                      handleMenuClick(e, 2);
+                    }}
+                  >
+                    Profile
+                  </MenuItem>
+                  {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
                   <MenuItem onClick={handleSignOut}>Logout</MenuItem>
                 </MenuList>
               </ClickAwayListener>
