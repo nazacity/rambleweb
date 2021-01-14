@@ -18,12 +18,6 @@ export const navbar = {
       path: '#features',
       offset: '81',
     },
-    {
-      id: 3,
-      label: 'Testimonial',
-      path: '#testimonial',
-      offset: '81',
-    },
   ],
   navMenu_th: [
     {
@@ -36,12 +30,6 @@ export const navbar = {
       id: 2,
       label: 'ฟีเจอร์',
       path: '#features',
-      offset: '81',
-    },
-    {
-      id: 3,
-      label: 'Testimonial',
-      path: '#testimonial',
       offset: '81',
     },
   ],
@@ -81,10 +69,10 @@ export const client = [
 /* ------------------------------------ */
 // Features data section
 /* ------------------------------------ */
-import featureIcon1 from 'common/assets/image/appModern/icon1.svg';
-import featureIcon2 from 'common/assets/image/appModern/icon2.svg';
-import featureIcon3 from 'common/assets/image/appModern/icon3.svg';
-import featureIcon4 from 'common/assets/image/appModern/icon4.svg';
+import featureIcon1 from '../../../../public/assets/onboarding/AW-01.png';
+import featureIcon2 from '../../../../public/assets/onboarding/AW-02.png';
+import featureIcon3 from '../../../../public/assets/onboarding/AW-03.png';
+import featureIcon4 from '../../../../public/assets/onboarding/AW-04.png';
 
 export const features = {
   slogan: 'KEY FEATURES',
@@ -94,9 +82,9 @@ export const features = {
       id: 1,
       color: '#F55767',
       icon: featureIcon1,
-      title: 'Marathon',
+      title: 'Running',
       subtitle: 'ประสบการณ์ใหม่',
-      description: 'ค้นหาการวิ่งมาราธอนครั้งแรกของคุณ',
+      description: 'ค้นหากิจกรรมวิ่งครั้งแรกของคุณกับคอมมิวนิตี้ของเรา',
     },
     {
       id: 2,
@@ -187,28 +175,42 @@ export const appSlider = {
       title: 'App Slide 1',
     },
   ],
-  title: 'Smart Jackpots that you may love this anytime & anywhere',
-  description:
-    "The rise of mobile devices transforms the way we consume information entirely and the world's most elevant channels such as Facebook.",
+  title_th: 'Ramble Runner Community',
+  title_en: 'Ramble Runner Community',
+  description_th:
+    'application ที่รวบรวมกิจกรรมงานวิ่งต่างๆ ทั่วทั้งประเทศไทยไว้ในที่เดียว ให้คุณสะดวกสบายในการค้นหา และเข้าร่วมกิจกรรมต่างๆ',
+  description_en:
+    'Applicaiton that collect entire activities from all around Thailand. Let you be more convinently to discover and participate',
   features: [
     {
       id: 1,
       icon: appIcon,
-      title: 'Easy Invoicing',
-      description: 'Surprice your clients with professional looking invoices.',
+      title_th: 'Discover fast',
+      description_th:
+        'ด้วยระบบการค้นหาของเรา คุณจะไม่พลาดกิจกรรมใหม่ๆ ที่คุณสนใจ',
+      title_en: 'Discover fast',
+      description_en:
+        'With our searching system, you will not miss any interested activities',
     },
     {
       id: 2,
       icon: appIcon,
-      title: 'UX Planning',
-      description:
-        'UI/UX Design by following and maintaining the latest trends .',
+      title_th: 'Notification',
+      description_th:
+        'แจ้งเตือนข่าวกิจกรรมของคุณ ให้คุณไม่พลาดทุกการอัพเดทของกิจกรรมที่คุณลงสมัคร',
+      title_en: 'Notification',
+      description_en:
+        'Notificate your ativities news. Will not let you miss any updated news',
     },
     {
       id: 3,
       icon: appIcon,
-      title: 'Customer Support',
-      description: 'A Dedicated support team will be always ready for you.',
+      title_th: 'Store milestones',
+      description_th:
+        'บันทึกประวัติกิจกรรมของคุณ ให้ทุกกิโลเมตรของคุณไม่สูญปล่าว',
+      title_en: 'Store milestones',
+      description_en:
+        'Record your history activities as a point. Do not let your distance be wasted',
     },
   ],
 };

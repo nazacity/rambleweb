@@ -31,7 +31,7 @@ export default function FullScreenDialog({
   loadingFalse,
 }) {
   const [state, setState] = useState(0);
-  const [activities, setActivities] = useState(0);
+  const [activities, setActivities] = useState([]);
   const [activityDetail, setActivityDetail] = useState({});
 
   const stateContent = () => {
@@ -95,7 +95,6 @@ export default function FullScreenDialog({
         handleClose();
       }}
       TransitionComponent={Transition}
-      style={{ zIndex: 50, minWidth: 800 }}
     >
       <AppBar style={{ position: 'relative' }}>
         <Toolbar>

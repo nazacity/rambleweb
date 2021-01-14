@@ -52,3 +52,8 @@ export const Delete = async (path, body, ctx) => {
   const res = await axios.delete(`${getURL(ctx)}${path}`, { headers });
   return res.data;
 };
+
+export const everyPost = async (path, body, ctx) => {
+  const res = await axios.post(`${getURL(ctx)}${path}`, body);
+  return res.data;
+};

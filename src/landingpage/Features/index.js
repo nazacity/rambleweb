@@ -35,21 +35,42 @@ const Features = () => {
           {lang === 'th' &&
             items_th.map((item) => (
               <Fade up delay={100 * item.id} key={`feature-key${item.id}`}>
-                <FeatureBlock
-                  style={{ '--color': `${item.color}` }}
-                  icon={
-                    <Fragment>
-                      <Icon className="plus" icon={plus} />
-                      <Icon className="circle" icon={mediaRecordOutline} />
-                      <Image src={item.icon} alt={item.title} />
-                      <Icon className="star" icon={starOutline} />
-                    </Fragment>
-                  }
-                  iconPosition="left"
-                  title={<Heading as="h3" content={item.title} />}
-                  subtitle={<Heading as="h4" content={item.subtitle} />}
-                  description={<Text content={item.description} />}
-                />
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                  }}
+                >
+                  <FeatureBlock
+                    style={{ '--color': `${item.color}` }}
+                    icon={
+                      <Fragment>
+                        <Icon className="plus" icon={plus} />
+                        <Icon className="circle" icon={mediaRecordOutline} />
+                        <Image src={item.icon} alt={item.title} />
+                        {/* <img
+                          src={item.icon}
+                          alt={item.title}
+                          style={{ width: 300, height: 'auto' }}
+                        /> */}
+                        <Icon className="star" icon={starOutline} />
+                      </Fragment>
+                    }
+                    iconPosition="left"
+                  />
+                  <Typography variant="h5" style={{ textAlign: 'center' }}>
+                    {item.title}
+                  </Typography>
+
+                  <Typography variant="h6" style={{ textAlign: 'center' }}>
+                    {item.subtitle}
+                  </Typography>
+
+                  <Typography variant="body1" style={{ textAlign: 'center' }}>
+                    {item.description}
+                  </Typography>
+                </div>
               </Fade>
             ))}
           {lang === 'en' &&

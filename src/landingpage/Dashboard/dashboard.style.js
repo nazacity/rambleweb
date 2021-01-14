@@ -15,7 +15,10 @@ const DashboardWrapper = styled.section`
 		to bottom,
 		#fff 35%,
 		rgb(244, 246, 250) 100%
-	); */
+  ); */
+  .dashboardWrapper1 {
+    display: none;
+  }
   @media (max-width: 1800px) {
     padding-bottom: 180px;
   }
@@ -35,6 +38,9 @@ const DashboardWrapper = styled.section`
     padding-top: 20px;
     padding-bottom: 20px;
     min-height: auto;
+    .dashboardWrapper1 {
+      display: inline;
+    }
   }
 
   @media only screen and (max-width: 480px) {

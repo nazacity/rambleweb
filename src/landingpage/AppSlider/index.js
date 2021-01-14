@@ -9,9 +9,19 @@ import GlideSlide from 'common/components/GlideCarousel/glideSlide';
 import SectionWrapper, { CarouseWrapper, TextWrapper } from './appSlider.style';
 
 import { appSlider } from 'common/data/AppModern';
+import { useSelector } from 'react-redux';
 
 const AppSlider = () => {
-  const { title, description, features, carousel } = appSlider;
+  const {
+    title_th,
+    description_th,
+    title_en,
+    description_en,
+    features,
+    carousel,
+  } = appSlider;
+
+  const lang = useSelector((state) => state.layout.lang);
 
   const glideOptions = {
     type: 'carousel',
@@ -42,15 +52,43 @@ const AppSlider = () => {
           </GlideCarousel>
         </CarouseWrapper>
         <TextWrapper>
-          <Heading content={title} />
-          <Text content={description} />
+          <Heading
+            content={lang === 'th' ? title_th : lang === 'en' && title_en}
+          />
+          <Text
+            content={
+              lang === 'th' ? description_th : lang === 'en' && description_en
+            }
+          />
           {features.map((item) => (
             <FeatureBlock
               key={`app-feature--key${item.id}`}
               iconPosition="left"
-              icon={<img src={item.icon} alt={item.title} />}
-              title={<Heading as="h3" content={item.title} />}
-              description={<Text content={item.description} />}
+              icon={
+                <img
+                  src={item.icon}
+                  alt={lang === 'th' ? title_th : lang === 'en' && title_en}
+                />
+              }
+              title={
+                <Heading
+                  as="h3"
+                  content={
+                    lang === 'th'
+                      ? item.title_th
+                      : lang === 'en' && item.title_en
+                  }
+                />
+              }
+              description={
+                <Text
+                  content={
+                    lang === 'th'
+                      ? item.description_th
+                      : lang === 'en' && item.description_en
+                  }
+                />
+              }
             />
           ))}
         </TextWrapper>

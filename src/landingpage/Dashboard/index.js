@@ -11,6 +11,8 @@ import Particles from '../Particle';
 import DashboardWrapper, { DashboardObject } from './dashboard.style';
 
 import DashboardObject1 from 'common/assets/image/appModern/dashboard.png';
+import { LocalizationContext } from '../../../pages/_app';
+import Link from 'Link';
 
 const DashboardSection = ({
   row,
@@ -22,30 +24,27 @@ const DashboardSection = ({
   discountAmount,
   outlineBtnStyle,
 }) => {
+  const { t } = React.useContext(LocalizationContext);
   const ButtonGroup = () => (
-    <Fragment>
-      <Button title="FREE TRAIL" {...btnStyle} />
-    </Fragment>
+    <Link href="/partner/register">
+      <Button title={t('dashboard.bepartner')} {...btnStyle} />
+    </Link>
   );
   return (
-    <DashboardWrapper id="banner_section">
+    <DashboardWrapper id="partner_section">
       <Particles />
       <Container>
         <Box className="row" {...row}>
           <Box className="col" {...col}>
-            <Heading className="subtitle" as="h5" content="APP'S DASHBOARD" />
+            <Heading
+              className="subtitle"
+              as="h5"
+              content="PARTNER'S DASHBOARD"
+            />
             <FeatureBlock
-              title={
-                <Heading
-                  content="Meet the dashboard features of our finalcial management."
-                  {...title}
-                />
-              }
+              title={<Heading content={t('dashboard.heading')} {...title} />}
               description={
-                <Text
-                  content="We help to create SaaS product that are innovative, differentiated with a superb User Experience, fully accessible through mobile devices. SaaS products are changing the world ."
-                  {...description}
-                />
+                <Text content={t('dashboard.description')} {...description} />
               }
               button={<ButtonGroup />}
             />
@@ -57,6 +56,9 @@ const DashboardSection = ({
           <Image src={DashboardObject1} alt="DashboardObject1" />
         </div>
       </DashboardObject>
+      <div className="dashboardWrapper1">
+        <Image src={DashboardObject1} alt="DashboardObject1" />
+      </div>
     </DashboardWrapper>
   );
 };

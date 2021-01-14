@@ -1,23 +1,13 @@
 import React, { useState } from 'react';
-import { IconButton } from '@material-ui/core';
-import { ArrowBack } from '@material-ui/icons';
-import Banner from './editactivity/Banner';
-import Title from './editactivity/Title';
-import Location from './editactivity/Location';
-import DateInfo from './editactivity/DateInfo';
-
-import CourseInfo from './editactivity/CourseInfo';
-import TimelineForm from './editactivity/TimelineForm';
-import ShirtStyle from './editactivity/ShirtStyle';
-import Size from './editactivity/Size';
-import Rules from './editactivity/Rules';
-import Rules1 from './editactivity/Rules1';
-import MoreDetail from './editactivity/MoreDetail';
-import Condition from './editactivity/Condition';
-import Gifts from './editactivity/Gifts';
-import SenderAddress from './editactivity/SenderAddress';
 
 import { post } from 'utils/request';
+import Detail from './activitydetail/Detail';
+import UserReport from './activitydetail/UserReport';
+import Report from './activitydetail/Report';
+import QrcodeGenerator from './activitydetail/QrcodeGenerator';
+import SpeedDial from './activitydetail/SpeedDial';
+import BackButton from './activitydetail/BackButton';
+import ReportPrint from './report/ReportPrint';
 
 const ActivityDetail = ({
   activityDetail,
@@ -40,17 +30,24 @@ const ActivityDetail = ({
     rules1: false,
     moredetail: false,
     condition: false,
+    senderAddress: false,
   });
 
+  const [qrcodeGeneratorModalOpen, setQrcodeGeneratorModalOpen] = useState(
+    false
+  );
+
+  const handleQrcodeGeneratorModalClose = () => {
+    setQrcodeGeneratorModalOpen();
+  };
+
   const editActivity = async (data, reset) => {
-    console.log(data);
     loadingTrue();
     try {
       const res = await post(
-        `/api/employees/editactivity/${activityDetail._id}`,
+        `/api/partners/editactivity/${activityDetail._id}`,
         data
       );
-
       if (res.status === 200) {
         if (reset) {
           reset(res.data);
@@ -64,108 +61,69 @@ const ActivityDetail = ({
     }
   };
 
-  return (
-    <div
-      style={{
-        width: 600,
-        padding: 20,
-        alignSelf: 'center',
-      }}
-    >
-      <IconButton
-        onClick={() => {
-          setState(0);
-        }}
-        style={{ marginBottom: 20 }}
-      >
-        <ArrowBack />
-      </IconButton>
-      <Banner
-        activityDetail={activityDetail}
-        editMode={editMode.banner}
-        setEditMode={setEditMode}
-        editActivity={editActivity}
-      />
-      <Title
-        setEditMode={setEditMode}
-        editMode={editMode.title}
-        activityDetail={activityDetail}
-        editActivity={editActivity}
-      />
-      <Location
-        setEditMode={setEditMode}
-        editMode={editMode.location}
-        activityDetail={activityDetail}
-        editActivity={editActivity}
-      />
-      <DateInfo
-        setEditMode={setEditMode}
-        editMode={editMode.dateinfo}
-        activityDetail={activityDetail}
-        editActivity={editActivity}
-      />
-      <CourseInfo
-        setEditMode={setEditMode}
-        editMode={editMode.courses}
-        activityDetail={activityDetail}
-        editActivity={editActivity}
-      />
-      <TimelineForm
-        setEditMode={setEditMode}
-        editMode={editMode.timeline}
-        activityDetail={activityDetail}
-        editActivity={editActivity}
-      />
-      <Gifts
-        setEditMode={setEditMode}
-        editMode={editMode.gifts}
-        activityDetail={activityDetail}
-        editActivity={editActivity}
-      />
+  const [value, setValue] = useState(0);
 
-      <ShirtStyle
-        setEditMode={setEditMode}
-        editMode={editMode.shirtstyle}
+  const stateContent = () => {
+    switch (value) {
+      case 0:
+        return (
+          <div
+            style={{
+              width: '100%',
+            }}
+          >
+            <ReportPrint activityDetail={activityDetail} />;
+          </div>
+        );
+      case 1:
+        return (
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              margin: 50,
+            }}
+          >
+            <Detail
+              activityDetail={activityDetail}
+              editActivity={editActivity}
+              editMode={editMode}
+              setEditMode={setEditMode}
+            />
+          </div>
+        );
+      case 2:
+        return (
+          <UserReport
+            loadingFalse={loadingFalse}
+            loadingTrue={loadingTrue}
+            activityDetail={activityDetail}
+          />
+        );
+      case 3:
+        return <ReportPrint activityDetail={activityDetail} />;
+      default:
+        return <div>Content is Not Found</div>;
+    }
+  };
+
+  return (
+    <div>
+      {stateContent()}
+      <SpeedDial
+        setValue={setValue}
+        setState={setState}
+        setQrcodeGeneratorModalOpen={setQrcodeGeneratorModalOpen}
         activityDetail={activityDetail}
-        editActivity={editActivity}
       />
-      <Size
-        setEditMode={setEditMode}
-        editMode={editMode.size}
+      <QrcodeGenerator
+        open={qrcodeGeneratorModalOpen}
+        handleClose={handleQrcodeGeneratorModalClose}
         activityDetail={activityDetail}
-        editActivity={editActivity}
       />
-      <Rules
-        setEditMode={setEditMode}
-        editMode={editMode.rules}
-        activityDetail={activityDetail}
-        editActivity={editActivity}
-      />
-      <Rules1
-        setEditMode={setEditMode}
-        editMode={editMode.rules1}
-        activityDetail={activityDetail}
-        editActivity={editActivity}
-      />
-      <MoreDetail
-        setEditMode={setEditMode}
-        editMode={editMode.moredetail}
-        activityDetail={activityDetail}
-        editActivity={editActivity}
-      />
-      <Condition
-        setEditMode={setEditMode}
-        editMode={editMode.condition}
-        activityDetail={activityDetail}
-        editActivity={editActivity}
-      />
-      <SenderAddress
-        setEditMode={setEditMode}
-        editMode={editMode.senderAddress}
-        activityDetail={activityDetail}
-        editActivity={editActivity}
-      />
-      <div style={{ margin: 50 }} />
+      <BackButton setState={setState} />
     </div>
   );
 };

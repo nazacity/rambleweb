@@ -10,6 +10,15 @@ const SectionWrapper = styled.section`
   @media only screen and (max-width: 667px) {
     padding: 45px 0;
   }
+  background-color: #fff;
+  border-top-left-radius: 200px;
+  margin-top: -200px;
+  @media only screen and (max-width: 800px) {
+    border-top-left-radius: 100px;
+  }
+  @media only screen and (max-width: 480px) {
+    border-top-left-radius: 75px;
+  }
 `;
 
 export const FeatureWrapper = styled.div`
@@ -47,12 +56,14 @@ export const FeatureWrapper = styled.div`
       position: relative;
       @media only screen and (max-width: 1366px) {
         img {
-          height: 72px;
+          width: 300px;
+          height: auto;
         }
       }
       @media only screen and (max-width: 480px) {
         img {
-          height: 70px;
+          width: 300px;
+          height: auto;
         }
       }
       i {
