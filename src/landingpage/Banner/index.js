@@ -11,9 +11,10 @@ import BannerWrapper, {
   BannerWrapper2,
 } from './banner.style';
 
-import bannerImg from 'common/assets/image/appModern/banner2.png';
+import bannerImg from '../../../public/assets/screen/mockup1.png';
 import activity1 from '../../../public/assets/screen/activity1.png';
 import activity2 from '../../../public/assets/screen/activity2.png';
+import activity3 from '../../../public/assets/screen/activity3.png';
 import videoBanner1 from 'common/assets/image/appModern/video-1.png';
 import videoBanner2 from 'common/assets/image/appModern/video-2.png';
 import { LocalizationContext } from '../../../pages/_app';
@@ -156,8 +157,8 @@ const Banner = () => {
                       style={{
                         width: '15vw',
                         position: 'absolute',
-                        top: 150,
-                        left: 80,
+                        top: '10vw',
+                        left: '5vw',
                       }}
                     />
                   </Fade>
@@ -168,20 +169,20 @@ const Banner = () => {
                       style={{
                         width: '15vw',
                         position: 'absolute',
-                        top: 320,
-                        left: 320,
+                        top: '10vw',
+                        left: '18vw',
                       }}
                     />
                   </Fade>
                   <Fade up delay={340}>
                     <img
-                      src={activity2}
+                      src={activity3}
                       alt="activities"
                       style={{
                         width: '15vw',
                         position: 'absolute',
-                        top: 80,
-                        left: 240,
+                        top: '5vw',
+                        left: '12vw',
                       }}
                     />
                   </Fade>
@@ -217,8 +218,8 @@ const Banner = () => {
                       style={{
                         width: '30vw',
                         position: 'absolute',
-                        top: 40,
-                        left: 60,
+                        top: '10vw',
+                        left: '13vw',
                       }}
                     />
                   </Fade>
@@ -229,20 +230,20 @@ const Banner = () => {
                       style={{
                         width: '30vw',
                         position: 'absolute',
-                        top: 120,
-                        left: 140,
+                        top: '25vw',
+                        left: '30vw',
                       }}
                     />
                   </Fade>
                   <Fade up delay={340}>
                     <img
-                      src={activity2}
+                      src={activity3}
                       alt="activities"
                       style={{
                         width: '30vw',
                         position: 'absolute',
-                        top: 40,
-                        left: 200,
+                        top: '5vw',
+                        left: '42vw',
                       }}
                     />
                   </Fade>
