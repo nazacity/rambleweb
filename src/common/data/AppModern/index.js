@@ -18,6 +18,12 @@ export const navbar = {
       path: '#features',
       offset: '81',
     },
+    {
+      id: 3,
+      label: 'Partner',
+      path: '#partner_section',
+      offset: '81',
+    },
   ],
   navMenu_th: [
     {
@@ -30,6 +36,12 @@ export const navbar = {
       id: 2,
       label: 'ฟีเจอร์',
       path: '#features',
+      offset: '81',
+    },
+    {
+      id: 3,
+      label: 'พาร์ทเนอร์',
+      path: '#partner_section',
       offset: '81',
     },
   ],

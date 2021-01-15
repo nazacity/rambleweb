@@ -78,15 +78,15 @@ const Navbar = (props) => {
     <NavbarWrapper className="navbar">
       <Container>
         <Logo
-          href="/appmodern"
+          href="/"
           logoSrc={LogoImage}
-          title="App Modern"
+          title="Ramble"
           className="main-logo"
         />
         <Logo
-          href="/appmodern"
+          href="/"
           logoSrc={LogoImageAlt}
-          title="App Modern"
+          title="Ramble"
           className="logo-alt"
         />
         {/* end of logo */}
