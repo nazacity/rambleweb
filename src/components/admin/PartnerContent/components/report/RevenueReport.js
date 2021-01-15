@@ -43,7 +43,7 @@ const CourseReport = ({ activityDetail, mobile }) => {
       return {
         id: item.title,
         label: item.title,
-        value: item.register_no * item.price,
+        value: item.revenue ? item.revenue : 0,
       };
     });
 
@@ -118,9 +118,20 @@ const CourseReport = ({ activityDetail, mobile }) => {
             );
           })}
           <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
+            <p className={styles.statLabel}>ค่าส่ง ems</p>
+            <p className={styles.statValue}>
+              {activityDetail.report_infomation.mailfee
+                ? activityDetail.report_infomation.mailfee
+                : 0}
+            </p>
+          </Box>
+          <Box p={2} flex={'auto'} className={borderedGridStyles.item}>
             <p className={styles.statLabel}>รายได้ทั้งหมด</p>
             <p className={styles.statValue}>
-              {data.reduce((sum, item) => sum + item.value, 0)}
+              {activityDetail.report_infomation.mailfee
+                ? data.reduce((sum, item) => sum + item.value, 0) +
+                  activityDetail.report_infomation.mailfee
+                : data.reduce((sum, item) => sum + item.value, 0)}
             </p>
           </Box>
         </div>

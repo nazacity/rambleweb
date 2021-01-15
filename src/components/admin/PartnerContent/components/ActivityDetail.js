@@ -45,7 +45,7 @@ const ActivityDetail = ({
     loadingTrue();
     try {
       const res = await post(
-        `/api/partners/editactivity/${activityDetail._id}`,
+        `/api/employees/editactivity/${activityDetail._id}`,
         data
       );
       if (res.status === 200) {
