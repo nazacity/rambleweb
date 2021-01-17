@@ -3,11 +3,10 @@ import React, { useState } from 'react';
 import { post } from 'utils/request';
 import Detail from './activitydetail/Detail';
 import UserReport from './activitydetail/UserReport';
-import Report from './activitydetail/Report';
+import ReportPrint from './report/ReportPrint';
 import QrcodeGenerator from './activitydetail/QrcodeGenerator';
 import SpeedDial from './activitydetail/SpeedDial';
 import BackButton from './activitydetail/BackButton';
-import ReportPrint from './report/ReportPrint';
 
 const ActivityDetail = ({
   activityDetail,
@@ -38,7 +37,7 @@ const ActivityDetail = ({
   );
 
   const handleQrcodeGeneratorModalClose = () => {
-    setQrcodeGeneratorModalOpen();
+    setQrcodeGeneratorModalOpen(false);
   };
 
   const editActivity = async (data, reset) => {

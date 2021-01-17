@@ -8,6 +8,7 @@ import QrcodeGenerator from './activitydetail/QrcodeGenerator';
 import SpeedDial from './activitydetail/SpeedDial';
 import BackButton from './activitydetail/BackButton';
 import ReportPrint from './report/ReportPrint';
+import usePopstate from 'react-usepopstate';
 
 const ActivityDetail = ({
   activityDetail,
@@ -60,6 +61,13 @@ const ActivityDetail = ({
       loadingFalse();
     }
   };
+
+  const { isBackButtonClicked } = usePopstate({
+    isPrompt: false,
+    callback: () => {
+      setState(0);
+    },
+  });
 
   const [value, setValue] = useState(0);
 

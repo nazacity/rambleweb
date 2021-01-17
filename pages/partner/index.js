@@ -21,6 +21,20 @@ const index = ({ user }) => {
     }, [800]);
   }, []);
 
+  useEffect(() => {
+    let s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.innerHTML = `
+    function preventBack() { window.history.forward(); }
+    setTimeout("preventBack()", 0);
+    window.onunload = function () { null };
+    `;
+    document.body.appendChild(s);
+    return () => {
+      document.body.removeChild(s);
+    };
+  }, []);
+
   const partnerMenuIndexContent = () => {
     switch (partnerIndexMenu) {
       case 0:

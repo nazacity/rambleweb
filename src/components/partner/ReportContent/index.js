@@ -42,7 +42,7 @@ export default function FullScreenDialog({}) {
         return (
           <div>
             <BackButton setState={setState} />
-            <ReportPrint activityDetail={activityDetail} />
+            <ReportPrint activityDetail={activityDetail} setState={setState} />
           </div>
         );
     }

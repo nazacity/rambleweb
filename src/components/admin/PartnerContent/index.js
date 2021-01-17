@@ -6,6 +6,7 @@ import MaterialTable from 'material-table';
 import { Avatar, IconButton, Button, Typography } from '@material-ui/core';
 import Filter from './components/Filter';
 import Profile from './components/Profile';
+import usePopstate from 'react-usepopstate';
 
 const index = () => {
   const [profileDialogOpen, setProfileDialogOpen] = useState(false);
@@ -13,6 +14,13 @@ const index = () => {
   const [partners, setPartners] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const dispatch = useDispatch();
+
+  const { isBackButtonClicked } = usePopstate({
+    isPrompt: false,
+    callback: () => {
+      handleProfileDialogClose();
+    },
+  });
 
   const handleProfileDialogClose = () => {
     setProfile({});

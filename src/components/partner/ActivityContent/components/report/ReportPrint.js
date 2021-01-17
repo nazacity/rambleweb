@@ -6,8 +6,15 @@ import CourseReport from './CourseReport';
 import GenderReport from './GenderReport';
 import RevenueReport from './RevenueReport';
 import { Hidden } from '@material-ui/core';
+import usePopstate from 'react-usepopstate';
 
-const ReportPrint = ({ activityDetail }) => {
+const ReportPrint = ({ activityDetail, setState }) => {
+  const { isBackButtonClicked } = usePopstate({
+    isPrompt: false,
+    callback: () => {
+      setState(0);
+    },
+  });
   return (
     <div>
       <Hidden mdDown>

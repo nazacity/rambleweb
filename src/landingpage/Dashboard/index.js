@@ -10,7 +10,7 @@ import Container from 'common/components/UI/Container';
 import Particles from '../Particle';
 import DashboardWrapper, { DashboardObject } from './dashboard.style';
 
-import DashboardObject1 from 'common/assets/image/appModern/dashboard.png';
+import DashboardObject1 from '../../../public/assets/screen/dashboard.png';
 import { LocalizationContext } from '../../../pages/_app';
 import Link from 'Link';
 
