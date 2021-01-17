@@ -61,7 +61,7 @@ const AgeRangeReport = ({ activityDetail }) => {
           radialLabelsTextColor="#333333"
           radialLabelsLinkColor={{ from: 'color' }}
           sliceLabelsSkipAngle={10}
-          sliceLabelsTextColor="#333333"
+          sliceLabelsTextColor="#ffffff"
           enableRadialLabels={false}
           defs={[
             {
