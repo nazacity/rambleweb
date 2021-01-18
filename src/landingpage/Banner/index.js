@@ -104,19 +104,19 @@ const Banner = () => {
                           title={t('banner.getstarted')}
                         />
                       </AnchorLink>
-                      <Button
+                      {/* <Button
                         className="text"
                         variant="textButton"
                         icon={<Icon icon={playCircle} />}
                         iconPosition="left"
                         title={t('banner.watchvideo')}
                         onClick={handleVideoModal}
-                      />
+                      /> */}
                     </ButtonGroup>
                   </Fade>
                   <Fade up delay={300}>
                     <div style={{ display: 'flex', marginTop: 60 }}>
-                      <img
+                      {/* <img
                         src={videoBanner1}
                         onClick={handleVideoModal}
                         alt="Microsoft"
@@ -127,8 +127,8 @@ const Banner = () => {
                           height: '100%',
                           borderRadius: 5,
                         }}
-                      />
-                      <img
+                      /> */}
+                      {/* <img
                         src={videoBanner2}
                         onClick={handleVideoModal}
                         alt="Microsoft"
@@ -138,7 +138,7 @@ const Banner = () => {
                           height: '100%',
                           borderRadius: 5,
                         }}
-                      />
+                      /> */}
                     </div>
                   </Fade>
                 </Grid>
