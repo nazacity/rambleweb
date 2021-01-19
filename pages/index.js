@@ -33,12 +33,9 @@ const AppModern = () => {
       <>
         <Head>
           <title>Ramble Ruunner Sharing Community</title>
-          <meta name="Description" content="React next landing page" />
+          <meta name="Description" content="Ramble Ruunner Sharing Community" />
           <meta name="theme-color" content="#2563FF" />
-          <meta
-            name="keywords"
-            content="React, React js, Next, Next js, Super fast next js landing, Modren landing, Next js landing"
-          />
+          <meta name="keywords" content="Ramble Ruunner Sharing Community" />
           <link
             href="https://fonts.googleapis.com/css?family=Heebo:300,400,500,700&display=swap"
             rel="stylesheet"

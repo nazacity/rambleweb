@@ -61,11 +61,11 @@ export default function MyApp(props) {
         <link rel="apple-touch-icon" href="./assets/icon/ramble144.png" />
         <meta
           name="description"
-          content="Ramble marathon sharing community find your first marathon."
+          content="Ramble Ruunner Sharing Community find your first marathon."
         />
         <meta
           property="og:description"
-          content="Ramble marathon sharing community find your first marathon."
+          content="Ramble Ruunner Sharing Community find your first marathon."
         />
         <meta property="og:image" content="./assets/icon/ramble256.png" />
       </Head>
