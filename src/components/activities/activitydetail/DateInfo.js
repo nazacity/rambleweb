@@ -7,8 +7,8 @@ moment.locale('th');
 const DateInfo = ({ activityDetail }) => {
   return (
     <React.Fragment>
-      <div style={{ margin: '20px auto' }}>
-        <Typography variant="h4">วันงาน</Typography>
+      <div style={{ margin: '10px auto' }}>
+        <Typography variant="h6">วันงาน</Typography>
 
         <div style={{ display: 'flex', flexDirection: 'row', marginLeft: 20 }}>
           <Typography>
@@ -17,7 +17,7 @@ const DateInfo = ({ activityDetail }) => {
         </div>
       </div>
       <div style={{ margin: '20px auto' }}>
-        <Typography variant="h4">วันที่เปิดรับสมัคร</Typography>
+        <Typography variant="h6">วันที่เปิดรับสมัคร</Typography>
 
         <div style={{ display: 'flex', flexDirection: 'row', marginLeft: 20 }}>
           <Typography>

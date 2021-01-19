@@ -4,9 +4,9 @@ import ReactMarkdown from 'react-markdown';
 
 const Rules1 = ({ activityDetail }) => {
   return (
-    <div style={{ margin: '20px auto' }}>
+    <div style={{ margin: '10px auto' }}>
       <div style={{ display: 'flex' }}>
-        <Typography variant="h4">กฏ</Typography>
+        <Typography variant="h6">กฏ</Typography>
       </div>
       <ReactMarkdown source={activityDetail.rules1} />
     </div>

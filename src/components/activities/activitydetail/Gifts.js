@@ -4,9 +4,9 @@ import ModalImage from 'react-modal-image';
 
 const Gifts = ({ activityDetail }) => {
   return (
-    <div style={{ margin: '20px 0' }}>
+    <div style={{ margin: '10px 0' }}>
       <div style={{ display: 'flex' }}>
-        <Typography variant="h4">รางวัลของที่ระลึก</Typography>
+        <Typography variant="h6">รางวัลของที่ระลึก</Typography>
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
         {activityDetail.gifts.map((item, index) => {

@@ -3,14 +3,14 @@ import React from 'react';
 
 const Rules = ({ activityDetail }) => {
   return (
-    <div style={{ margin: '20px 0' }}>
+    <div style={{ margin: '10px 0' }}>
       <div style={{ display: 'flex' }}>
-        <Typography variant="h4">กติการางวัล</Typography>
+        <Typography variant="h6">กติการางวัล</Typography>
       </div>
       <div style={{ paddingLeft: 20 }}>
         {activityDetail.rules.map((item, index) => {
           return (
-            <div key={index} style={{ paddingHorizontal: 20, marginBottom: 5 }}>
+            <div key={index} style={{ marginBottom: 5 }}>
               <div
                 style={{
                   display: 'flex',

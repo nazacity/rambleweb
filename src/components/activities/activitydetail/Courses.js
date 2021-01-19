@@ -4,9 +4,9 @@ import ModalImage from 'react-modal-image';
 
 const Courses = ({ activityDetail }) => {
   return (
-    <div style={{ margin: '20px 0' }}>
-      <div style={{ display: 'flex' }}>
-        <Typography variant="h4">คอร์สวิ่ง</Typography>
+    <div style={{ margin: '10px 0' }}>
+      <div style={{ display: 'flex', marginBottom: 10 }}>
+        <Typography variant="h6">คอร์สวิ่ง</Typography>
       </div>
       {activityDetail.courses.map((item, index) => {
         return (

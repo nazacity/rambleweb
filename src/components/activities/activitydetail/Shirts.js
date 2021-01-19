@@ -4,9 +4,9 @@ import ModalImage from 'react-modal-image';
 
 const Shirts = ({ activityDetail }) => {
   return (
-    <div style={{ margin: '20px 0' }}>
+    <div style={{ margin: '10px 0' }}>
       <div style={{ display: 'flex' }}>
-        <Typography variant="h4">แบบเสื้อ</Typography>
+        <Typography variant="h6">แบบเสื้อ</Typography>
       </div>
       <div
         style={{

@@ -4,9 +4,9 @@ import TimelineDisplay from './TimelineDisplay';
 
 const TimelineForm = ({ activityDetail }) => {
   return (
-    <div style={{ margin: '20px auto' }}>
+    <div style={{ margin: '10px auto' }}>
       <div style={{ display: 'flex' }}>
-        <Typography variant="h4">รายละเอียดกำหนดการ</Typography>
+        <Typography variant="h6">รายละเอียดกำหนดการ</Typography>
       </div>
       <TimelineDisplay data={activityDetail.timeline} />
     </div>
