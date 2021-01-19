@@ -81,7 +81,7 @@ const index = () => {
         onLoad={() => handleLiff()}
       />
       {!router.query.activity && <ActivitiesBoard />}
-      {activity && <ActivityDetail activityDetail={activity} />}
+      {activity.courses && <ActivityDetail activityDetail={activity} />}
       <BottomNavbar user={user} />
     </div>
   );

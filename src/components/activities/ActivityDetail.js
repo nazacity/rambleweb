@@ -1,6 +1,16 @@
 import { Avatar, Typography } from '@material-ui/core';
 import React from 'react';
-import ModalImage from 'react-modal-image';
+import Banner from './activitydetail/Banner';
+import Title from './activitydetail/Title';
+import Location from './activitydetail/Location';
+import Courses from './activitydetail/Courses';
+import Gifts from './activitydetail/Gifts';
+import Shirts from './activitydetail/Shirts';
+import Rules from './activitydetail/Rules';
+import Rules1 from './activitydetail/Rules1';
+import TimelineForm from './activitydetail/TimelineForm';
+import Size from './activitydetail/Size';
+import DateInfo from './activitydetail/DateInfo';
 
 const Activity = ({ activityDetail }) => {
   return (
@@ -8,28 +18,26 @@ const Activity = ({ activityDetail }) => {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
-        padding: 20,
       }}
     >
+      <Banner activityDetail={activityDetail} />
       <div
-        style={{
-          height: 200,
-          width: 300,
-          borderRadius: 10,
-          overflow: 'hidden',
-        }}
+        style={{ padding: 10, boxShadow: '0px 5px 5px 0px rgba(0,0,0,0.2)' }}
       >
-        <ModalImage
-          style={{
-            height: 200,
-            width: 300,
-            borderRadius: 20,
-          }}
-          small={activityDetail.activity_picture_url}
-          large={activityDetail.activity_picture_url}
-        />
+        <Location activityDetail={activityDetail} />
       </div>
+      <div style={{ margin: '0 20px' }}>
+        <Title activityDetail={activityDetail} />
+        <DateInfo activityDetail={activityDetail} />
+        <Courses activityDetail={activityDetail} />
+        <TimelineForm activityDetail={activityDetail} />
+        <Gifts activityDetail={activityDetail} />
+        <Shirts activityDetail={activityDetail} />
+        <Size activityDetail={activityDetail} />
+        <Rules activityDetail={activityDetail} />
+        <Rules1 activityDetail={activityDetail} />
+      </div>
+      <div style={{ height: 100 }} />
     </div>
   );
 };
