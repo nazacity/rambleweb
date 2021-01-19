@@ -1,5 +1,6 @@
 import { Button } from '@material-ui/core';
 import React from 'react';
+import ButtonRegister from './ButtonRegister';
 
 const Banner = ({ activityDetail }) => {
   return (
@@ -10,13 +11,7 @@ const Banner = ({ activityDetail }) => {
         position: 'relative',
       }}
     >
-      <Button
-        style={{ position: 'absolute', bottom: 10, right: 10, width: 200 }}
-        variant="contained"
-        color="primary"
-      >
-        register
-      </Button>
+      <ButtonRegister absolute />
       <img
         style={{
           height: 300,

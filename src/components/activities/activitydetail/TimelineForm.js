@@ -6,7 +6,9 @@ const TimelineForm = ({ activityDetail }) => {
   return (
     <div style={{ margin: '10px auto' }}>
       <div style={{ display: 'flex' }}>
-        <Typography variant="h6">รายละเอียดกำหนดการ</Typography>
+        <Typography variant="h6" color="primary">
+          รายละเอียดกำหนดการ
+        </Typography>
       </div>
       <TimelineDisplay data={activityDetail.timeline} />
     </div>

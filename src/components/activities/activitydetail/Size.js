@@ -5,7 +5,9 @@ const Size = ({ activityDetail }) => {
   return (
     <div style={{ margin: '10px 0' }}>
       <div style={{ display: 'flex' }}>
-        <Typography variant="h6">ไซส์เสื้อ</Typography>
+        <Typography variant="h6" color="primary">
+          ไซส์เสื้อ
+        </Typography>
       </div>
       {activityDetail.size.map((size, index) => {
         return (

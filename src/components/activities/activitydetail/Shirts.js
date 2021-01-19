@@ -6,7 +6,9 @@ const Shirts = ({ activityDetail }) => {
   return (
     <div style={{ margin: '10px 0' }}>
       <div style={{ display: 'flex' }}>
-        <Typography variant="h6">แบบเสื้อ</Typography>
+        <Typography variant="h6" color="primary">
+          แบบเสื้อ
+        </Typography>
       </div>
       <div
         style={{

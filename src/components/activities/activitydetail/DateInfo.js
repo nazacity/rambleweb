@@ -8,7 +8,9 @@ const DateInfo = ({ activityDetail }) => {
   return (
     <React.Fragment>
       <div style={{ margin: '10px auto' }}>
-        <Typography variant="h6">วันงาน</Typography>
+        <Typography variant="h6" color="primary">
+          วันงาน
+        </Typography>
 
         <div style={{ display: 'flex', flexDirection: 'row', marginLeft: 20 }}>
           <Typography>
@@ -16,8 +18,10 @@ const DateInfo = ({ activityDetail }) => {
           </Typography>
         </div>
       </div>
-      <div style={{ margin: '20px auto' }}>
-        <Typography variant="h6">วันที่เปิดรับสมัคร</Typography>
+      <div style={{ margin: '10px auto' }}>
+        <Typography variant="h6" color="primary">
+          วันที่เปิดรับสมัคร
+        </Typography>
 
         <div style={{ display: 'flex', flexDirection: 'row', marginLeft: 20 }}>
           <Typography>

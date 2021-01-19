@@ -5,7 +5,9 @@ const Rules = ({ activityDetail }) => {
   return (
     <div style={{ margin: '10px 0' }}>
       <div style={{ display: 'flex' }}>
-        <Typography variant="h6">กติการางวัล</Typography>
+        <Typography variant="h6" color="primary">
+          กติการางวัล
+        </Typography>
       </div>
       <div style={{ paddingLeft: 20 }}>
         {activityDetail.rules.map((item, index) => {

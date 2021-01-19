@@ -11,6 +11,7 @@ import Rules1 from './activitydetail/Rules1';
 import TimelineForm from './activitydetail/TimelineForm';
 import Size from './activitydetail/Size';
 import DateInfo from './activitydetail/DateInfo';
+import ButtonRegister from './activitydetail/ButtonRegister';
 
 const Activity = ({ activityDetail }) => {
   return (
@@ -18,6 +19,7 @@ const Activity = ({ activityDetail }) => {
       style={{
         display: 'flex',
         flexDirection: 'column',
+        alignItems: 'center',
       }}
     >
       <Banner activityDetail={activityDetail} />
@@ -36,6 +38,9 @@ const Activity = ({ activityDetail }) => {
         <Size activityDetail={activityDetail} />
         <Rules activityDetail={activityDetail} />
         <Rules1 activityDetail={activityDetail} />
+      </div>
+      <div style={{ marginTop: 20 }}>
+        <ButtonRegister />
       </div>
       <div style={{ height: 100 }} />
     </div>
