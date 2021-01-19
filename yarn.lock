@@ -6281,7 +6281,7 @@
   dependencies:
     "asap" "~2.0.3"
 
-"prop-types@^15.5.10", "prop-types@^15.5.8", "prop-types@^15.6.0", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@15.7.2", "prop-types@latest":
+"prop-types@^15.5.10", "prop-types@^15.5.8", "prop-types@^15.6.0", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@>=15", "prop-types@15.7.2", "prop-types@latest":
   "integrity" "sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz"
   "version" "15.7.2"
@@ -6767,6 +6767,11 @@
   "resolved" "https://registry.npmjs.org/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz"
   "version" "3.0.4"
 
+"react-load-script@^0.0.6":
+  "integrity" "sha512-aRGxDGP9VoLxcsaYvKWIW+LRrMOzz2eEcubTS4NvQPPugjk2VvMhow0wWTkSl7RxookomD1MwcP4l5UStg5ShQ=="
+  "resolved" "https://registry.npmjs.org/react-load-script/-/react-load-script-0.0.6.tgz"
+  "version" "0.0.6"
+
 "react-loading-overlay@^1.0.1":
   "integrity" "sha512-aUjtZ8tNXBSx+MbD2SQs0boPbeTAGTh+I5U9nWjDzMasKlYr58RJpr57c8W7uApeLpOkAGbInExRi6GamNC2bA=="
   "resolved" "https://registry.npmjs.org/react-loading-overlay/-/react-loading-overlay-1.0.1.tgz"
@@ -6996,7 +7001,7 @@
   "resolved" "https://registry.npmjs.org/react-usepopstate/-/react-usepopstate-1.0.1.tgz"
   "version" "1.0.1"
 
-"react@^0.14.7 || ^15.0.0 || ^16.0.0", "react@^16.8.0 || ^17.0.0", "react@latest":
+"react@^0.14.7 || ^15.0.0 || ^16.0.0", "react@^16.8.0 || ^17.0.0", "react@>=0.14.9", "react@latest":
   "integrity" "sha512-lG9c9UuMHdcAexXtigOZLX8exLWkW0Ku29qPRU8uhF2R9BN96dLCt0psvzPLlHc5OWkgymP3qwTRgbnw5BKx3w=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.1.tgz"
   "version" "17.0.1"
