@@ -1,5 +1,5 @@
 import { Avatar, Typography } from '@material-ui/core';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import Banner from './activitydetail/Banner';
 import Title from './activitydetail/Title';
 import Location from './activitydetail/Location';
@@ -61,25 +61,30 @@ const Activity = () => {
         buttonOnClick={handleRegisterDialogOpen}
         userActivity={userActivity._id ? false : true}
       />
-      <div
-        style={{ padding: 10, boxShadow: '0px 5px 5px 0px rgba(0,0,0,0.2)' }}
-      >
-        <Location activityDetail={activityDetail} />
-      </div>
       {!userActivity._id && (
-        <div style={{ margin: '0 20px' }}>
-          <Title activityDetail={activityDetail} />
-          <DateInfo activityDetail={activityDetail} />
-          <Courses activityDetail={activityDetail} />
-          <TimelineForm activityDetail={activityDetail} />
-          <Gifts activityDetail={activityDetail} />
-          <Shirts activityDetail={activityDetail} />
-          <Size activityDetail={activityDetail} />
-          <Rules activityDetail={activityDetail} />
-          <Rules1 activityDetail={activityDetail} />
-        </div>
-      )}
+        <Fragment>
+          <div
+            style={{
+              padding: 10,
+              boxShadow: '0px 5px 5px 0px rgba(0,0,0,0.2)',
+            }}
+          >
+            <Location activityDetail={activityDetail} />
+          </div>
 
+          <div style={{ margin: '0 20px' }}>
+            <Title activityDetail={activityDetail} />
+            <DateInfo activityDetail={activityDetail} />
+            <Courses activityDetail={activityDetail} />
+            <TimelineForm activityDetail={activityDetail} />
+            <Gifts activityDetail={activityDetail} />
+            <Shirts activityDetail={activityDetail} />
+            <Size activityDetail={activityDetail} />
+            <Rules activityDetail={activityDetail} />
+            <Rules1 activityDetail={activityDetail} />
+          </div>
+        </Fragment>
+      )}
       {!userActivity._id && (
         <div style={{ marginTop: 20 }}>
           <ButtonRegister onClick={handleRegisterDialogOpen} />

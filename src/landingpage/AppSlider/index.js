@@ -68,6 +68,7 @@ const AppSlider = () => {
                 <img
                   src={item.icon}
                   alt={lang === 'th' ? title_th : lang === 'en' && title_en}
+                  style={{ width: 80, height: 80 }}
                 />
               }
               title={

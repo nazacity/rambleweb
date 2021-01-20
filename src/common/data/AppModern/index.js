@@ -167,7 +167,9 @@ export const features = {
 import appSlide1 from '../../../../public/assets/appslide/1.png';
 import appSlide2 from '../../../../public/assets/appslide/2.png';
 import appSlide3 from '../../../../public/assets/appslide/3.png';
-import appIcon from 'common/assets/image/appModern/icon1.svg';
+import appIcon1 from '../../../../public/assets/feature/2.png';
+import appIcon2 from '../../../../public/assets/feature/5.png';
+import appIcon3 from '../../../../public/assets/feature/7.png';
 
 export const appSlider = {
   carousel: [
@@ -196,7 +198,7 @@ export const appSlider = {
   features: [
     {
       id: 1,
-      icon: appIcon,
+      icon: appIcon1,
       title_th: 'Discover fast',
       description_th:
         'ด้วยระบบการค้นหาของเรา คุณจะไม่พลาดกิจกรรมใหม่ๆ ที่คุณสนใจ',
@@ -206,7 +208,7 @@ export const appSlider = {
     },
     {
       id: 2,
-      icon: appIcon,
+      icon: appIcon2,
       title_th: 'Notification',
       description_th:
         'แจ้งเตือนข่าวกิจกรรมของคุณ ให้คุณไม่พลาดทุกการอัพเดทของกิจกรรมที่คุณลงสมัคร',
@@ -216,7 +218,7 @@ export const appSlider = {
     },
     {
       id: 3,
-      icon: appIcon,
+      icon: appIcon3,
       title_th: 'Store milestones',
       description_th:
         'บันทึกประวัติกิจกรรมของคุณ ให้ทุกกิโลเมตรของคุณไม่สูญปล่าว',

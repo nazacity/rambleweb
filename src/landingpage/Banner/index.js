@@ -291,17 +291,17 @@ const Banner = () => {
                           className="primary"
                           title={t('banner.getstarted')}
                         />
-                        <Button
+                        {/* <Button
                           className="text"
                           variant="textButton"
                           icon={<Icon icon={playCircle} />}
                           iconPosition="left"
                           title={t('banner.watchvideo')}
-                        />
+                        /> */}
                       </ButtonGroup>
                     </div>
                   </Fade>
-                  <Fade up delay={300}>
+                  {/* <Fade up delay={300}>
                     <div
                       style={{
                         margin: '60px auto',
@@ -334,7 +334,7 @@ const Banner = () => {
                         }}
                       />
                     </div>
-                  </Fade>
+                  </Fade> */}
                 </Grid>
               </Grid>
             </BannerWrapper2>

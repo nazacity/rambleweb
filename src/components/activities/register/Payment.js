@@ -3,47 +3,47 @@ import React, { useState, useEffect } from 'react';
 import { post } from 'utils/request';
 
 const Payment = ({ userActivity, activity }) => {
-  const [qrcode, setQrcode] = useState('');
+  //   const [qrcode, setQrcode] = useState('');
 
-  const getQrcode = async () => {
-    let amount;
-    if (userActivity.address._id !== '5ff6600d20ed83388ab4ccbd') {
-      amount = +userActivity.activity.course.price + 80;
-      const res = await post(`/api/users/requestpayment/${userActivity._id}`, {
-        amount: amount,
-        activity_title: activity.title,
-        mailfee: true,
-      });
+  //   const getQrcode = async () => {
+  //     let amount;
+  //     if (userActivity.address._id !== '5ff6600d20ed83388ab4ccbd') {
+  //       amount = +userActivity.activity.course.price + 80;
+  //       const res = await post(`/api/users/requestpayment/${userActivity._id}`, {
+  //         amount: amount,
+  //         activity_title: activity.title,
+  //         mailfee: true,
+  //       });
 
-      if (res) {
-        setQrcode(res.data.qrImage);
-      }
-    } else {
-      amount = +userActivity.activity.course.price;
-      const res = await post(`/api/users/requestpayment/${userActivity._id}`, {
-        amount: amount,
-        activity_title: activity.title,
-        mailfee: false,
-      });
+  //       if (res) {
+  //         setQrcode(res.data.qrImage);
+  //       }
+  //     } else {
+  //       amount = +userActivity.activity.course.price;
+  //       const res = await post(`/api/users/requestpayment/${userActivity._id}`, {
+  //         amount: amount,
+  //         activity_title: activity.title,
+  //         mailfee: false,
+  //       });
 
-      if (res) {
-        setQrcode(res.data.qrImage);
-      }
-    }
-  };
+  //       if (res) {
+  //         setQrcode(res.data.qrImage);
+  //       }
+  //     }
+  //   };
 
-  useEffect(() => {
-    getQrcode();
-  }, [userActivity]);
+  //   useEffect(() => {
+  //     getQrcode();
+  //   }, [userActivity]);
   return (
     <div>
-      {qrcode && (
+      {/* {qrcode && (
         <img
           src={'data:image/png;base64,' + qrcode}
           style={{ width: 200, height: 200 }}
         />
-      )}
-      <Typography>กรุณาชำระโดยการสแกน Qr code</Typography>
+      )} */}
+      <Typography>ดำเนินการชำระเงินได้ที่แอพ Ramble</Typography>
     </div>
   );
 };
