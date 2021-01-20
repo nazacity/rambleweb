@@ -2,19 +2,34 @@ import { SET_LINE_USER, SET_ACTIVITY, UPDATE_USER_ACTIVITIES } from '../types';
 
 let INITIAL_STATE = {
   user: {
-    type: 'ramble',
-    lineId: 'U83584e6690b2d22b4a604ac227348d9a',
-    display_name: 'nazacity',
-    user_picture_url:
-      'https://profile.line-scdn.net/0hDrAvGHgcG118DzLCHJVkCkBKFTALIR0VBG9WaVgIQ2tWawhZFW5UMl0GQzkBbQleRDtRPVgHRzoG',
-    first_name: 'warodom',
-    last_name: 'lertthaweedech',
-    birthday: '1992-11-10T05:00:00.000+00:00',
-    gender: 'male',
-    phone_number: '0881493995',
-    blood_type: 'O',
-    idcard: '1103700943854',
-    _id: '6007d9995360333cd0bec99f',
+    // type: 'ramble',
+    // lineId: 'U83584e6690b2d22b4a604ac227348d9a',
+    // display_name: 'nazacity',
+    // user_picture_url:
+    //   'https://profile.line-scdn.net/0hDrAvGHgcG118DzLCHJVkCkBKFTALIR0VBG9WaVgIQ2tWawhZFW5UMl0GQzkBbQleRDtRPVgHRzoG',
+    // first_name: 'warodom',
+    // last_name: 'lertthaweedech',
+    // birthday: '1992-11-10T05:00:00.000+00:00',
+    // gender: 'male',
+    // phone_number: '0881493995',
+    // blood_type: 'O',
+    // idcard: '1103700943854',
+    // _id: '6007d9995360333cd0bec99f',
+    // user_activities: [
+
+    // ],
+    type: 'line',
+    lineId: '',
+    display_name: '',
+    user_picture_url: '',
+    first_name: '',
+    last_name: '',
+    birthday: '',
+    gender: '',
+    phone_number: '',
+    blood_type: '',
+    idcard: '',
+    _id: '',
     user_activities: [
       // {
       //   _id: '600807ea4c2a022060c4d4f3',

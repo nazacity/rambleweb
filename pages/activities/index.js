@@ -18,15 +18,20 @@ const index = () => {
   const handleLiff = async () => {
     dispatch(setLoading(false)); // delete after finishing
 
-    // await liff.init({ liffId: '1655591354-8d5Zzbm5' });
+    await liff.init({ liffId: '1655591354-8d5Zzbm5' });
 
-    // const profile = await liff.getProfile();
+    const profile = await liff.getProfile();
 
     try {
+      // const res = await post(`/users/lineId`, {
+      //   lineId: 'U83584e6690b2d22b4a604ac227348d9a',
+      //   user_picture_url:
+      //     'https://profile.line-scdn.net/0hDrAvGHgcG118DzLCHJVkCkBKFTALIR0VBG9WaVgIQ2tWawhZFW5UMl0GQzkBbQleRDtRPVgHRzoG',
+      // });
+
       const res = await post(`/users/lineId`, {
-        lineId: 'U83584e6690b2d22b4a604ac227348d9a',
-        user_picture_url:
-          'https://profile.line-scdn.net/0hDrAvGHgcG118DzLCHJVkCkBKFTALIR0VBG9WaVgIQ2tWawhZFW5UMl0GQzkBbQleRDtRPVgHRzoG',
+        lineId: profile.userId,
+        user_picture_url: profile.pictureUrl,
       });
 
       if (res.data === 'No user is found') {
