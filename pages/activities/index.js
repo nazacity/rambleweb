@@ -29,14 +29,14 @@ const index = () => {
       //     'https://profile.line-scdn.net/0hDrAvGHgcG118DzLCHJVkCkBKFTALIR0VBG9WaVgIQ2tWawhZFW5UMl0GQzkBbQleRDtRPVgHRzoG',
       // });
 
-      const res = await post(`/users/lineId`, {
+      const res = await axios.post(`${api}/users/lineId`, {
         lineId: profile.userId,
         user_picture_url: profile.pictureUrl,
       });
-      // console.log(res);
+      console.log(res);
 
       if (res.data.message === 'No user is found') {
-        // console.log('test');
+        console.log('test');
         dispatch(
           setLineUser({
             type: 'line',
