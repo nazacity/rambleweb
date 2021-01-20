@@ -10,6 +10,8 @@ import ActivitiesBoard from 'components/activities/ActivitiesBoard';
 import ActivityDetail from 'components/activities/ActivityDetail';
 import BottomNavbar from 'components/activities/BottomNavbar';
 import { setActivity, setLineUser } from '../../redux/actions/lineAction';
+import axios from 'axios';
+import { api } from 'api/api';
 
 const index = () => {
   const activity = useSelector((state) => state.line.activity);
@@ -59,12 +61,12 @@ const index = () => {
 
   const getActivityById = async () => {
     try {
-      const res = await get(
-        `/api/everyone/getactivitybyid/${router.query.activity}`
+      const res = await axios.get(
+        `${api}/api/everyone/getactivitybyid/${router.query.activity}`
       );
 
       if (res.status === 200) {
-        dispatch(setActivity(res.data));
+        dispatch(setActivity(res.data.data));
       }
     } catch (error) {
       console.log(error);
