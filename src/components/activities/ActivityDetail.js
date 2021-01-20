@@ -1,5 +1,5 @@
 import { Avatar, Typography } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 import Banner from './activitydetail/Banner';
 import Title from './activitydetail/Title';
 import Location from './activitydetail/Location';
@@ -12,8 +12,21 @@ import TimelineForm from './activitydetail/TimelineForm';
 import Size from './activitydetail/Size';
 import DateInfo from './activitydetail/DateInfo';
 import ButtonRegister from './activitydetail/ButtonRegister';
+import RegisterDialog from './register/RegisterDialog';
+import { useSelector } from 'react-redux';
 
-const Activity = ({ activityDetail }) => {
+const Activity = () => {
+  const [registerDialogOpen, setRegisterDialogOpen] = useState(false);
+  const activityDetail = useSelector((state) => state.line.activity);
+
+  const handleRegisterDialogOpen = () => {
+    setRegisterDialogOpen(true);
+  };
+
+  const handleRegisterDialogClose = () => {
+    setRegisterDialogOpen(false);
+  };
+
   return (
     <div
       style={{
@@ -22,7 +35,10 @@ const Activity = ({ activityDetail }) => {
         alignItems: 'center',
       }}
     >
-      <Banner activityDetail={activityDetail} />
+      <Banner
+        activityDetail={activityDetail}
+        buttonOnClick={handleRegisterDialogOpen}
+      />
       <div
         style={{ padding: 10, boxShadow: '0px 5px 5px 0px rgba(0,0,0,0.2)' }}
       >
@@ -40,9 +56,13 @@ const Activity = ({ activityDetail }) => {
         <Rules1 activityDetail={activityDetail} />
       </div>
       <div style={{ marginTop: 20 }}>
-        <ButtonRegister />
+        <ButtonRegister onClick={handleRegisterDialogOpen} />
       </div>
       <div style={{ height: 100 }} />
+      <RegisterDialog
+        open={registerDialogOpen}
+        handleClose={handleRegisterDialogClose}
+      />
     </div>
   );
 };

@@ -17,6 +17,15 @@ const theme = createMuiTheme({
       default: '#fff',
     },
   },
+  overrides: {
+    MuiLink: {
+      underlineHover: {
+        '&:hover': {
+          textDecoration: 'none',
+        },
+      },
+    },
+  },
 });
 
 export default theme;

@@ -4,20 +4,15 @@ import Cookies from 'js-cookie';
 import Script from 'react-load-script';
 import { useRouter } from 'next/router';
 import { setLoading } from '../../redux/actions/layoutActions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Typography, Avatar } from '@material-ui/core';
 import ActivitiesBoard from 'components/activities/ActivitiesBoard';
 import ActivityDetail from 'components/activities/ActivityDetail';
 import BottomNavbar from 'components/activities/BottomNavbar';
+import { setActivity } from '../../redux/actions/lineAction';
 
 const index = () => {
-  const [user, setUser] = useState({
-    userId: '',
-    displayName: '',
-    pictureUrl: '',
-    statusMessage: '',
-  });
-  const [activity, setActivity] = useState({});
+  const activity = useSelector((state) => state.line.activity);
   const dispatch = useDispatch();
   const router = useRouter();
   const handleLiff = async () => {
@@ -35,16 +30,21 @@ const index = () => {
 
         if (res.status === 200) {
           if (res.data === 'No user is found') {
-            setUser({
-              type: 'line',
-              user_picture_url: profile.pictureUrl,
-              display_name: profile.displayName,
-            });
+            dispatch(
+              setLineUser({
+                type: 'line',
+                lineId: profile.userId,
+                user_picture_url: profile.pictureUrl,
+                display_name: profile.displayName,
+              })
+            );
           } else {
-            setUser({
-              type: 'ramble',
-              ...res.data,
-            });
+            dispatch(
+              setLineUser({
+                type: 'ramble',
+                ...res.data,
+              })
+            );
           }
         }
         dispatch(setLoading(false));
@@ -62,7 +62,8 @@ const index = () => {
       );
 
       if (res.status === 200) {
-        setActivity(res.data);
+        console.log(res.data);
+        dispatch(setActivity(res.data));
       }
     } catch (error) {
       console.log(error);
@@ -81,8 +82,8 @@ const index = () => {
         onLoad={() => handleLiff()}
       />
       {!router.query.activity && <ActivitiesBoard />}
-      {activity.courses && <ActivityDetail activityDetail={activity} />}
-      <BottomNavbar user={user} />
+      {activity.courses.length > 0 && <ActivityDetail />}
+      <BottomNavbar />
     </div>
   );
 };

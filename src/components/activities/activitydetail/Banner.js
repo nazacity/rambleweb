@@ -2,7 +2,7 @@ import { Button } from '@material-ui/core';
 import React from 'react';
 import ButtonRegister from './ButtonRegister';
 
-const Banner = ({ activityDetail }) => {
+const Banner = ({ activityDetail, buttonOnClick }) => {
   return (
     <div
       style={{
@@ -11,7 +11,7 @@ const Banner = ({ activityDetail }) => {
         position: 'relative',
       }}
     >
-      <ButtonRegister absolute />
+      <ButtonRegister absolute onClick={buttonOnClick} />
       <img
         style={{
           height: 300,

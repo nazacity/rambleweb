@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 // Next
 import { useRouter } from 'next/router';
+import Link from 'Link';
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,11 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import HomeIcon from '@material-ui/icons/Home';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Avatar from '@material-ui/core/Avatar';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import AssignmentIcon from '@material-ui/icons/Assignment';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,11 +37,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const BottomNavbar = ({ user }) => {
+const BottomNavbar = () => {
   const classes = useStyles();
   const action = useDispatch();
   const [value, setValue] = useState(0);
-
+  const user = useSelector((state) => state.line.user);
   const handleChange = (event, activeIndex) => {
     setValue(0);
   };
@@ -54,6 +51,7 @@ const BottomNavbar = ({ user }) => {
   const menuOptions = [
     {
       name: 'ActivitiesBoard',
+      link: '/activities',
       selectedIndex: 0,
       icon: <HomeIcon />,
     },
@@ -80,8 +78,10 @@ const BottomNavbar = ({ user }) => {
         onChange={handleChange}
         className={classes.bottomnavbox}
       >
-        {/* {menuOptions.map((menu) => (
+        {menuOptions.map((menu) => (
           <BottomNavigationAction
+            component={Link}
+            href={menu.link}
             key={menu.name}
             label={menu.name}
             value={menu.selectedIndex}
@@ -91,7 +91,7 @@ const BottomNavbar = ({ user }) => {
               selected: classes.selected,
             }}
           />
-        ))} */}
+        ))}
         <BottomNavigationAction
           label={user.display_name}
           value={0}
