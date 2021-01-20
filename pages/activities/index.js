@@ -33,10 +33,8 @@ const index = () => {
         lineId: profile.userId,
         user_picture_url: profile.pictureUrl,
       });
-      console.log(res);
 
       if (res.data.message === 'No user is found') {
-        console.log('test');
         dispatch(
           setLineUser({
             type: 'line',

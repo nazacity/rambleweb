@@ -78,7 +78,7 @@ let INITIAL_STATE = {
 const lineReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_LINE_USER:
-      return { ...state, user: action.payload };
+      return { ...state, user: { ...state.user, ...action.payload } };
     case SET_ACTIVITY:
       return { ...state, activity: action.payload };
     case UPDATE_USER_ACTIVITIES:
