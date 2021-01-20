@@ -24,6 +24,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 import { get } from 'utils/request';
 import { setLoading } from '../../../../redux/actions/layoutActions';
+import { setLineUser } from '../../../../redux/actions/lineAction';
 
 const SignInForm = ({ setView }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -49,7 +50,16 @@ const SignInForm = ({ setView }) => {
         lineId: user.lineId,
         user_picture_url: user.user_picture_url,
       });
-    } catch (error) {}
+
+      dispatch(
+        setLineUser({
+          ...res.user,
+          type: 'ramble',
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

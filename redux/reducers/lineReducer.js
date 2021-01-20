@@ -3,10 +3,9 @@ import { SET_LINE_USER, SET_ACTIVITY } from '../types';
 let INITIAL_STATE = {
   user: {
     type: 'line',
-    userId: '',
-    displayName: '',
-    pictureUrl: '',
-    statusMessage: '',
+    lineId: '',
+    display_name: '',
+    user_picture_url: '',
   },
   activity: {
     activity_picture_url: '',
