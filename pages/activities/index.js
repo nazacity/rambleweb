@@ -23,7 +23,7 @@ const index = () => {
 
     const profile = await liff.getProfile();
     try {
-      // const res = await post(`/users/lineId`, {
+      // const res = await axios.post(`${api}/users/lineId`, {
       //   lineId: 'U83584e6690b2d22b4a604ac227348d9a',
       //   user_picture_url:
       //     'https://profile.line-scdn.net/0hDrAvGHgcG118DzLCHJVkCkBKFTALIR0VBG9WaVgIQ2tWawhZFW5UMl0GQzkBbQleRDtRPVgHRzoG',
@@ -34,7 +34,16 @@ const index = () => {
         user_picture_url: profile.pictureUrl,
       });
 
-      if (res.user) {
+      if (res.data.message === 'No user is found') {
+        dispatch(
+          setLineUser({
+            type: 'line',
+            lineId: profile.userId,
+            user_picture_url: profile.pictureUrl,
+            display_name: profile.displayName,
+          })
+        );
+      } else {
         dispatch(
           setLineUser({
             type: 'ramble',
@@ -46,15 +55,7 @@ const index = () => {
 
       dispatch(setLoading(false));
     } catch (error) {
-      console.log(error);
-      dispatch(
-        setLineUser({
-          type: 'line',
-          lineId: profile.userId,
-          user_picture_url: profile.pictureUrl,
-          display_name: profile.displayName,
-        })
-      );
+      console.log('test', error);
       dispatch(setLoading(false));
     }
   };
