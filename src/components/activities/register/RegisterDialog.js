@@ -14,6 +14,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import { useSelector } from 'react-redux';
 import RambleRegister from './RambleRegister';
+import ActivityRegister from './ActivityRegister';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -57,7 +58,9 @@ export default function RegisterDialog({ open, handleClose }) {
           </Toolbar>
         </AppBar>
         {user.type === 'line' && <RambleRegister />}
-        {user.type === 'ramble' && <div>test</div>}
+        {user.type === 'ramble' && (
+          <ActivityRegister handleClose={handleClose} />
+        )}
       </Dialog>
     </div>
   );

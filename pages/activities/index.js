@@ -17,41 +17,41 @@ const index = () => {
   const router = useRouter();
   const handleLiff = async () => {
     dispatch(setLoading(false)); // delete after finishing
-    let accessToken;
-    await liff.init({ liffId: '1655591354-8d5Zzbm5' });
-    accessToken = await liff.getAccessToken();
-    const profile = await liff.getProfile();
-    if (accessToken) {
-      Cookies.set('accessToken', accessToken);
-      try {
-        const res = await post('/api/everyone/getuserfromlinetoken', {
-          accessToken: accessToken,
-        });
 
-        if (res.status === 200) {
-          if (res.data === 'No user is found') {
-            dispatch(
-              setLineUser({
-                type: 'line',
-                lineId: profile.userId,
-                user_picture_url: profile.pictureUrl,
-                display_name: profile.displayName,
-              })
-            );
-          } else {
-            dispatch(
-              setLineUser({
-                type: 'ramble',
-                ...res.data,
-              })
-            );
-          }
-        }
-        dispatch(setLoading(false));
-      } catch (error) {
-        console.log(error);
-        dispatch(setLoading(false));
+    // await liff.init({ liffId: '1655591354-8d5Zzbm5' });
+
+    // const profile = await liff.getProfile();
+
+    try {
+      const res = await post(`/users/lineId`, {
+        lineId: 'U83584e6690b2d22b4a604ac227348d9a',
+        user_picture_url:
+          'https://profile.line-scdn.net/0hDrAvGHgcG118DzLCHJVkCkBKFTALIR0VBG9WaVgIQ2tWawhZFW5UMl0GQzkBbQleRDtRPVgHRzoG',
+      });
+
+      if (res.data === 'No user is found') {
+        dispatch(
+          setLineUser({
+            type: 'line',
+            lineId: profile.userId,
+            user_picture_url: profile.pictureUrl,
+            display_name: profile.displayName,
+          })
+        );
+      } else {
+        dispatch(
+          setLineUser({
+            type: 'ramble',
+            ...res.user,
+          })
+        );
+        Cookies.set('accessToken', res.token);
       }
+
+      dispatch(setLoading(false));
+    } catch (error) {
+      console.log(error);
+      dispatch(setLoading(false));
     }
   };
 
@@ -62,7 +62,6 @@ const index = () => {
       );
 
       if (res.status === 200) {
-        console.log(res.data);
         dispatch(setActivity(res.data));
       }
     } catch (error) {

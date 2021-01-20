@@ -1,4 +1,4 @@
-import { SET_LINE_USER, SET_ACTIVITY } from '../types';
+import { SET_LINE_USER, SET_ACTIVITY, UPDATE_USER_ACTIVITIES } from '../types';
 
 export const setLineUser = (data) => (dispatch) => {
   dispatch({
@@ -10,6 +10,13 @@ export const setLineUser = (data) => (dispatch) => {
 export const setActivity = (data) => (dispatch) => {
   dispatch({
     type: SET_ACTIVITY,
+    payload: data,
+  });
+};
+
+export const updateUserActivity = (data) => (dispatch) => {
+  dispatch({
+    type: UPDATE_USER_ACTIVITIES,
     payload: data,
   });
 };
