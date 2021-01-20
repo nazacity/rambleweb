@@ -43,7 +43,7 @@ const SignInForm = ({ setView }) => {
   const onSubmit = async (data) => {
     // dispatch(setLoading(true));
     try {
-      const res = await axios.post(`${api}/partners/login`, {
+      const res = await axios.post(`${api}/users/login`, {
         username: data.username,
         password: data.password,
         lineId: user.lineId,

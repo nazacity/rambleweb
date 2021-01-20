@@ -57,6 +57,7 @@ export default function RegisterDialog({ open, handleClose }) {
           </Toolbar>
         </AppBar>
         {user.type === 'line' && <RambleRegister />}
+        {user.type === 'ramble' && <div>test</div>}
       </Dialog>
     </div>
   );
