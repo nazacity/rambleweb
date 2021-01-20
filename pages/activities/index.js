@@ -9,7 +9,7 @@ import { Typography, Avatar } from '@material-ui/core';
 import ActivitiesBoard from 'components/activities/ActivitiesBoard';
 import ActivityDetail from 'components/activities/ActivityDetail';
 import BottomNavbar from 'components/activities/BottomNavbar';
-import { setActivity } from '../../redux/actions/lineAction';
+import { setActivity, setLineUser } from '../../redux/actions/lineAction';
 
 const index = () => {
   const activity = useSelector((state) => state.line.activity);

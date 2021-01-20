@@ -5,7 +5,8 @@ let INITIAL_STATE = {
     type: 'line',
     lineId: '',
     display_name: '',
-    user_picture_url: '',
+    user_picture_url:
+      'https://thestandard.co/wp-content/uploads/2020/10/COVER-WEB-99.jpg',
   },
   activity: {
     activity_picture_url: '',
