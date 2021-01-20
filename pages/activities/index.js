@@ -17,7 +17,9 @@ const index = () => {
   const router = useRouter();
   const handleLiff = async () => {
     dispatch(setLoading(false)); // delete after finishing
+    await liff.init({ liffId: '1655591354-8d5Zzbm5' });
 
+    const profile = await liff.getProfile();
     try {
       // const res = await post(`/users/lineId`, {
       //   lineId: 'U83584e6690b2d22b4a604ac227348d9a',
@@ -25,24 +27,12 @@ const index = () => {
       //     'https://profile.line-scdn.net/0hDrAvGHgcG118DzLCHJVkCkBKFTALIR0VBG9WaVgIQ2tWawhZFW5UMl0GQzkBbQleRDtRPVgHRzoG',
       // });
 
-      await liff.init({ liffId: '1655591354-8d5Zzbm5' });
-
-      const profile = await liff.getProfile();
       const res = await post(`/users/lineId`, {
         lineId: profile.userId,
         user_picture_url: profile.pictureUrl,
       });
 
-      if (res.data === 'No user is found') {
-        dispatch(
-          setLineUser({
-            type: 'line',
-            lineId: profile.userId,
-            user_picture_url: profile.pictureUrl,
-            display_name: profile.displayName,
-          })
-        );
-      } else {
+      if (res.user) {
         dispatch(
           setLineUser({
             type: 'ramble',
@@ -55,6 +45,14 @@ const index = () => {
       dispatch(setLoading(false));
     } catch (error) {
       console.log(error);
+      dispatch(
+        setLineUser({
+          type: 'line',
+          lineId: profile.userId,
+          user_picture_url: profile.pictureUrl,
+          display_name: profile.displayName,
+        })
+      );
       dispatch(setLoading(false));
     }
   };
