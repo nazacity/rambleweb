@@ -18,11 +18,11 @@ const index = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const handleLiff = async () => {
-    dispatch(setLoading(false)); // delete after finishing
-    await liff.init({ liffId: '1655591354-8d5Zzbm5' });
-
-    const profile = await liff.getProfile();
     try {
+      dispatch(setLoading(false)); // delete after finishing
+      await liff.init({ liffId: '1655591354-8d5Zzbm5' });
+
+      const profile = await liff.getProfile();
       // const res = await axios.post(`${api}/users/lineId`, {
       //   lineId: 'U83584e6690b2d22b4a604ac227348d9a12',
       //   user_picture_url:
