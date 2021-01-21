@@ -18,8 +18,9 @@ import Payment from './register/Payment';
 
 const Activity = () => {
   const [registerDialogOpen, setRegisterDialogOpen] = useState(false);
+  const [paymentDialogOpen, setPaymentDialogOpen] = useState(false);
   const [userActivity, setUserActivity] = useState({
-    _id: '',
+    state: 'unregister',
   });
   const activityDetail = useSelector((state) => state.line.activity);
 
@@ -40,12 +41,28 @@ const Activity = () => {
     checkUserActivities();
   }, [user_activities, activityDetail]);
 
+  useEffect(() => {
+    if (userActivity.state === 'waiting_payment') {
+      setTimeout(() => {
+        setPaymentDialogOpen(true);
+      }, 1000);
+    }
+  }, [userActivity]);
+
   const handleRegisterDialogOpen = () => {
     setRegisterDialogOpen(true);
   };
 
   const handleRegisterDialogClose = () => {
     setRegisterDialogOpen(false);
+  };
+
+  const handlePaymentDialogOpen = () => {
+    setPaymentDialogOpen(true);
+  };
+
+  const handlePaymentDialogClose = () => {
+    setPaymentDialogOpen(false);
   };
 
   return (
@@ -58,40 +75,52 @@ const Activity = () => {
     >
       <Banner
         activityDetail={activityDetail}
-        buttonOnClick={handleRegisterDialogOpen}
-        userActivity={userActivity._id ? false : true}
+        buttonOnClick={
+          userActivity.state === 'waiting_payment'
+            ? handlePaymentDialogOpen
+            : handleRegisterDialogOpen
+        }
+        userActivity={userActivity}
       />
-      {!userActivity._id && (
-        <Fragment>
-          <div
-            style={{
-              padding: 10,
-              boxShadow: '0px 5px 5px 0px rgba(0,0,0,0.2)',
-            }}
-          >
-            <Location activityDetail={activityDetail} />
-          </div>
+      <div
+        style={{
+          padding: 10,
+          boxShadow: '0px 5px 5px 0px rgba(0,0,0,0.2)',
+        }}
+      >
+        <Location activityDetail={activityDetail} />
+      </div>
 
-          <div style={{ margin: '0 20px' }}>
-            <Title activityDetail={activityDetail} />
-            <DateInfo activityDetail={activityDetail} />
-            <Courses activityDetail={activityDetail} />
-            <TimelineForm activityDetail={activityDetail} />
-            <Gifts activityDetail={activityDetail} />
-            <Shirts activityDetail={activityDetail} />
-            <Size activityDetail={activityDetail} />
-            <Rules activityDetail={activityDetail} />
-            <Rules1 activityDetail={activityDetail} />
-          </div>
-        </Fragment>
-      )}
-      {!userActivity._id && (
-        <div style={{ marginTop: 20 }}>
-          <ButtonRegister onClick={handleRegisterDialogOpen} />
-        </div>
-      )}
-      {userActivity._id && (
-        <Payment userActivity={userActivity} activity={activityDetail} />
+      <div style={{ margin: '0 20px' }}>
+        <Title activityDetail={activityDetail} />
+        <DateInfo activityDetail={activityDetail} />
+        <Courses activityDetail={activityDetail} />
+        <TimelineForm activityDetail={activityDetail} />
+        <Gifts activityDetail={activityDetail} />
+        <Shirts activityDetail={activityDetail} />
+        <Size activityDetail={activityDetail} />
+        <Rules activityDetail={activityDetail} />
+        <Rules1 activityDetail={activityDetail} />
+      </div>
+
+      <div style={{ marginTop: 20 }}>
+        <ButtonRegister
+          onClick={
+            userActivity.state === 'waiting_payment'
+              ? handlePaymentDialogOpen
+              : handleRegisterDialogOpen
+          }
+          userActivity={userActivity}
+        />
+      </div>
+
+      {userActivity.state === 'waiting_payment' && (
+        <Payment
+          open={paymentDialogOpen}
+          handleClose={handlePaymentDialogClose}
+          userActivity={userActivity}
+          activity={activityDetail}
+        />
       )}
       <div style={{ height: 100 }} />
       <RegisterDialog

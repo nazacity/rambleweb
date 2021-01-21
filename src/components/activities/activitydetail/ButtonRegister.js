@@ -1,7 +1,7 @@
 import { Button } from '@material-ui/core';
 import React from 'react';
 
-const ButtonRegister = ({ absolute, onClick }) => {
+const ButtonRegister = ({ absolute, onClick, userActivity }) => {
   return (
     <Button
       style={{
@@ -14,7 +14,9 @@ const ButtonRegister = ({ absolute, onClick }) => {
       color="primary"
       onClick={onClick}
     >
-      สมัคร
+      {userActivity.state === 'unregister' && 'สมัคร'}
+      {userActivity.state === 'waiting_payment' && 'ชำระ'}
+      {userActivity.state === 'upcoming' && 'Upcomimng'}
     </Button>
   );
 };

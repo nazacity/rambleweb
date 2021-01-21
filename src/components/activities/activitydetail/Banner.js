@@ -11,7 +11,11 @@ const Banner = ({ activityDetail, buttonOnClick, userActivity }) => {
         position: 'relative',
       }}
     >
-      {userActivity && <ButtonRegister absolute onClick={buttonOnClick} />}
+      <ButtonRegister
+        absolute
+        onClick={buttonOnClick}
+        userActivity={userActivity}
+      />
       <img
         style={{
           height: 300,
