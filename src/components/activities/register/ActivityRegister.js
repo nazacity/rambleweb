@@ -11,8 +11,9 @@ import {
 } from '@material-ui/core';
 import axios from 'axios';
 import { api } from 'api/api';
+import { updateUserActivity } from '../../../../redux/actions/lineAction';
 
-const ActivityRegister = ({ handleClose }) => {
+const ActivityRegister = ({ handleClose, userActivity, setUserActivity }) => {
   const activity = useSelector((state) => state.line.activity);
   const user = useSelector((state) => state.line.user);
   const dispatch = useDispatch();
@@ -141,6 +142,7 @@ const ActivityRegister = ({ handleClose }) => {
 
     // set user activities
     dispatch(updateUserActivity(res.data.data));
+    setUserActivity({ ...userActivity, state: 'waiting_payment' });
     handleClose();
   };
   const theme = useTheme();
@@ -392,7 +394,12 @@ const ActivityRegister = ({ handleClose }) => {
         />
       </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Button variant="contained" color="primary" onClick={onSubmit}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={onSubmit}
+          style={{ width: '80%' }}
+        >
           สมัคร
         </Button>
       </div>

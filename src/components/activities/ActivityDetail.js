@@ -127,6 +127,8 @@ const Activity = () => {
       )}
       <div style={{ height: 100 }} />
       <RegisterDialog
+        userActivity={userActivity}
+        setUserActivity={setUserActivity}
         open={registerDialogOpen}
         handleClose={handleRegisterDialogClose}
       />

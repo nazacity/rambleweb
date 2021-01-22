@@ -25,7 +25,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function RegisterDialog({ open, handleClose }) {
+export default function RegisterDialog({
+  open,
+  handleClose,
+  userActivity,
+  setUserActivity,
+}) {
   const classes = useStyles();
   const user = useSelector((state) => state.line.user);
   return (
@@ -54,7 +59,11 @@ export default function RegisterDialog({ open, handleClose }) {
         </AppBar>
         {user.type === 'line' && <RambleRegister />}
         {user.type === 'ramble' && (
-          <ActivityRegister handleClose={handleClose} />
+          <ActivityRegister
+            handleClose={handleClose}
+            userActivity={userActivity}
+            setUserActivity={setUserActivity}
+          />
         )}
       </Dialog>
     </div>
