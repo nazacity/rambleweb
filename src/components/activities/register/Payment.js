@@ -1,18 +1,10 @@
 import { Typography, IconButton, Grid, Button } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import React, { useState, useEffect, Fragment } from 'react';
-import { post } from 'utils/request';
 import { makeStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import Slide from '@material-ui/core/Slide';
-import { useSelector } from 'react-redux';
 import Fade from 'react-reveal/Fade';
-import BannerWrapper, {
-  ButtonGroup,
-  VideoWrapper,
-  BannerWrapper1,
-  BannerWrapper2,
-} from './banner.style';
 import bannerImg from '../../../../public/assets/screen/mockup1.png';
 import activity1 from '../../../../public/assets/screen/activity1.png';
 import activity2 from '../../../../public/assets/screen/activity2.png';

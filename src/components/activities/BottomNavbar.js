@@ -50,10 +50,12 @@ const BottomNavbar = () => {
 
   const menuOptions = [
     {
-      name: 'ActivitiesBoard',
+      name: 'Activity',
       link: '/activities',
       selectedIndex: 0,
-      icon: <HomeIcon />,
+      icon: (
+        <img src="./assets/buttonicon/activity.svg" style={{ width: 20 }}></img>
+      ),
     },
   ];
 
@@ -78,7 +80,7 @@ const BottomNavbar = () => {
         onChange={handleChange}
         className={classes.bottomnavbox}
       >
-        {/* {menuOptions.map((menu) => (
+        {menuOptions.map((menu) => (
           <BottomNavigationAction
             component={Link}
             href={menu.link}
@@ -91,7 +93,7 @@ const BottomNavbar = () => {
               selected: classes.selected,
             }}
           />
-        ))} */}
+        ))}
         <BottomNavigationAction
           label={user.display_name}
           value={0}

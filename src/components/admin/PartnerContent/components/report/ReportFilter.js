@@ -20,7 +20,6 @@ const ReportFilter = ({
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
     // loadingTrue();
     try {
       const res = await get(
