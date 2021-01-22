@@ -54,7 +54,7 @@ const BottomNavbar = () => {
       link: '/activities',
       selectedIndex: 0,
       icon: (
-        <img src="./assets/buttonicon/activity.svg" style={{ width: 20 }}></img>
+        <img src="./assets/buttonicon/activity.png" style={{ width: 20 }}></img>
       ),
     },
   ];
