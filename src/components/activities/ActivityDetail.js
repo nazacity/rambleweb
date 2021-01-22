@@ -15,6 +15,7 @@ import ButtonRegister from './activitydetail/ButtonRegister';
 import RegisterDialog from './register/RegisterDialog';
 import { useDispatch, useSelector } from 'react-redux';
 import Payment from './register/Payment';
+import BackButton from './layout/BackButton2';
 
 const Activity = () => {
   const [registerDialogOpen, setRegisterDialogOpen] = useState(false);
@@ -73,6 +74,7 @@ const Activity = () => {
         alignItems: 'center',
       }}
     >
+      <BackButton />
       <Banner
         activityDetail={activityDetail}
         buttonOnClick={
