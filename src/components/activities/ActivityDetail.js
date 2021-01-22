@@ -86,12 +86,13 @@ const Activity = () => {
         style={{
           padding: 10,
           boxShadow: '0px 5px 5px 0px rgba(0,0,0,0.2)',
+          width: '100vw',
         }}
       >
         <Location activityDetail={activityDetail} />
       </div>
 
-      <div style={{ margin: '0 20px' }}>
+      <div style={{ padding: '0 20px', width: '100vw' }}>
         <Title activityDetail={activityDetail} />
         <DateInfo activityDetail={activityDetail} />
         <Courses activityDetail={activityDetail} />

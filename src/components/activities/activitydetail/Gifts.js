@@ -28,7 +28,7 @@ const Gifts = ({ activityDetail }) => {
                   large={item.gift_picture_url}
                 />
               </div>
-              <Typography style={{ textAlign: 'center' }}>
+              <Typography style={{ textAlign: 'center', width: 100 }}>
                 {item.description}
               </Typography>
             </div>

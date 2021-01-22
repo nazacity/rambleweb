@@ -3,12 +3,13 @@ import React, { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import 'moment/locale/th';
+import Link from 'Link';
 
 const ActivityCardDetail = ({ item, index }) => {
   const lang = useSelector((state) => state.layout.lang);
   moment.locale(lang);
   return (
-    <Fragment>
+    <Link href={`/activities?activity=${item._id}`}>
       <CardActionArea
         style={{
           width: '80vw',
@@ -41,7 +42,7 @@ const ActivityCardDetail = ({ item, index }) => {
         </div>
       </CardActionArea>
       {/* {(index + 1) % 5 === 0 && <MinorAdvertise />} */}
-    </Fragment>
+    </Link>
   );
 };
 
