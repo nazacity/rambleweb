@@ -60,10 +60,10 @@ const index = () => {
     }
   };
 
-  const getActivityById = async () => {
+  const getActivityById = async (activityId) => {
     try {
       const res = await axios.get(
-        `${api}/api/everyone/getactivitybyid/${router.query.activity}`
+        `${api}/api/everyone/getactivitybyid/${activityId}`
       );
 
       if (res.status === 200) {
@@ -74,9 +74,16 @@ const index = () => {
     }
   };
 
+  const queryString = decodeURIComponent(window.location.search).replace(
+    '?liff.state=',
+    ''
+  );
+  const params = new URLSearchParams(queryString);
+  const activityId = params.get('activity');
+
   useEffect(() => {
-    if (router.query.activity) {
-      getActivityById();
+    if (activityId) {
+      getActivityById(activityId);
     }
   }, [router]);
   return (
@@ -85,8 +92,8 @@ const index = () => {
         url="https://static.line-scdn.net/liff/edge/2.1/sdk.js"
         onLoad={() => handleLiff()}
       />
-      {!router.query.activity && <ActivitiesBoard />}
-      {router.query.activity && <ActivityDetail />}
+      {!activityId && <ActivitiesBoard />}
+      {activityId && <ActivityDetail />}
       <BottomNavbar />
     </div>
   );

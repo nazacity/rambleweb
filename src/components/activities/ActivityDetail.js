@@ -35,6 +35,10 @@ const Activity = () => {
     );
     if (checkActivity) {
       setUserActivity(checkActivity);
+    } else {
+      setUserActivity({
+        state: 'unregister',
+      });
     }
   };
 
@@ -46,7 +50,7 @@ const Activity = () => {
     if (userActivity.state === 'waiting_payment') {
       setTimeout(() => {
         setPaymentDialogOpen(true);
-      }, 1000);
+      }, 500);
     }
   }, [userActivity]);
 
@@ -74,7 +78,7 @@ const Activity = () => {
         alignItems: 'center',
       }}
     >
-      <BackButton />
+      <BackButton setUserActivity={setUserActivity} />
       <Banner
         activityDetail={activityDetail}
         buttonOnClick={

@@ -1,10 +1,9 @@
 import React from 'react';
-import TuneIcon from '@material-ui/icons/Tune';
 import { Fab, useTheme } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Link from 'Link';
 
-const FilterButton = () => {
+const FilterButton = ({ setUserActivity }) => {
   const theme = useTheme();
   return (
     <Link href="/activities">
@@ -17,6 +16,11 @@ const FilterButton = () => {
           zIndex: 100,
           backgroundColor: '#fff',
           color: theme.palette.primary.main,
+        }}
+        onClick={() => {
+          setUserActivity({
+            state: 'unregister',
+          });
         }}
       >
         <ArrowBackIcon />
