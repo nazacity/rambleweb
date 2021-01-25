@@ -14,7 +14,6 @@ import axios from 'axios';
 import { api } from 'api/api';
 
 const index = () => {
-  const activity = useSelector((state) => state.line.activity);
   const dispatch = useDispatch();
   const router = useRouter();
   const handleLiff = async () => {

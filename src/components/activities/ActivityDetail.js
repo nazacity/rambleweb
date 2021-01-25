@@ -31,8 +31,11 @@ const Activity = () => {
 
   const checkUserActivities = () => {
     const checkActivity = user_activities.find(
-      (item) => item.activity.id._id === activityDetail._id
+      (item) =>
+        item.activity.id._id === activityDetail._id ||
+        item.activity.id === activityDetail._id
     );
+    console.log(checkActivity);
     if (checkActivity) {
       setUserActivity(checkActivity);
     } else {
@@ -41,6 +44,8 @@ const Activity = () => {
       });
     }
   };
+
+  console.log(userActivity);
 
   useEffect(() => {
     checkUserActivities();

@@ -141,8 +141,9 @@ const ActivityRegister = ({ handleClose, userActivity, setUserActivity }) => {
     );
 
     // set user activities
+    console.log(res.data.data);
     dispatch(updateUserActivity(res.data.data));
-    setUserActivity({ ...userActivity, state: 'waiting_payment' });
+    setUserActivity({ ...res.data.data, state: 'waiting_payment' });
     handleClose();
   };
   const theme = useTheme();
