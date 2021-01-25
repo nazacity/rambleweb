@@ -49,7 +49,7 @@ const FilterDialog = ({
   };
   const [selectedDate, setSelectedDate] = React.useState({
     startDate: new Date(),
-    endDate: new Date(),
+    endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
   });
 
   const onSubmit = async (data) => {

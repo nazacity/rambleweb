@@ -13,6 +13,7 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import HomeIcon from '@material-ui/icons/Home';
 import Avatar from '@material-ui/core/Avatar';
+import ActivityIcon from '../../../public/assets/buttonicon/activity.png';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,9 +54,7 @@ const BottomNavbar = () => {
       name: 'Activity',
       link: '/activities',
       selectedIndex: 0,
-      icon: (
-        <img src="./assets/buttonicon/activity.png" style={{ width: 20 }}></img>
-      ),
+      icon: <img src={ActivityIcon} style={{ width: 20 }}></img>,
     },
   ];
 
@@ -96,6 +95,8 @@ const BottomNavbar = () => {
         ))}
         <BottomNavigationAction
           label={user.display_name}
+          component={Link}
+          href={'/activities/useractivities'}
           value={0}
           icon={
             <Avatar

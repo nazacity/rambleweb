@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import ActivityCardDetail from './ActivityCardDetail';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setLoading } from '../../../../redux/actions/layoutActions';
 import { CircularProgress, makeStyles } from '@material-ui/core';
 import axios from 'axios';
@@ -32,7 +32,7 @@ const AllActivities = () => {
   const [activities, setActivities] = useState([]);
   const [page, setPage] = useState(0);
   const [noMore, setNoMore] = useState(false);
-  const onLoadMore = async () => {
+  const onLoadMore = async (newRefresh) => {
     if (!noMore) {
       dispatch(setLoading(true));
       setPage(page + 1);
@@ -62,7 +62,7 @@ const AllActivities = () => {
   };
 
   useEffect(() => {
-    onLoadMore();
+    onLoadMore(true);
   }, []);
 
   if (!firstFetched) {
