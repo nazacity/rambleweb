@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { get } from 'utils/request';
+import { get, post } from 'utils/request';
 import { setLoading } from '../../../../redux/actions/layoutActions';
 import { useDispatch } from 'react-redux';
 import MaterialTable from 'material-table';
@@ -7,6 +7,7 @@ import { Avatar, IconButton, Button, Typography } from '@material-ui/core';
 import Filter from './components/Filter';
 import Profile from './components/Profile';
 import usePopstate from 'react-usepopstate';
+import { useToasts } from 'react-toast-notifications';
 
 const index = () => {
   const [profileDialogOpen, setProfileDialogOpen] = useState(false);
@@ -14,6 +15,8 @@ const index = () => {
   const [partners, setPartners] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const dispatch = useDispatch();
+  const { addToast } = useToasts();
+  const [tableLoading, setTableLoading] = useState(false);
 
   const { isBackButtonClicked } = usePopstate({
     isPrompt: false,
@@ -158,6 +161,7 @@ const index = () => {
         columns={columnTitle}
         data={partners}
         title=""
+        isLoading={tableLoading}
         editable={{
           onRowUpdate: (newData, oldData) =>
             new Promise(async (resolve) => {
@@ -166,9 +170,33 @@ const index = () => {
                 return;
               }
               try {
+                setTableLoading(true);
+                const res = await post(
+                  `/api/employees/editpartner/${newData._id}`,
+                  { state: newData.state }
+                );
+                if (res.status === 200) {
+                  addToast(newData.display_name + 'อัพเดทเรียบร้อย', {
+                    appearance: 'success',
+                    autoDismiss: true,
+                  });
+                  const index = partners.findIndex(
+                    (item) => item._id === res.data._id
+                  );
+                  const newPartners = partners;
+                  newPartners[index] = res.data;
+
+                  setPartners(newPartners);
+                  setTableLoading(false);
+                }
                 resolve();
               } catch (error) {
                 console.log(error.message);
+                addToast(newData.display_name + 'ไม่สามารถอัพเดทได้', {
+                  appearance: 'error',
+                  autoDismiss: true,
+                });
+                setTableLoading(false);
                 resolve();
               }
             }),

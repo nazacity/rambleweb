@@ -128,21 +128,13 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
     {
       title: 'state',
       field: 'state',
-      render: (rowData) => (
-        <div>
-          <Typography>
-            {rowData.state === 'waiting_payment' && 'รอการชำระ'}
-            {rowData.state === 'cancel' && 'ยกเลิก'}
-            {rowData.state !== 'waiting_payment' &&
-              rowData.state !== 'cancel' &&
-              'ชำระแล้ว'}
-          </Typography>
-        </div>
-      ),
       editable: 'never',
       lookup: {
         waiting_payment: 'รอการชำระ',
         upcoming: 'ชำระแล้ว',
+        actual_date: 'รอมาเช็คอิน',
+        checked_in: 'เช็คอินแล้ว',
+        checked_out: 'เช็คเอ้าท์แล้ว',
         cancel: 'ยกเลิก',
       },
     },

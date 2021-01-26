@@ -73,12 +73,11 @@ const ReportFilter = ({
         display: 'flex',
         padding: 30,
         borderBottom: '1px solid black',
-        alignItems: 'center',
         paddingLeft: 100,
       }}
     >
       <Typography variant="h4">Filter</Typography>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div style={{ display: 'flex' }}>
         <div style={{ marginLeft: 50 }}>
           <Controller
             menuPlacement="auto"

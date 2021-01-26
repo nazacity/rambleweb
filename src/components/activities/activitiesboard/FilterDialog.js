@@ -222,7 +222,7 @@ const FilterDialog = ({
           <div>
             <MuiPickersUtilsProvider utils={MomentUtils}>
               <KeyboardDatePicker
-                // disablePast
+                disablePast
                 disableToolbar
                 inputVariant="outlined"
                 format="DD MMM yyyy"
@@ -238,7 +238,7 @@ const FilterDialog = ({
                 style={{ width: '100%' }}
               />
               <KeyboardDatePicker
-                // disablePast
+                disablePast
                 disableToolbar
                 margin="normal"
                 inputVariant="outlined"

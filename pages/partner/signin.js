@@ -55,13 +55,21 @@ const signin = () => {
       });
 
       if (res.status === 200) {
-        Cookies.set('accessToken', res.data.token);
-        dispatch(userStateHandle(res.data.partner));
-        addToast('SignIn Successed!', {
-          appearance: 'success',
-          autoDismiss: true,
-        });
-        Router.push('/partner');
+        if (res.data.partner.state === 'active') {
+          Cookies.set('accessToken', res.data.token);
+          dispatch(userStateHandle(res.data.partner));
+          addToast('ล็อคอินสำเร็จ', {
+            appearance: 'success',
+            autoDismiss: true,
+          });
+          Router.push('/partner');
+        } else {
+          addToast('กรุณาติดต่อ Admin', {
+            appearance: 'error',
+            autoDismiss: true,
+          });
+          dispatch(setLoading(false));
+        }
       }
     } catch (error) {
       addToast('Username or Password is incorrect', {

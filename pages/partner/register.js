@@ -1,6 +1,16 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { TextField, Button, Hidden } from '@material-ui/core';
+import {
+  TextField,
+  Button,
+  Hidden,
+  FormControl,
+  InputLabel,
+  IconButton,
+  FormHelperText,
+  OutlinedInput,
+  InputAdornment,
+} from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import axios from 'axios';
@@ -10,7 +20,6 @@ import Router, { useRouter } from 'next/router';
 import { useToasts } from 'react-toast-notifications';
 import { useForm, Controller } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
-import { userStateHandle } from '../../redux/actions/userActions';
 import { setLoading } from '../../redux/actions/layoutActions';
 import { everyPost } from '../../src/utils/request';
 import { LocalizationContext } from '../_app';
@@ -24,9 +33,16 @@ const register = () => {
   const { control, handleSubmit, errors } = useForm();
   const [successedDialogOpen, setSuccessedDialogOpen] = useState(false);
 
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   const handleSuccessedDialogClose = () => {
-    setSuccessedDialogOpen();
+    setSuccessedDialogOpen(false);
     route.push('/');
+  };
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
   };
 
   const dispatch = useDispatch();
@@ -39,14 +55,32 @@ const register = () => {
 
   const onSubmit = async (data) => {
     dispatch(setLoading(true));
-    try {
-      const res = await everyPost('/api/everyone/partnerregister', data);
+    if (data.password !== data.confirm_password) {
+      addToast('รหัสผ่านไม่ตรงกัน', {
+        appearance: 'error',
+        autoDismiss: true,
+      });
+    } else {
+      try {
+        const form = data;
+        delete form.confirm_password;
+        const res = await everyPost('/api/everyone/partnerregister', form);
 
-      dispatch(setLoading(false));
-      setSuccessedDialogOpen(true);
-    } catch (error) {
-      console.log(error);
-      dispatch(setLoading(false));
+        if (res.status === 200) {
+          if (res.data === 'Register successfully') {
+            setSuccessedDialogOpen(true);
+          } else if (res.data === 'Username is existed') {
+            addToast('Username ถูกใช้ไปแล้ว', {
+              appearance: 'error',
+              autoDismiss: true,
+            });
+          }
+        }
+        dispatch(setLoading(false));
+      } catch (error) {
+        console.log(error);
+        dispatch(setLoading(false));
+      }
     }
   };
 
@@ -56,7 +90,7 @@ const register = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 3fr',
+            gridTemplateColumns: '2fr 3fr',
             height: '100vh',
           }}
         >
@@ -70,10 +104,128 @@ const register = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <Controller
                 as={TextField}
+                name="username"
+                control={control}
+                defaultValue=""
+                label="Username"
+                variant="outlined"
+                rules={{
+                  required: 'กรุณาใส่ Username',
+                }}
+                error={errors.username && true}
+                helperText={errors.username?.message}
+                // disabled={loading}
+                style={{ width: '100%', marginBottom: 20 }}
+              />
+              <Controller
+                name="password"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: 'กรุณาใส่ Password',
+                }}
+                render={({ onChange, value }) => (
+                  <FormControl
+                    style={{ width: '100%', marginBottom: 20 }}
+                    variant="outlined"
+                  >
+                    <InputLabel
+                      htmlFor="outlined-adornment-password"
+                      error={errors.password && true}
+                    >
+                      Password
+                    </InputLabel>
+                    <OutlinedInput
+                      id="outlined-adornment-password"
+                      type={showPassword ? 'text' : 'password'}
+                      value={value}
+                      onChange={onChange}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                          >
+                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                      labelWidth={70}
+                      error={errors.password && true}
+                    />
+                    <FormHelperText error={errors.password && true}>
+                      {errors.password?.message}
+                    </FormHelperText>
+                  </FormControl>
+                )}
+              />
+              <Controller
+                name="confirm_password"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: 'กรุณาใส่ Confirm Password',
+                }}
+                render={({ onChange, value }) => (
+                  <FormControl
+                    style={{ width: '100%', marginBottom: 20 }}
+                    variant="outlined"
+                  >
+                    <InputLabel
+                      htmlFor="outlined-adornment-password"
+                      error={errors.password && true}
+                    >
+                      Confirm Password
+                    </InputLabel>
+                    <OutlinedInput
+                      id="outlined-adornment-password"
+                      type={showPassword ? 'text' : 'password'}
+                      value={value}
+                      onChange={onChange}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                          >
+                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                      labelWidth={140}
+                      error={errors.confirm_password && true}
+                    />
+                    <FormHelperText error={errors.confirm_password && true}>
+                      {errors.password?.message}
+                    </FormHelperText>
+                  </FormControl>
+                )}
+              />
+              <Controller
+                as={TextField}
+                name="display_name"
+                control={control}
+                defaultValue=""
+                label="Display Name"
+                variant="outlined"
+                rules={{
+                  required: 'กรุณาใส่ Display Name',
+                }}
+                error={errors.display_name && true}
+                helperText={errors.display_name?.message}
+                // disabled={loading}
+                style={{ width: '100%', marginBottom: 20 }}
+              />
+              <Controller
+                as={TextField}
                 name="first_name"
                 control={control}
                 defaultValue=""
-                label={t('partnerregister.first_name')}
+                label={t('partnerregister.first_name') + '*'}
                 variant="outlined"
                 rules={{
                   required: t('partnerregister.first_name_error'),
@@ -88,7 +240,7 @@ const register = () => {
                 name="last_name"
                 control={control}
                 defaultValue=""
-                label={t('partnerregister.last_name')}
+                label={t('partnerregister.last_name') + '*'}
                 variant="outlined"
                 rules={{
                   required: t('partnerregister.last_name_error'),
@@ -105,11 +257,11 @@ const register = () => {
                 defaultValue=""
                 label={t('partnerregister.company_name')}
                 variant="outlined"
-                rules={{
-                  required: t('partnerregister.company_name_error'),
-                }}
-                error={errors.company_name && true}
-                helperText={errors.company_name?.message}
+                // rules={{
+                //   required: t('partnerregister.company_name_error'),
+                // }}
+                // error={errors.company_name && true}
+                // helperText={errors.company_name?.message}
                 // disabled={loading}
                 style={{ width: '100%', marginBottom: 20 }}
               />
@@ -118,25 +270,10 @@ const register = () => {
                 name="phone_number"
                 control={control}
                 defaultValue=""
-                label={t('partnerregister.phone')}
+                label={t('partnerregister.phone') + '*'}
                 variant="outlined"
                 rules={{
                   required: t('partnerregister.phone_error'),
-                }}
-                error={errors.company_name && true}
-                helperText={errors.company_name?.message}
-                // disabled={loading}
-                style={{ width: '100%', marginBottom: 20 }}
-              />
-              <Controller
-                as={TextField}
-                name="line_id"
-                control={control}
-                defaultValue=""
-                label={t('partnerregister.line_id')}
-                variant="outlined"
-                rules={{
-                  required: t('partnerregister.line_id_error'),
                 }}
                 error={errors.company_name && true}
                 helperText={errors.company_name?.message}
