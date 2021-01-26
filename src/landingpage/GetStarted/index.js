@@ -17,6 +17,7 @@ const index = () => {
         justifyContent: 'center',
         paddingTop: 100,
         paddingBottom: 100,
+        height: '100vh',
       }}
     >
       <Hidden smDown>

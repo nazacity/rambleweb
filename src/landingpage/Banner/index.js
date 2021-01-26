@@ -287,10 +287,12 @@ const Banner = () => {
                   <Fade up delay={300}>
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
                       <ButtonGroup>
-                        <Button
-                          className="primary"
-                          title={t('banner.getstarted')}
-                        />
+                        <AnchorLink href="#getstarted" offset={84}>
+                          <Button
+                            className="primary"
+                            title={t('banner.getstarted')}
+                          />
+                        </AnchorLink>
                         {/* <Button
                           className="text"
                           variant="textButton"

@@ -14,7 +14,7 @@ const en = {
   },
   getstarted: {
     getstart: 'Get started',
-    title: 'Download our app on your iOS or Android device',
+    title: 'Download our app on your iOS or Android device today',
   },
   dashboard: {
     heading: 'Meet our dashboard features for handling your participants',
