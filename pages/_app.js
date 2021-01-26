@@ -20,6 +20,8 @@ import '@redq/reuse-modal/es/index.css';
 import 'common/assets/css/flaticon.css';
 import 'swiper/swiper-bundle.css';
 import 'common/assets/css/icon-example-page.css';
+import logo144 from '../public/assets/icon/ramble144.png';
+import logo256 from '../public/assets/icon/ramble256.png';
 
 import i18n from 'i18n-js';
 import 'translations';
@@ -52,13 +54,13 @@ export default function MyApp(props) {
   return (
     <Modal>
       <Head>
-        <title>Ramble Marathon Community</title>
+        <title>Ramble Runner Sharing Community</title>
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
-        <link rel="icon" href="./assets/icon/ramble144.png" />
-        <link rel="apple-touch-icon" href="./assets/icon/ramble144.png" />
+        <link rel="icon" href={logo144} />
+        <link rel="apple-touch-icon" href={logo144} />
         <meta
           name="description"
           content="Ramble Ruunner Sharing Community find your first marathon."
@@ -67,7 +69,7 @@ export default function MyApp(props) {
           property="og:description"
           content="Ramble Ruunner Sharing Community find your first marathon."
         />
-        <meta property="og:image" content="./assets/icon/ramble256.png" />
+        <meta property="og:image" content={logo256} />
       </Head>
       <MuiPickersUtilsProvider utils={MomentUtils}>
         <LocalizationContext.Provider value={localizationContext}>

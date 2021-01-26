@@ -325,10 +325,128 @@ const register = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <Controller
               as={TextField}
+              name="username"
+              control={control}
+              defaultValue=""
+              label="Username"
+              variant="outlined"
+              rules={{
+                required: 'กรุณาใส่ Username',
+              }}
+              error={errors.username && true}
+              helperText={errors.username?.message}
+              // disabled={loading}
+              style={{ width: '100%', marginBottom: 20 }}
+            />
+            <Controller
+              name="password"
+              control={control}
+              defaultValue=""
+              rules={{
+                required: 'กรุณาใส่ Password',
+              }}
+              render={({ onChange, value }) => (
+                <FormControl
+                  style={{ width: '100%', marginBottom: 20 }}
+                  variant="outlined"
+                >
+                  <InputLabel
+                    htmlFor="outlined-adornment-password"
+                    error={errors.password && true}
+                  >
+                    Password
+                  </InputLabel>
+                  <OutlinedInput
+                    id="outlined-adornment-password"
+                    type={showPassword ? 'text' : 'password'}
+                    value={value}
+                    onChange={onChange}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    labelWidth={70}
+                    error={errors.password && true}
+                  />
+                  <FormHelperText error={errors.password && true}>
+                    {errors.password?.message}
+                  </FormHelperText>
+                </FormControl>
+              )}
+            />
+            <Controller
+              name="confirm_password"
+              control={control}
+              defaultValue=""
+              rules={{
+                required: 'กรุณาใส่ Confirm Password',
+              }}
+              render={({ onChange, value }) => (
+                <FormControl
+                  style={{ width: '100%', marginBottom: 20 }}
+                  variant="outlined"
+                >
+                  <InputLabel
+                    htmlFor="outlined-adornment-password"
+                    error={errors.password && true}
+                  >
+                    Confirm Password
+                  </InputLabel>
+                  <OutlinedInput
+                    id="outlined-adornment-password"
+                    type={showPassword ? 'text' : 'password'}
+                    value={value}
+                    onChange={onChange}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    labelWidth={140}
+                    error={errors.confirm_password && true}
+                  />
+                  <FormHelperText error={errors.confirm_password && true}>
+                    {errors.password?.message}
+                  </FormHelperText>
+                </FormControl>
+              )}
+            />
+            <Controller
+              as={TextField}
+              name="display_name"
+              control={control}
+              defaultValue=""
+              label="Display Name"
+              variant="outlined"
+              rules={{
+                required: 'กรุณาใส่ Display Name',
+              }}
+              error={errors.display_name && true}
+              helperText={errors.display_name?.message}
+              // disabled={loading}
+              style={{ width: '100%', marginBottom: 20 }}
+            />
+            <Controller
+              as={TextField}
               name="first_name"
               control={control}
               defaultValue=""
-              label={t('partnerregister.first_name')}
+              label={t('partnerregister.first_name') + '*'}
               variant="outlined"
               rules={{
                 required: t('partnerregister.first_name_error'),
@@ -343,7 +461,7 @@ const register = () => {
               name="last_name"
               control={control}
               defaultValue=""
-              label={t('partnerregister.last_name')}
+              label={t('partnerregister.last_name') + '*'}
               variant="outlined"
               rules={{
                 required: t('partnerregister.last_name_error'),
@@ -360,11 +478,11 @@ const register = () => {
               defaultValue=""
               label={t('partnerregister.company_name')}
               variant="outlined"
-              rules={{
-                required: t('partnerregister.company_name_error'),
-              }}
-              error={errors.company_name && true}
-              helperText={errors.company_name?.message}
+              // rules={{
+              //   required: t('partnerregister.company_name_error'),
+              // }}
+              // error={errors.company_name && true}
+              // helperText={errors.company_name?.message}
               // disabled={loading}
               style={{ width: '100%', marginBottom: 20 }}
             />
@@ -373,25 +491,10 @@ const register = () => {
               name="phone_number"
               control={control}
               defaultValue=""
-              label={t('partnerregister.phone')}
+              label={t('partnerregister.phone') + '*'}
               variant="outlined"
               rules={{
                 required: t('partnerregister.phone_error'),
-              }}
-              error={errors.company_name && true}
-              helperText={errors.company_name?.message}
-              // disabled={loading}
-              style={{ width: '100%', marginBottom: 20 }}
-            />
-            <Controller
-              as={TextField}
-              name="line_id"
-              control={control}
-              defaultValue=""
-              label={t('partnerregister.line_id')}
-              variant="outlined"
-              rules={{
-                required: t('partnerregister.line_id_error'),
               }}
               error={errors.company_name && true}
               helperText={errors.company_name?.message}
