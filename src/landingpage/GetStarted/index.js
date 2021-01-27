@@ -2,6 +2,7 @@ import React from 'react';
 import BannerWrapper from '../Banner/banner.style';
 import { Button, Typography, Hidden } from '@material-ui/core';
 import { LocalizationContext } from '../../../pages/_app';
+import Link from '../../Link';
 
 const index = () => {
   const { t } = React.useContext(LocalizationContext);
@@ -52,17 +53,19 @@ const index = () => {
               style={{ width: 200 }}
             />
           </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ backgroundColor: 'rgba(0,0,0,0.6)', borderRadius: 10 }}
-          >
-            <img
-              src="./assets/button/googleplay.png"
-              alt="ramble apple store"
-              style={{ width: 200 }}
-            />
-          </Button>
+          <Link href="https://play.google.com/store/apps/details?id=com.ramble">
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ backgroundColor: 'rgba(0,0,0,0.6)', borderRadius: 10 }}
+            >
+              <img
+                src="./assets/button/googleplay.png"
+                alt="ramble apple store"
+                style={{ width: 200 }}
+              />
+            </Button>
+          </Link>
         </div>
       </Hidden>
       <Hidden mdUp>
@@ -102,17 +105,20 @@ const index = () => {
               style={{ width: 150 }}
             />
           </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ backgroundColor: 'rgba(0,0,0,0.6)', borderRadius: 10 }}
-          >
-            <img
-              src="./assets/button/googleplay.png"
-              alt="ramble apple store"
-              style={{ width: 150 }}
-            />
-          </Button>
+
+          <Link href="https://play.google.com/store/apps/details?id=com.ramble">
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ backgroundColor: 'rgba(0,0,0,0.6)', borderRadius: 10 }}
+            >
+              <img
+                src="./assets/button/googleplay.png"
+                alt="ramble apple store"
+                style={{ width: 150 }}
+              />
+            </Button>
+          </Link>
         </div>
       </Hidden>
     </div>
