@@ -571,7 +571,7 @@ export const footer = {
     {
       id: 6,
       text: 'Contact',
-      link: '#',
+      link: '/contact',
     },
   ],
 };

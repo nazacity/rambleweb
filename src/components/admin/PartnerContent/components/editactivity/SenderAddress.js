@@ -30,7 +30,7 @@ const SenderAddress = ({
       },
       reset
     );
-    setEditMode({ ...editMode, title: false });
+    setEditMode({ ...editMode, senderAddress: false });
   };
   if (editMode) {
     return (

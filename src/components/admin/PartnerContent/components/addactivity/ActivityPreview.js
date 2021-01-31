@@ -89,10 +89,37 @@ const ActivityPreview = ({ activityDetail }) => {
       </div>
       <div style={{ margin: '20px auto' }}>
         <div style={{ display: 'flex' }}>
+          <Typography variant="h4">เบอร์โทรศัพท์ผู้จัดงาน</Typography>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'row', marginLeft: 20 }}>
+          <Link
+            href={`tel:${activityDetail.contact.phone_number}`}
+            target="black"
+          >
+            <Typography style={{ color: '#000' }}>
+              {activityDetail.contact.phone_number}
+            </Typography>
+          </Link>
+        </div>
+      </div>
+      <div style={{ margin: '20px auto' }}>
+        <div style={{ display: 'flex' }}>
+          <Typography variant="h4">Line ติดต่อ</Typography>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'row', marginLeft: 20 }}>
+          <Link
+            href={`http://line.me/ti/p/~${activityDetail.contact.line}`}
+            target="black"
+          >
+            <Typography style={{ color: '#000' }}>
+              {activityDetail.contact.line}
+            </Typography>
+          </Link>
+        </div>
+      </div>
+      <div style={{ margin: '20px auto' }}>
+        <div style={{ display: 'flex' }}>
           <Typography variant="h4">วันงาน</Typography>
-          <IconButton>
-            <Edit />
-          </IconButton>
         </div>
         <div style={{ display: 'flex', flexDirection: 'row', marginLeft: 20 }}>
           <Typography>

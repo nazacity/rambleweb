@@ -13,6 +13,7 @@ import Rules1 from '../editactivity/Rules1';
 import MoreDetail from '../editactivity/MoreDetail';
 import Condition from '../editactivity/Condition';
 import Gifts from '../editactivity/Gifts';
+import Contact from '../editactivity/Contact';
 import SenderAddress from '../editactivity/SenderAddress';
 import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
 import { Card } from '@material-ui/core';
@@ -48,6 +49,12 @@ const Detail = ({ activityDetail, editMode, setEditMode, editActivity }) => {
         <Location
           setEditMode={setEditMode}
           editMode={editMode.location}
+          activityDetail={activityDetail}
+          editActivity={editActivity}
+        />
+        <Contact
+          setEditMode={setEditMode}
+          editMode={editMode.contact}
           activityDetail={activityDetail}
           editActivity={editActivity}
         />

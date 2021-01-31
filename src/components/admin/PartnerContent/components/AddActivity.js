@@ -17,6 +17,7 @@ import ActivityDetail from './addactivity/ActivityPreview';
 import Condition from './addactivity/Condition';
 import Gifts from './addactivity/Gifts';
 import SenderAddress from './addactivity/SenderAddress';
+import Contact from './addactivity/Contact';
 import { post } from 'utils/request';
 
 import moment from 'moment';
@@ -55,6 +56,10 @@ const defaultValues = {
     province: '',
     zip: '',
     phone_number: '',
+  },
+  contact: {
+    phone_number: '',
+    line: '',
   },
 };
 
@@ -151,6 +156,7 @@ const AddActivity = ({
         condition: activityDetail.condition,
         gifts: activityDetail.gifts,
         senderAddress: activityDetail.senderAddress,
+        contact: activityDetail.contact,
       };
 
       const res = await post('/api/employees/createactivity', data);
@@ -193,6 +199,7 @@ const AddActivity = ({
           />
           <Title control={control} errors={errors} />
           <Location control={control} errors={errors} />
+          <Contact control={control} errors={errors} />
           <DateInfo
             activityDetail={activityDetail}
             setActivityDetail={setActivityDetail}
