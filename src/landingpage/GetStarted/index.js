@@ -53,7 +53,10 @@ const index = () => {
               style={{ width: 200 }}
             />
           </Button>
-          <Link href="https://play.google.com/store/apps/details?id=com.ramble">
+          <Link
+            href="https://play.google.com/store/apps/details?id=com.ramble"
+            target="blank"
+          >
             <Button
               variant="contained"
               color="primary"
@@ -105,8 +108,10 @@ const index = () => {
               style={{ width: 150 }}
             />
           </Button>
-
-          <Link href="https://play.google.com/store/apps/details?id=com.ramble">
+          <Link
+            href="https://play.google.com/store/apps/details?id=com.ramble"
+            target="blank"
+          >
             <Button
               variant="contained"
               color="primary"

@@ -65,7 +65,7 @@ const QrcodeGenerator = ({ open, handleClose, activityDetail }) => {
         </div>
         <div>
           <Typography style={{ textAlign: 'center' }} variant="h4">
-            Check Out Or Code
+            Check Out Qr Code
           </Typography>
           {activityDetail.courses.map((item) => {
             return (
