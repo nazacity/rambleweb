@@ -38,21 +38,26 @@ const index = () => {
           </Typography>
         </div>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Button
-            variant="contained"
-            color="primary"
-            style={{
-              backgroundColor: 'rgba(0,0,0,0.6)',
-              marginRight: 30,
-              borderRadius: 10,
-            }}
+          <Link
+            href="https://apps.apple.com/th/app/ramble/id1551268864?l=th"
+            target="blank"
           >
-            <img
-              src="./assets/button/applystore.png"
-              alt="ramble apple store"
-              style={{ width: 200 }}
-            />
-          </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              style={{
+                backgroundColor: 'rgba(0,0,0,0.6)',
+                marginRight: 30,
+                borderRadius: 10,
+              }}
+            >
+              <img
+                src="./assets/button/applystore.png"
+                alt="ramble apple store"
+                style={{ width: 200 }}
+              />
+            </Button>
+          </Link>
           <Link
             href="https://play.google.com/store/apps/details?id=com.ramble"
             target="blank"
@@ -93,21 +98,26 @@ const index = () => {
           </Typography>
         </div>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Button
-            variant="contained"
-            color="primary"
-            style={{
-              backgroundColor: 'rgba(0,0,0,0.6)',
-              marginRight: 10,
-              borderRadius: 10,
-            }}
+          <Link
+            href="https://apps.apple.com/th/app/ramble/id1551268864?l=th"
+            target="blank"
           >
-            <img
-              src="./assets/button/applystore.png"
-              alt="ramble apple store"
-              style={{ width: 150 }}
-            />
-          </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              style={{
+                backgroundColor: 'rgba(0,0,0,0.6)',
+                marginRight: 10,
+                borderRadius: 10,
+              }}
+            >
+              <img
+                src="./assets/button/applystore.png"
+                alt="ramble apple store"
+                style={{ width: 150 }}
+              />
+            </Button>
+          </Link>
           <Link
             href="https://play.google.com/store/apps/details?id=com.ramble"
             target="blank"
