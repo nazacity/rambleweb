@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Button, makeStyles } from '@material-ui/core';
+import { Button, makeStyles, Typography } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { setLoading } from '../../redux/actions/layoutActions';
 import lineLogo from '../../public/assets/button/linebutton.png';
@@ -24,8 +24,8 @@ const useStyles = makeStyles((theme) => ({
     '&:focus': {
       backgroundColor: '#00B300',
     },
-    marginBottom: 20,
-    width: '100%',
+    marginBottom: 100,
+    width: '90vw',
   },
   loginsubdetail: {
     fontSize: '24px',
@@ -46,11 +46,13 @@ const index = () => {
   }, []);
 
   const client_id = '1655591354';
-  //   const redirect = 'httpss%3A%2F%2Framble-club.com/lineconnect';
+
   const scope = 'openid%20profile%20email';
   const state = router.query.user_id;
-  const redirect = 'http%3A%2F%2Flocalhost:3000/lineconnect';
-  const redirect_uri = 'http://localhost:3000/lineconnect';
+  //   const redirect = 'http%3A%2F%2Flocalhost:3000/lineconnect';
+  //   const redirect_uri = 'http://localhost:3000/lineconnect';
+  const redirect = 'httpss%3A%2F%2Framble-club.com/lineconnect';
+  const redirect_uri = 'http://ramble-club.com/lineconnect';
   const lineloginlink = `https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirect}&state=${state}&scope=${scope}`;
   const client_secret = '107ae6120b8af1b1fa772ce8d628a21f';
 
@@ -140,24 +142,39 @@ const index = () => {
           src={require('../../public/assets/logo/ramble.png')}
           style={{ maxWidth: 600, width: '70vw', margin: 50 }}
         />
-        <div style={{ flex: 1 }} />
-        {view === 0 && (
-          <Link href={lineloginlink} style={{ textDecoration: 'none' }}>
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.loginbutton}
-              type="submit"
-            >
-              <img
-                src={lineLogo}
-                alt="linebutton"
-                style={{ width: 50, height: 50, marginRight: 10 }}
-              />
-              <span style={{ color: '#fff' }}>Login with LINE</span>
-            </Button>
-          </Link>
-        )}
+        <div
+          style={{
+            flex: 1,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          {view === 0 && (
+            <Link href={lineloginlink} style={{ textDecoration: 'none' }}>
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.loginbutton}
+                type="submit"
+              >
+                <img
+                  src={lineLogo}
+                  alt="linebutton"
+                  style={{ width: 50, height: 50, marginRight: 10 }}
+                />
+                <span style={{ color: '#fff' }}>Login with LINE</span>
+              </Button>
+            </Link>
+          )}
+          {view === 1 && (
+            <div>
+              <Typography variant="h6" color="primary">
+                การเชื่อมต่อเรียบร้อยกรุณาปิดหน้าต่าง
+              </Typography>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
