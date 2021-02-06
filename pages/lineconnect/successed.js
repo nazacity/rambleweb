@@ -93,8 +93,8 @@ const successed = () => {
               color="primary"
               style={{ textAlign: 'center', marginBottom: 40 }}
             >
-              กรุณา Add Line Ramble เป็นเพื่อน เพื่อรับ Feature เพิ่มเติมทาง
-              Line
+              กรุณาเพิ่ม Line Ramble เป็นเพื่อน เพื่อรับการแจ้งเตือน
+              และข่าวสารทาง Line
             </Typography>
             <Link
               href={'http://line.me/ti/p/~@833qbcov'}
