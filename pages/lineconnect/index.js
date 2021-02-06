@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: '#00B300',
     },
     marginBottom: 100,
+    maxWidth: 600,
     width: '90vw',
   },
   loginsubdetail: {
@@ -140,7 +141,7 @@ const index = () => {
       >
         <img
           src={require('../../public/assets/logo/ramble.png')}
-          style={{ maxWidth: 600, width: '70vw', margin: 50 }}
+          style={{ maxWidth: 600, width: '90vw', marginTop: 50 }}
         />
         <div
           style={{
@@ -151,27 +152,89 @@ const index = () => {
           }}
         >
           {view === 0 && (
-            <Link href={lineloginlink} style={{ textDecoration: 'none' }}>
-              <Button
-                variant="contained"
+            <div
+              style={{
+                maxWidth: 600,
+                width: '100vw',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+            >
+              <Typography
+                variant="h6"
                 color="primary"
-                className={classes.loginbutton}
-                type="submit"
+                style={{ textAlign: 'center' }}
               >
-                <img
-                  src={lineLogo}
-                  alt="linebutton"
-                  style={{ width: 50, height: 50, marginRight: 10 }}
-                />
-                <span style={{ color: '#fff' }}>Login with LINE</span>
-              </Button>
-            </Link>
+                เชื่อมต่อกับ Line
+              </Typography>
+              <Typography
+                variant="h6"
+                color="primary"
+                style={{ textAlign: 'center', marginBottom: 50 }}
+              >
+                เพิ่มรับ Feature แจ้งเตือน และอื่นๆ อีกมากมาย
+              </Typography>
+              <Link href={lineloginlink} style={{ textDecoration: 'none' }}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.loginbutton}
+                  type="submit"
+                >
+                  <img
+                    src={lineLogo}
+                    alt="linebutton"
+                    style={{ width: 50, height: 50, marginRight: 10 }}
+                  />
+                  <span style={{ color: '#fff' }}>Login with LINE</span>
+                </Button>
+              </Link>
+            </div>
           )}
           {view === 1 && (
-            <div>
-              <Typography variant="h6" color="primary">
-                การเชื่อมต่อเรียบร้อยกรุณาปิดหน้าต่าง
+            <div
+              style={{
+                maxWidth: 600,
+                width: '100vw',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+            >
+              <Typography
+                variant="h6"
+                color="primary"
+                style={{ textAlign: 'center' }}
+              >
+                การเชื่อมต่อเรียบร้อย
               </Typography>
+              <Typography
+                variant="h6"
+                color="primary"
+                style={{ textAlign: 'center', marginBottom: 40 }}
+              >
+                กรุณา Add Line Ramble เป็นเพื่อน เพื่อรับ Feature เพิ่มเติมทาง
+                Line
+              </Typography>
+              <Link
+                href={'http://line.me/ti/p/~@833qbcov'}
+                style={{ textDecoration: 'none' }}
+              >
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.loginbutton}
+                  type="submit"
+                >
+                  <img
+                    src={lineLogo}
+                    alt="linebutton"
+                    style={{ width: 50, height: 50, marginRight: 10 }}
+                  />
+                  <span style={{ color: '#fff' }}>Add Friend</span>
+                </Button>
+              </Link>
             </div>
           )}
         </div>
