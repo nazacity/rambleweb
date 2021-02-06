@@ -50,10 +50,10 @@ const index = () => {
 
   const scope = 'openid%20profile%20email';
   const state = router.query.user_id;
-  //   const redirect = 'http%3A%2F%2Flocalhost:3000/lineconnect';
-  //   const redirect_uri = 'http://localhost:3000/lineconnect';
-  const redirect = 'https%3A%2F%2Framble-club.com/lineconnect';
-  const redirect_uri = 'https://ramble-club.com/lineconnect';
+  const redirect = 'http%3A%2F%2Flocalhost:3000/lineconnect';
+  const redirect_uri = 'http://localhost:3000/lineconnect';
+  // const redirect = 'https%3A%2F%2Framble-club.com/lineconnect';
+  // const redirect_uri = 'https://ramble-club.com/lineconnect';
   const lineloginlink = `https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirect}&state=${state}&scope=${scope}`;
   const client_secret = '107ae6120b8af1b1fa772ce8d628a21f';
 
@@ -93,17 +93,20 @@ const index = () => {
                   appearance: 'success',
                   autoDismiss: true,
                 });
-                setView(1);
+                // setView(1);
+                router.push('/lineconnect/successed');
               } else if (res.status === 401) {
                 addToast('กรุณาเชื่อมต่อใหม่อีกครั้ง', {
                   appearance: 'error',
                   autoDismiss: true,
                 });
+                router.push('/lineconnect/failled');
               } else {
                 addToast('กรุณาเชื่อมต่อใหม่อีกครั้ง', {
                   appearance: 'error',
                   autoDismiss: true,
                 });
+                router.push('/lineconnect/failled');
               }
             } catch (error) {
               console.log(error);
@@ -111,10 +114,9 @@ const index = () => {
                 appearance: 'error',
                 autoDismiss: true,
               });
+              router.push('/lineconnect/failled');
             }
           }
-          //accessToken: res.data.access_token
-          //user_id: router.query.state
         })
         .catch((err) => {
           console.log(err);
