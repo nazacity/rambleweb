@@ -23,7 +23,7 @@ const ReportFilter = ({
     // loadingTrue();
     try {
       const res = await get(
-        `/api/partners/filtereduseractivities/${activityDetail._id}?${
+        `/api/employees/filtereduseractivities/${activityDetail._id}?${
           data.course.value && 'course=' + data.course.value
         }${data.size.value && '&size=' + data.size.value}${
           data.idcard && '&idcard=' + data.idcard
@@ -109,7 +109,6 @@ const ReportFilter = ({
                     width: '100%',
                     height: 60,
                     zIndex: 500,
-                    width: 300,
                   }),
                 }}
               />

@@ -332,43 +332,43 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
               ]
             : []
         }
-        editable={
-          activityDetail.state !== 'end_activity' && {
-            onRowUpdate: (newData, oldData) =>
-              new Promise(async (resolve, reject) => {
-                if (newData === oldData) {
-                  resolve();
-                  return;
-                } else {
-                  const createData = newData;
-                  delete createData.announcement;
-                  try {
-                    setLoading(true);
-                    const res = await post(
-                      `/api/partners/edituseractivity/${newData._id}`,
-                      createData
-                    );
-                    if (res.status === 200) {
-                      const updatedData = data;
-                      const index = data.findIndex(
-                        (item) => item._id === res.data._id
-                      );
+        // editable={
+        //   activityDetail.state !== 'end_activity' && {
+        //     onRowUpdate: (newData, oldData) =>
+        //       new Promise(async (resolve, reject) => {
+        //         if (newData === oldData) {
+        //           resolve();
+        //           return;
+        //         } else {
+        //           const createData = newData;
+        //           delete createData.announcement;
+        //           try {
+        //             setLoading(true);
+        //             const res = await post(
+        //               `/api/partners/edituseractivity/${newData._id}`,
+        //               createData
+        //             );
+        //             if (res.status === 200) {
+        //               const updatedData = data;
+        //               const index = data.findIndex(
+        //                 (item) => item._id === res.data._id
+        //               );
 
-                      updatedData[index] = res.data;
+        //               updatedData[index] = res.data;
 
-                      setData(updatedData);
-                    }
-                    setLoading(false);
-                    resolve();
-                  } catch (error) {
-                    setLoading(false);
-                    console.log(error);
-                    resolve();
-                  }
-                }
-              }),
-          }
-        }
+        //               setData(updatedData);
+        //             }
+        //             setLoading(false);
+        //             resolve();
+        //           } catch (error) {
+        //             setLoading(false);
+        //             console.log(error);
+        //             resolve();
+        //           }
+        //         }
+        //       }),
+        //   }
+        // }
         options={{
           pageSize: 50,
           pageSizeOptions: [50],

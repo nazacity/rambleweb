@@ -70,14 +70,14 @@ export default function SpeedDials({
         handleClose();
       },
     },
-    // {
-    //   icon: <AccountCircleIcon />,
-    //   name: 'User Management',
-    //   onClick: () => {
-    //     setValue(2);
-    //     handleClose();
-    //   },
-    // },
+    {
+      icon: <AccountCircleIcon />,
+      name: 'User Management',
+      onClick: () => {
+        setValue(2);
+        handleClose();
+      },
+    },
     {
       icon: <Icon className="fas fa-qrcode" />,
       name: 'Qrcode Generator',

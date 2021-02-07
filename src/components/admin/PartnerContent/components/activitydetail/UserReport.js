@@ -62,7 +62,7 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
     loadingTrue();
     try {
       const res = await get(
-        `/api/partners/useractivities/${activityDetail._id}`
+        `/api/employees/useractivities/${activityDetail._id}`
       );
 
       if (res.status === 200) {
@@ -205,7 +205,7 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
       let newData = [];
       await data.map(async (item) => {
         const res = await post(
-          `/api/partners/updatconstestuseractivities/${item.id}`,
+          `/api/employees/updatconstestuseractivities/${item.id}`,
           {
             contest_no: `${item.contest_no}`,
           }
@@ -231,7 +231,7 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
       loadingTrue();
       try {
         const res = await get(
-          `/api/partners/updateprintstate/${printData._id}`
+          `/api/employees/updateprintstate/${printData._id}`
         );
 
         if (res.status === 200) {
@@ -353,7 +353,7 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
                   try {
                     setLoading(true);
                     const res = await post(
-                      `/api/partners/edituseractivity/${newData._id}`,
+                      `/api/employees/edituseractivity/${newData._id}`,
                       createData
                     );
                     if (res.status === 200) {

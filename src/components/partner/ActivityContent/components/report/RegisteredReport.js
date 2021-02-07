@@ -49,6 +49,7 @@ export const RegisteredReport = React.memo(function ProfileCard({
     borderColor: 'rgba(0, 0, 0, 0.08)',
     height: '50%',
   });
+
   return (
     <Card
       className={shadowStyles.root}

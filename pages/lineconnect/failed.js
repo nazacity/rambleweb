@@ -28,7 +28,7 @@ const failed = () => {
         alignItems: 'center',
       }}
     >
-      <div
+      {/* <div
         style={{
           maxWidth: 600,
           display: 'flex',
@@ -74,7 +74,7 @@ const failed = () => {
             </Typography>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

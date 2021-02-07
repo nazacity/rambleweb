@@ -12,7 +12,7 @@ const CheckDialog = ({ open, handleClose, rowData, data, setData }) => {
   const checkinActivity = async () => {
     try {
       dispatch(setLoading(true));
-      const res = await get(`/api/partners/checkinactivity/${rowData._id}`);
+      const res = await get(`/api/employees/checkinactivity/${rowData._id}`);
 
       if (res.status === 200) {
         let newData = data;
@@ -41,7 +41,7 @@ const CheckDialog = ({ open, handleClose, rowData, data, setData }) => {
   const checkoutActivity = async () => {
     try {
       dispatch(setLoading(true));
-      const res = await post(`/api/partners/checkoutactivity/${rowData._id}`);
+      const res = await post(`/api/employees/checkoutactivity/${rowData._id}`);
 
       if (res.status === 200) {
         let newData = data;

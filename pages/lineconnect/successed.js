@@ -51,7 +51,7 @@ const successed = () => {
         alignItems: 'center',
       }}
     >
-      <div
+      {/* <div
         style={{
           maxWidth: 600,
           display: 'flex',
@@ -116,7 +116,7 @@ const successed = () => {
             </Link>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
