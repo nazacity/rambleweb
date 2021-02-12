@@ -5,11 +5,19 @@ import { useDispatch } from 'react-redux';
 import MaterialTable from 'material-table';
 import { Avatar, IconButton, Button, Typography } from '@material-ui/core';
 import Filter from './components/Filter';
+import UserDialog from './components/UserDialog';
 
 const index = () => {
   const [partners, setPartners] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const dispatch = useDispatch();
+  const [user, setUser] = useState({});
+  const [userDialog, setUserDialog] = useState(false);
+
+  const handleUserDialogClose = () => {
+    setUser({});
+    setUserDialog(false);
+  };
 
   const loadingTrue = () => {
     dispatch(setLoading(true));
@@ -121,18 +129,18 @@ const index = () => {
       editable: 'never',
     },
     {
-      title: 'ยืนยันตัวตน',
+      title: 'การยืนยันตัวตน',
       field: 'vefiry_information.state',
       lookup: {
-        not_verify: 'ยังไม่ได้ยืนยันตัวตน',
+        not_verify: 'ยังไม่ได้ยืนยัน',
         verifying: 'กำลังตรวจสอบ',
-        verified: 'ยืนยันตัวตนแล้ว',
-        rejected: 'รอยืนยันตัวตนอีกครั้ง',
+        verified: 'ยืนยันแล้ว',
+        rejected: 'รอยืนยันอีกครั้ง',
       },
       editable: 'never',
     },
     {
-      title: 'ยืนยันการฉีดวัคซีนโควิด',
+      title: 'การยืนยันการฉีดวัคซีนโควิด',
       field: 'vefiry_vaccine.state',
       lookup: {
         not_verify: 'ยังไม่ได้ยืนยัน',
@@ -203,7 +211,6 @@ const index = () => {
           search: true,
           filtering: true,
           rowStyle: (rowData) => {
-            console.log(rowData);
             if (
               rowData.vefiry_information.state === 'verifying' ||
               rowData.vefiry_vaccine.state === 'verifying'
@@ -219,7 +226,21 @@ const index = () => {
           boxShadow: 'none',
         }}
         onChangePage={onChangePage}
+        onRowClick={(event, rowData, togglePanel) => {
+          setUser(rowData);
+          setUserDialog(true);
+        }}
       />
+      {userDialog && (
+        <UserDialog
+          open={userDialog}
+          handleClose={handleUserDialogClose}
+          user={user}
+          setUser={setUser}
+          partners={partners}
+          setPartners={setPartners}
+        />
+      )}
     </div>
   );
 };

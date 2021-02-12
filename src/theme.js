@@ -16,6 +16,9 @@ const theme = createMuiTheme({
     background: {
       default: '#fff',
     },
+    success: {
+      main: '#64dd17',
+    },
   },
   overrides: {
     MuiLink: {
