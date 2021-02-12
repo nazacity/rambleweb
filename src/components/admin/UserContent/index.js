@@ -29,9 +29,21 @@ const index = () => {
             filter.display_name && 'display_name=' + filter.display_name
           }${filter.first_name && '&first_name=' + filter.first_name}${
             filter.last_name && '&last_name=' + filter.last_name
-          }${filter.gender && '&gender=' + filter.gender}${
-            filter.min_age && '&min_age=' + filter.min_age
-          }${filter.max_age && '&max_age=' + filter.max_age}`
+          }${
+            filter.gender &&
+            filter.gender.value &&
+            '&gender=' + filter.gender.value
+          }${filter.min_age && '&min_age=' + filter.min_age}${
+            filter.max_age && '&max_age=' + filter.max_age
+          }${
+            filter.identity &&
+            filter.identity.value !== undefined &&
+            '&identity_state=' + filter.identity.value
+          }${
+            filter.vaccine &&
+            filter.vaccine.value &&
+            '&vaccine_state=' + filter.vaccine.value
+          }`
         );
       } else {
         res = await get(
@@ -90,6 +102,10 @@ const index = () => {
       title: 'เพศ',
       field: 'gender',
       editable: 'never',
+      lookup: {
+        male: 'ชาย',
+        female: 'หญิง',
+      },
     },
     {
       title: 'เบอร์โทร์',
@@ -102,6 +118,28 @@ const index = () => {
       render: (rowData) => (
         <div style={{ marginLeft: 40 }}>{rowData.user_activities.length}</div>
       ),
+      editable: 'never',
+    },
+    {
+      title: 'ยืนยันตัวตน',
+      field: 'vefiry_information.state',
+      lookup: {
+        not_verify: 'ยังไม่ได้ยืนยันตัวตน',
+        verifying: 'กำลังตรวจสอบ',
+        verified: 'ยืนยันตัวตนแล้ว',
+        rejected: 'รอยืนยันตัวตนอีกครั้ง',
+      },
+      editable: 'never',
+    },
+    {
+      title: 'ยืนยันการฉีดวัคซีนโควิด',
+      field: 'vefiry_vaccine.state',
+      lookup: {
+        not_verify: 'ยังไม่ได้ยืนยัน',
+        verifying: 'กำลังตรวจสอบ',
+        verified: 'ยืนยันแล้ว',
+        rejected: 'รอยืนยันอีกครั้ง',
+      },
       editable: 'never',
     },
     {
@@ -158,26 +196,24 @@ const index = () => {
         columns={columnTitle}
         data={partners}
         title=""
-        editable={{
-          onRowUpdate: (newData, oldData) =>
-            new Promise(async (resolve) => {
-              if (!oldData || newData === oldData) {
-                resolve();
-                return;
-              }
-              try {
-                resolve();
-              } catch (error) {
-                console.log(error.message);
-                resolve();
-              }
-            }),
-        }}
         options={{
-          pageSize: 15,
-          pageSizeOptions: [15],
+          pageSize: 30,
+          pageSizeOptions: [30],
           paginationType: 'stepped',
-          search: false,
+          search: true,
+          filtering: true,
+          rowStyle: (rowData) => {
+            console.log(rowData);
+            if (
+              rowData.vefiry_information.state === 'verifying' ||
+              rowData.vefiry_vaccine.state === 'verifying'
+            ) {
+              return {
+                backgroundColor: '#fff9c4',
+                color: '#c62828',
+              };
+            }
+          },
         }}
         style={{
           boxShadow: 'none',

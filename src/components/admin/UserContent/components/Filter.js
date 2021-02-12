@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Typography, TextField, IconButton } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
+import Select from 'react-select';
+import { gender, identity_state, vaccine_state } from 'constants/user';
 
 const Filter = ({ getPartners }) => {
   const [filter, setFilter] = useState({
@@ -10,6 +12,8 @@ const Filter = ({ getPartners }) => {
     gender: '',
     min_age: '',
     max_age: '',
+    identity: '',
+    vaccine: '',
   });
 
   const handleChange = (event) => {
@@ -23,14 +27,12 @@ const Filter = ({ getPartners }) => {
   return (
     <div
       style={{
-        display: 'flex',
         padding: 30,
         borderBottom: '1px solid black',
-        alignItems: 'center',
       }}
     >
       <Typography variant="h4">Filter</Typography>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: 20 }}>
         <div style={{ marginLeft: 50 }}>
           <TextField
             label="Display Name"
@@ -39,6 +41,7 @@ const Filter = ({ getPartners }) => {
             value={filter.display_name}
             onChange={handleChange}
             size="small"
+            style={{ width: 300 }}
           />
         </div>
         <div style={{ marginLeft: 50 }}>
@@ -49,6 +52,7 @@ const Filter = ({ getPartners }) => {
             value={filter.first_name}
             onChange={handleChange}
             size="small"
+            style={{ width: 300 }}
           />
         </div>
         <div style={{ marginLeft: 50 }}>
@@ -59,16 +63,38 @@ const Filter = ({ getPartners }) => {
             value={filter.last_name}
             onChange={handleChange}
             size="small"
+            style={{ width: 300 }}
           />
         </div>
+        <div style={{ marginLeft: 10 }}>
+          <IconButton onClick={() => getPartners(0, filter)}>
+            <Search />
+          </IconButton>
+        </div>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: 20 }}>
         <div style={{ marginLeft: 50 }}>
-          <TextField
-            label="Gender"
-            name="gender"
-            variant="outlined"
+          <Select
+            placeholder="Gender"
             value={filter.gender}
-            onChange={handleChange}
-            size="small"
+            options={[{ label: 'ทั้งหมด', value: '' }, ...gender]}
+            onChange={(e) => {
+              setFilter({ ...filter, gender: e });
+            }}
+            styles={{
+              control: (styles) => ({
+                ...styles,
+                backgroundColor: 'white',
+                height: 50,
+                width: 300,
+              }),
+              container: (styles) => ({
+                ...styles,
+                width: '100%',
+                height: 50,
+                zIndex: 501,
+              }),
+            }}
           />
         </div>
         <div style={{ marginLeft: 50 }}>
@@ -79,6 +105,7 @@ const Filter = ({ getPartners }) => {
             value={filter.min_age}
             onChange={handleChange}
             size="small"
+            style={{ width: 300 }}
           />
         </div>
         <div style={{ marginLeft: 50 }}>
@@ -89,12 +116,58 @@ const Filter = ({ getPartners }) => {
             value={filter.max_age}
             onChange={handleChange}
             size="small"
+            style={{ width: 300 }}
           />
         </div>
-        <div style={{ marginLeft: 10 }}>
-          <IconButton onClick={() => getPartners(0, filter)}>
-            <Search />
-          </IconButton>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: 20 }}>
+        <div style={{ marginLeft: 50 }}>
+          <Select
+            placeholder="Identity verify state"
+            value={filter.identity}
+            options={[{ label: 'ทั้งหมด', value: '' }, ...identity_state]}
+            onChange={(e) => {
+              setFilter({ ...filter, identity: e });
+            }}
+            styles={{
+              control: (styles) => ({
+                ...styles,
+                backgroundColor: 'white',
+                height: 50,
+                width: 300,
+              }),
+              container: (styles) => ({
+                ...styles,
+                width: '100%',
+                height: 50,
+                zIndex: 500,
+              }),
+            }}
+          />
+        </div>
+        <div style={{ marginLeft: 50 }}>
+          <Select
+            placeholder="Covid vaccine verify state"
+            value={filter.vaccine}
+            options={[{ label: 'ทั้งหมด', value: '' }, ...vaccine_state]}
+            onChange={(e) => {
+              setFilter({ ...filter, vaccine: e });
+            }}
+            styles={{
+              control: (styles) => ({
+                ...styles,
+                backgroundColor: 'white',
+                height: 50,
+                width: 300,
+              }),
+              container: (styles) => ({
+                ...styles,
+                width: '100%',
+                height: 50,
+                zIndex: 500,
+              }),
+            }}
+          />
         </div>
       </div>
     </div>

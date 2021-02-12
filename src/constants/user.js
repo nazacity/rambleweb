@@ -1,6 +1,6 @@
 const gender = [
-  { value: 'male', label: 'male' },
-  { value: 'female', label: 'female' },
+  { value: 'male', label: 'ชาย' },
+  { value: 'female', label: 'หญิง' },
 ];
 
 const blood_type = [
@@ -10,4 +10,18 @@ const blood_type = [
   { value: 'AB', label: 'AB' },
 ];
 
-export { gender, blood_type };
+const identity_state = [
+  { value: 'verified', label: 'ยืนยันแล้ว' },
+  { value: 'verifying', label: 'กำลังตรวจสอบ' },
+  { value: 'rejected', label: 'รอยืนยันอีกครั้ง' },
+  { value: 'not_verify', label: 'ยังไม่ได้ยืนยัน' },
+];
+
+const vaccine_state = [
+  { value: 'verified', label: 'ยืนยันแล้ว' },
+  { value: 'verifying', label: 'กำลังตรวจสอบ' },
+  { value: 'rejected', label: 'รอยืนยันอีกครั้ง' },
+  { value: 'not_verify', label: 'ยังไม่ได้ยืนยัน' },
+];
+
+export { gender, blood_type, identity_state, vaccine_state };
