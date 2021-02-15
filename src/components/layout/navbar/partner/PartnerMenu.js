@@ -73,13 +73,13 @@ export default function MenuListComposition({
                   id="menu-list-grow"
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem
+                  {/* <MenuItem
                     onClick={(e) => {
                       handleMenuClick(e, 2);
                     }}
                   >
                     Profile
-                  </MenuItem>
+                  </MenuItem> */}
                   {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
                   <MenuItem onClick={handleSignOut}>Logout</MenuItem>
                 </MenuList>

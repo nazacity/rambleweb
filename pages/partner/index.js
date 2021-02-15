@@ -41,8 +41,8 @@ const index = ({ user }) => {
         return <ActivityContent />;
       case 1:
         return <ReportContent />;
-      case 2:
-        return <ProfileContent />;
+      // case 2:
+      //   return <ProfileContent />;
       default:
         return <div>Coming Soon</div>;
     }

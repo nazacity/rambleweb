@@ -202,8 +202,8 @@ const index = () => {
             }),
         }}
         options={{
-          pageSize: 15,
-          pageSizeOptions: [15],
+          pageSize: 30,
+          pageSizeOptions: [30],
           paginationType: 'stepped',
           search: false,
         }}
