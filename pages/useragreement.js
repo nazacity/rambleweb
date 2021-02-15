@@ -9,7 +9,7 @@ const useragreement = () => {
     dispatch(setLoading(false));
   }, []);
   return (
-    <div style={{ maxWidth: 600, margin: 'auto', padding: '20px 0 100px' }}>
+    <div style={{ maxWidth: 600, margin: 'auto', padding: '20px 20px 100px' }}>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <img src={logo} style={{ width: 'auto', height: 100 }} />
       </div>
