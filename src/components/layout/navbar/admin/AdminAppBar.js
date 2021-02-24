@@ -125,7 +125,11 @@ const ElevateAppBar = (props) => {
             <Tab label="ผู้ใช้งาน" className={classes.tabStyle} value={1} />
             <Tab label="กิจกรรม" className={classes.tabStyle} value={2} />
             <Tab label="รายงาน" className={classes.tabStyle} value={3} />
-            <Tab label="ระบบโฆษณา CS" className={classes.tabStyle} value={4} />
+            <Tab
+              label="ระบบจัดการ Content"
+              className={classes.tabStyle}
+              value={4}
+            />
           </Tabs>
         </div>
         <div

@@ -35,6 +35,8 @@ const getURL = (ctx) => {
   }
 };
 
+const socialUrl = 'http://localhost:5100';
+
 export const get = async (path, ctx) => {
   const headers = createJWTTokenHeaders(ctx);
   const res = await axios.get(`${getURL(ctx)}${path}`, { headers });
@@ -55,5 +57,23 @@ export const Delete = async (path, body, ctx) => {
 
 export const everyPost = async (path, body, ctx) => {
   const res = await axios.post(`${getURL(ctx)}${path}`, body);
+  return res.data;
+};
+
+export const getSocial = async (path, ctx) => {
+  const headers = createJWTTokenHeaders(ctx);
+  const res = await axios.get(`${socialUrl}${path}`, { headers });
+  return res.data;
+};
+
+export const postSocial = async (path, body, ctx) => {
+  const headers = createJWTTokenHeaders(ctx);
+  const res = await axios.post(`${socialUrl}${path}`, body, { headers });
+  return res.data;
+};
+
+export const deleteSocial = async (path, body, ctx) => {
+  const headers = createJWTTokenHeaders(ctx);
+  const res = await axios.delete(`${socialUrl}${path}`, { headers });
   return res.data;
 };
