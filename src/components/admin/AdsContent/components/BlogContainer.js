@@ -66,6 +66,7 @@ const BlogContainer = ({ contents, setContents, setContent }) => {
               height: 200,
               width: 300,
               position: 'relative',
+              marginBottom: 10,
             }}
           >
             <div
@@ -76,7 +77,6 @@ const BlogContainer = ({ contents, setContents, setContent }) => {
                 backgroundSize: 'cover',
                 borderRadius: 10,
                 overflow: 'hidden',
-                marginBottom: 10,
                 cursor: 'pointer',
               }}
               onClick={() => {
