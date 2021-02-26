@@ -142,6 +142,7 @@ const BlogContent = () => {
         {blogCategories.map((item) => {
           return (
             <div
+              key={item._id}
               style={{
                 height: 200,
                 width: 300,
@@ -150,7 +151,6 @@ const BlogContent = () => {
               }}
             >
               <div
-                key={item._id}
                 style={{
                   height: 200,
                   width: 300,

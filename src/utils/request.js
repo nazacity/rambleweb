@@ -35,7 +35,7 @@ const getURL = (ctx) => {
   }
 };
 
-const socialUrl = 'http://localhost:5100';
+const socialUrl = process.env.SOCIAL_API;
 
 export const get = async (path, ctx) => {
   const headers = createJWTTokenHeaders(ctx);
@@ -61,6 +61,7 @@ export const everyPost = async (path, body, ctx) => {
 };
 
 export const getSocial = async (path, ctx) => {
+  console.log(socialUrl);
   const headers = createJWTTokenHeaders(ctx);
   const res = await axios.get(`${socialUrl}${path}`, { headers });
   return res.data;
