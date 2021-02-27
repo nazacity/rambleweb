@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { IconButton, AppBar, Tabs, Tab, Toolbar } from '@material-ui/core';
 import MainContent from './components/MainContent';
 import BlogContent from './components/BlogContent';
+import SocialContent from './components/SocialContent';
 
 const index = () => {
   const [value, setValue] = useState(0);
@@ -16,6 +17,8 @@ const index = () => {
         return <MainContent />;
       case 1:
         return <BlogContent />;
+      case 2:
+        return <SocialContent />;
       default:
         return <div>Content is Not Found</div>;
     }
@@ -34,6 +37,7 @@ const index = () => {
           >
             <Tab label="Main Content" />
             <Tab label="Blog Content" />
+            <Tab label="Social Content" />
           </Tabs>
         </Toolbar>
       </AppBar>

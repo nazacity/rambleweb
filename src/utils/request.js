@@ -31,7 +31,7 @@ const getURL = (ctx) => {
   if (ctx) {
     return serverRuntimeConfig.backendAPIHost;
   } else {
-    return process.env.NEXT_PUBLIC_API_HOST || 'https://api.ramble-club.com';
+    return process.env.SERVER_API_HOST;
   }
 };
 
@@ -61,7 +61,6 @@ export const everyPost = async (path, body, ctx) => {
 };
 
 export const getSocial = async (path, ctx) => {
-  console.log(socialUrl);
   const headers = createJWTTokenHeaders(ctx);
   const res = await axios.get(`${socialUrl}${path}`, { headers });
   return res.data;
