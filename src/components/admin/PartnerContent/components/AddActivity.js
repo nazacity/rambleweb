@@ -18,7 +18,7 @@ import Condition from './addactivity/Condition';
 import Gifts from './addactivity/Gifts';
 import SenderAddress from './addactivity/SenderAddress';
 import Contact from './addactivity/Contact';
-import { post } from 'utils/request';
+import { post, postSocial } from 'utils/request';
 
 import moment from 'moment';
 import 'moment/locale/th';
@@ -160,6 +160,13 @@ const AddActivity = ({
       };
 
       const res = await post('/api/employees/createactivity', data);
+
+      const res2 = await postSocial('/api/employees/createactivity', {
+        _id: res.data._id,
+        activity_picture_url: res.data.activity_picture_url,
+        title: res.data.title,
+      });
+
       if (res.status === 201) {
         await getActivitiesById();
         setActivityDetail({
