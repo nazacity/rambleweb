@@ -32,10 +32,10 @@ const AppModern = () => {
     <ThemeProvider theme={theme}>
       <>
         <Head>
-          <title>Ramble Ruunner Sharing Community</title>
+          <title>Ramble</title>
           <meta name="Description" content="Ramble Ruunner Sharing Community" />
           <meta name="theme-color" content="#2563FF" />
-          <meta name="keywords" content="Ramble Ruunner Sharing Community" />
+          <meta name="keywords" content="Ramble Runner Sharing Community" />
           <link
             href="https://fonts.googleapis.com/css?family=Heebo:300,400,500,700&display=swap"
             rel="stylesheet"
