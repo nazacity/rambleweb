@@ -95,24 +95,6 @@ const index = () => {
             ? activityDetail.title
             : 'Ramble Sharing community'}
         </title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta
-          property="og:title"
-          content={
-            activityDetail.title
-              ? activityDetail.title
-              : 'Ramble Sharing community'
-          }
-        />
-        <meta property="og:description" content="กิจกรรมจาก Ramble" />
-        <meta
-          property="og:image"
-          content={
-            activityDetail.activity_picture_url
-              ? activityDetail.activity_picture_url
-              : logo
-          }
-        />
       </Head>
       <Script
         url="https://static.line-scdn.net/liff/edge/2.1/sdk.js"
