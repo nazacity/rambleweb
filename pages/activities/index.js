@@ -12,6 +12,7 @@ import { setActivity, setLineUser } from '../../redux/actions/lineAction';
 import axios from 'axios';
 import { api } from 'api/api';
 import Head from 'next/head';
+import logo from '../../public/assets/icon/ramble144.png';
 
 const index = () => {
   const dispatch = useDispatch();
@@ -89,13 +90,28 @@ const index = () => {
   return (
     <div>
       <Head>
-        <title>{activityDetail.title}</title>
+        <title>
+          {activityDetail.title
+            ? activityDetail.title
+            : 'Ramble Sharing community'}
+        </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta property="og:title" content={activityDetail.title} />
+        <meta
+          property="og:title"
+          content={
+            activityDetail.title
+              ? activityDetail.title
+              : 'Ramble Sharing community'
+          }
+        />
         <meta property="og:description" content="กิจกรรมจาก Ramble" />
         <meta
           property="og:image"
-          content={activityDetail.activity_picture_url}
+          content={
+            activityDetail.activity_picture_url
+              ? activityDetail.activity_picture_url
+              : logo
+          }
         />
       </Head>
       <Script
