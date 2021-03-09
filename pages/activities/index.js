@@ -11,10 +11,12 @@ import BottomNavbar from 'components/activities/BottomNavbar';
 import { setActivity, setLineUser } from '../../redux/actions/lineAction';
 import axios from 'axios';
 import { api } from 'api/api';
+import Head from 'next/head';
 
 const index = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const activityDetail = useSelector((state) => state.line.activity);
   const handleLiff = async () => {
     // dispatch(setLoading(false)); // delete after finishing
     try {
@@ -86,6 +88,16 @@ const index = () => {
   }, [router]);
   return (
     <div>
+      <Head>
+        <title>{activityDetail.title}</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta property="og:title" content={activityDetail.title} />
+        <meta property="og:description" content="กิจกรรมจาก Ramble" />
+        <meta
+          property="og:image"
+          content={activityDetail.activity_picture_url}
+        />
+      </Head>
       <Script
         url="https://static.line-scdn.net/liff/edge/2.1/sdk.js"
         onLoad={() => handleLiff()}
