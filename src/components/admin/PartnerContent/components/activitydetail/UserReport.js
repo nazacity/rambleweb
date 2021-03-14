@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, Fragment } from 'react';
 import { get, post } from 'utils/request';
 import MaterialTable from 'material-table';
 import {
@@ -146,33 +146,39 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
     {
       title: 'address',
       field: 'address.address',
-      render: (rowData) => (
-        <div>
-          {rowData.state !== 'waiting_payment' && (
-            <IconButton
-              onClick={() => {
-                setPrintData(rowData);
-                setPrintDialog(true);
-              }}
-              style={{ margin: 'auto' }}
-            >
-              <PrintIcon />
-            </IconButton>
-          )}
-          <Typography>
-            {rowData.address.address === 'At event'
-              ? 'รับที่งาน'
-              : rowData.address.address}
-          </Typography>
-          <Typography>{rowData.address.province}</Typography>
-          <Typography>{rowData.address.zip}</Typography>
-          <Typography>
-            {rowData.address.address === 'At event'
-              ? rowData.user.phone_number
-              : rowData.address.phone_number}
-          </Typography>
-        </div>
-      ),
+      render: (rowData) => {
+        return (
+          <div>
+            {rowData.state !== 'waiting_payment' && (
+              <IconButton
+                onClick={() => {
+                  setPrintData(rowData);
+                  setPrintDialog(true);
+                }}
+                style={{ margin: 'auto' }}
+              >
+                <PrintIcon />
+              </IconButton>
+            )}
+            {rowData.address && (
+              <Fragment>
+                <Typography>
+                  {rowData.address.address === 'At event'
+                    ? 'รับที่งาน'
+                    : rowData.address?.address}
+                </Typography>
+                <Typography>{rowData.address.province}</Typography>
+                <Typography>{rowData.address.zip}</Typography>
+                <Typography>
+                  {rowData.address.address === 'At event'
+                    ? rowData.user.phone_number
+                    : rowData.address.phone_number}
+                </Typography>
+              </Fragment>
+            )}
+          </div>
+        );
+      },
       editable: 'never',
       filtering: false,
       export: false,
