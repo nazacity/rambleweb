@@ -141,7 +141,6 @@ const ActivityRegister = ({ handleClose, userActivity, setUserActivity }) => {
     );
 
     // set user activities
-    console.log(res.data.data);
     dispatch(updateUserActivity(res.data.data));
     setUserActivity({ ...res.data.data, state: 'waiting_payment' });
     handleClose();
