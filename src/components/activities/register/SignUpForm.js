@@ -58,7 +58,7 @@ const SignUpForm = () => {
         username: data.username,
         password: data.password,
         display_name: data.display_name,
-        idcard: 'not provide',
+        idcard: 'not provide yet',
         first_name: data.first_name,
         last_name: data.last_name,
         phone_number: data.phone_number,

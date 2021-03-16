@@ -20,10 +20,13 @@ const ActivityRegister = ({ handleClose, userActivity, setUserActivity }) => {
   const [state, setState] = useState({
     course: {},
     size: {},
-    address: {},
+    address: {
+      _id: 'new',
+    },
   });
 
   const [address, setAddress] = useState({
+    _id: 'new',
     phone_number: '',
     address: '',
     province: '',
@@ -59,7 +62,7 @@ const ActivityRegister = ({ handleClose, userActivity, setUserActivity }) => {
     let name;
     let relationship;
     let phone_number1;
-    if (state.address._id === 'new') {
+    if (address._id === 'new') {
       if (!address.address) {
         address1 = 'กรุณาใส่ที่อยู่';
       }
@@ -125,7 +128,7 @@ const ActivityRegister = ({ handleClose, userActivity, setUserActivity }) => {
       },
       idcard: user.idcard,
       address: {
-        _id: state.address._id,
+        _id: address._id,
         address: address.address,
         province: address.province,
         zip: address.zip,
@@ -256,14 +259,12 @@ const ActivityRegister = ({ handleClose, userActivity, setUserActivity }) => {
             control={
               <Checkbox
                 checked={
-                  state.address._id === '5ff6600d20ed83388ab4ccbd'
-                    ? true
-                    : false
+                  address._id === '5ff6600d20ed83388ab4ccbd' ? true : false
                 }
                 onChange={() => {
-                  setState({
-                    ...state,
-                    address: { _id: '5ff6600d20ed83388ab4ccbd' },
+                  setAddress({
+                    ...address,
+                    _id: '5ff6600d20ed83388ab4ccbd',
                   });
                 }}
                 name="checkedB"
@@ -282,11 +283,11 @@ const ActivityRegister = ({ handleClose, userActivity, setUserActivity }) => {
           <FormControlLabel
             control={
               <Checkbox
-                checked={state.address._id === 'new' ? true : false}
+                checked={address._id === 'new' ? true : false}
                 onChange={() => {
-                  setState({
-                    ...state,
-                    address: { _id: 'new' },
+                  setAddress({
+                    ...address,
+                    _id: 'new',
                   });
                 }}
                 name="checkedB"
