@@ -27,8 +27,6 @@ const StatusDialog = ({ open, handleClose, rowData, data, setData }) => {
           amount: amount,
         });
 
-        console.log(res.data);
-
         if (res.status === 200) {
           let newData = data;
           const index = data.findIndex((item) => item._id === res.data._id);

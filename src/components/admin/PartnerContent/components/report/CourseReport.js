@@ -32,7 +32,6 @@ const CourseReport = ({ activityDetail }) => {
   useEffect(() => {
     convertData();
   }, []);
-  console.log(data);
 
   return (
     <Card className={cx(styles.card, shadowStyles.root)}>

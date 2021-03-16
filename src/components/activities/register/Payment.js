@@ -87,7 +87,6 @@ const Payment = ({ userActivity, activity, open, handleClose }) => {
   //   },
   // ];
 
-  console.log(userActivity);
   return (
     <Dialog
       fullScreen

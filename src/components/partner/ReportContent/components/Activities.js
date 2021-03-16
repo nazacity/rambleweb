@@ -92,7 +92,7 @@ const Activities = ({ activities, setState, setActivityDetail }) => {
   const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
-    console.log(removed);
+
     result.splice(endIndex, 0, removed);
 
     return result;
@@ -100,7 +100,7 @@ const Activities = ({ activities, setState, setActivityDetail }) => {
 
   const onDragEnd = (result, item) => {
     const { destination, source, draggable } = result;
-    console.log(!destination);
+
     if (!destination) {
       return;
     }

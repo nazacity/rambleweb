@@ -17,7 +17,6 @@ const Report = ({
   setActivityDetail,
   editActivity,
 }) => {
-  // console.log(activityDetail);
   return (
     <div>
       <Hidden mdDown>

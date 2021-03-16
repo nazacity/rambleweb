@@ -57,8 +57,6 @@ const ShirtReport = ({ activityDetail, mobile }) => {
     setSize(SData);
   };
 
-  console.log(activityDetail);
-
   useEffect(() => {
     convertData();
   }, []);

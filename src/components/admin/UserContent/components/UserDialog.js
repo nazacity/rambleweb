@@ -28,7 +28,6 @@ const UserDialog = ({
   partners,
   setPartners,
 }) => {
-  console.log(user);
   return (
     <Dialog
       fullScreen
