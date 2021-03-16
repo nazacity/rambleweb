@@ -14,6 +14,7 @@ import PrintIcon from '@material-ui/icons/Print';
 import ReportFilter from '../report/ReportFilter';
 import CSVReader from 'react-csv-reader';
 import CheckDialog from '../report/CheckDialog';
+import StatusDialog from './StatusDialog';
 
 const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
   const [data, setData] = useState([]);
@@ -24,10 +25,16 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
   const [rowData, setRowData] = useState({});
   const [checkDialogOpen, setCheckDialogOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [statusDialogOpen, setStatusDialogOpen] = useState(false);
 
   const handleCheckDialogClose = () => {
     setRowData({});
-    setCheckDialogOpen(courseLookup);
+    setCheckDialogOpen(false);
+  };
+
+  const handleStatusDialogClose = () => {
+    setRowData({});
+    setStatusDialogOpen(false);
   };
 
   const convertCourseLookup = () => {
@@ -187,14 +194,26 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
       title: 'state',
       field: 'state',
       render: (rowData) => (
-        <div>
-          <Typography>
+        <div style={{ display: 'flex', width: 200, alignItems: 'center' }}>
+          <Typography style={{ width: 100 }}>
             {rowData.state === 'waiting_payment' && 'รอการชำระ'}
             {rowData.state === 'cancel' && 'ยกเลิก'}
             {rowData.state !== 'waiting_payment' &&
               rowData.state !== 'cancel' &&
               'ชำระแล้ว'}
           </Typography>
+          {rowData.state === 'waiting_payment' && (
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                setRowData(rowData);
+                setStatusDialogOpen(true);
+              }}
+            >
+              ยืนยันการชำระ
+            </Button>
+          )}
         </div>
       ),
       lookup: {
@@ -202,6 +221,7 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
         upcoming: 'ชำระแล้ว',
         cancel: 'ยกเลิก',
       },
+      editable: 'never',
     },
   ];
 
@@ -254,10 +274,15 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
     }
   };
 
-  console.log(data);
-
   return (
     <div>
+      <StatusDialog
+        open={statusDialogOpen}
+        handleClose={handleStatusDialogClose}
+        rowData={rowData}
+        data={data}
+        setData={setData}
+      />
       <CheckDialog
         open={checkDialogOpen}
         handleClose={handleCheckDialogClose}
