@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { Dialog, Typography, Button, TextField } from '@material-ui/core';
 import { get, post } from '../../../../../utils/request';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setLoading } from '../../../../../../redux/actions/layoutActions';
 import { useToasts } from 'react-toast-notifications';
 
 const StatusDialog = ({ open, handleClose, rowData, data, setData }) => {
   const dispatch = useDispatch();
   const { addToast } = useToasts();
+  const isLoading = useSelector((state) => state.layout.loading);
 
-  const [amount, setAmount] = useState('');
+  const [amount, setAmount] = useState(0);
   const handleChange = (event) => {
     setError('');
     setAmount(event.target.value);
@@ -17,7 +18,7 @@ const StatusDialog = ({ open, handleClose, rowData, data, setData }) => {
   const [error, setError] = useState('');
 
   const approvePayment = async () => {
-    if (!amount) {
+    if (amount === 0) {
       setError('กรุณาใส่ยอดเงิน');
     } else {
       try {
@@ -38,14 +39,16 @@ const StatusDialog = ({ open, handleClose, rowData, data, setData }) => {
           autoDismiss: true,
         });
         dispatch(setLoading(false));
+        setAmount(0);
         handleClose();
       } catch (error) {
         console.log(error);
         addToast('Something when wrong', {
-          appearance: 'success',
+          appearance: 'error',
           autoDismiss: true,
         });
         dispatch(setLoading(false));
+        setAmount(0);
         handleClose();
       }
     }
@@ -81,6 +84,7 @@ const StatusDialog = ({ open, handleClose, rowData, data, setData }) => {
             color="primary"
             style={{ marginRight: 20 }}
             onClick={approvePayment}
+            disabled={isLoading}
           >
             อนุมัติการชำระ
           </Button>

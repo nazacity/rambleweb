@@ -202,6 +202,7 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
               rowData.state !== 'cancel' &&
               'ชำระแล้ว'}
           </Typography>
+
           {rowData.state === 'waiting_payment' && (
             <Button
               variant="contained"
@@ -222,6 +223,22 @@ const UserReport = ({ activityDetail, loadingTrue, loadingFalse }) => {
         cancel: 'ยกเลิก',
       },
       editable: 'never',
+    },
+    {
+      title: 'ยอดชำระ',
+      field: 'amount',
+      render: (rowData) => (
+        <Typography style={{ width: 150 }}>
+          ยอดชำระ{' '}
+          {rowData.transaction.reduce(
+            (sum, transaction) => sum + transaction.amount,
+            0
+          )}{' '}
+          บาท
+        </Typography>
+      ),
+      editable: 'never',
+      filtering: false,
     },
   ];
 
