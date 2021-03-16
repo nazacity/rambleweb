@@ -4,8 +4,6 @@ import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
 
 const RambleRegister = () => {
-  const [view, setView] = useState(0);
-
   return (
     <div
       style={{
@@ -15,8 +13,7 @@ const RambleRegister = () => {
         alignItems: 'center',
       }}
     >
-      {view === 0 && <SignInForm setView={setView} />}
-      {view === 1 && <SignUpForm setView={setView} />}
+      <SignUpForm />
     </div>
   );
 };

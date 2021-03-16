@@ -18,7 +18,6 @@ const index = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const activityDetail = useSelector((state) => state.line.activity);
-  const [noLiff, setNoLiff] = useState(false);
   const handleLiff = async () => {
     // dispatch(setLoading(false)); // delete after finishing
     try {
@@ -36,6 +35,7 @@ const index = () => {
       //   user_picture_url:
       //     'https://profile.line-scdn.net/0hDrAvGHgcG118DzLCHJVkCkBKFTALIR0VBG9WaVgIQ2tWawhZFW5UMl0GQzkBbQleRDtRPVgHRzoG',
       // });
+
       if (res.data.message === 'No user is found') {
         dispatch(
           setLineUser({
@@ -43,6 +43,10 @@ const index = () => {
             lineId: profile.userId,
             user_picture_url: profile.pictureUrl,
             display_name: profile.displayName,
+            // lineId: 'U83584e6690b2d22b4a604ac227348d9a',
+            // user_picture_url:
+            //   'https://profile.line-scdn.net/0hDrAvGHgcG118DzLCHJVkCkBKFTALIR0VBG9WaVgIQ2tWawhZFW5UMl0GQzkBbQleRDtRPVgHRzoG',
+            // display_name: 'warodom',
           })
         );
       } else {
@@ -52,13 +56,12 @@ const index = () => {
             ...res.data.user,
           })
         );
-        Cookies.set('accessToken', res.token);
+        Cookies.set('accessToken', res.data.token);
       }
 
       dispatch(setLoading(false));
     } catch (error) {
       console.log(error);
-      setNoLiff(true);
       dispatch(setLoading(false));
     }
   };
@@ -89,22 +92,6 @@ const index = () => {
       getActivityById(activityId);
     }
   }, [router]);
-
-  if (noLiff) {
-    return (
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          alignSelf: 'center',
-          height: 600,
-        }}
-      >
-        <Typography variant="h4">กรุณาเปิดลิงค์บน Line Application</Typography>
-      </div>
-    );
-  }
 
   return (
     <div>

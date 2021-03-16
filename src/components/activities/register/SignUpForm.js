@@ -29,7 +29,7 @@ import Select from 'react-select';
 import { gender, blood_type } from 'constants/user';
 import { setLineUser } from '../../../../redux/actions/lineAction';
 
-const SignUpForm = ({ setView }) => {
+const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { control, handleSubmit, errors } = useForm();
   const theme = useTheme();
@@ -52,13 +52,13 @@ const SignUpForm = ({ setView }) => {
 
   const onSubmit = async (data) => {
     // dispatch(setLoading(true));
-    console.log(data);
+
     try {
       const userinfo = {
         username: data.username,
         password: data.password,
         display_name: data.display_name,
-        idcard: data.idcard,
+        idcard: 'not provide',
         first_name: data.first_name,
         last_name: data.last_name,
         phone_number: data.phone_number,
@@ -83,6 +83,12 @@ const SignUpForm = ({ setView }) => {
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <Typography
+        variant="body1"
+        style={{ color: 'red', marginBottom: 10, textAlign: 'center' }}
+      >
+        เฉพาะครั้งแรก
+      </Typography>
       <Controller
         as={TextField}
         name="username"
@@ -137,7 +143,9 @@ const SignUpForm = ({ setView }) => {
               error={errors.password && true}
             />
             <FormHelperText error={errors.password && true}>
-              {errors.password?.message}
+              {errors.password?.message
+                ? errors.password.message
+                : 'มากกว่า 8 ตัวอักษร'}
             </FormHelperText>
           </FormControl>
         )}
@@ -181,7 +189,9 @@ const SignUpForm = ({ setView }) => {
               error={errors.confirm_password && true}
             />
             <FormHelperText error={errors.confirm_password && true}>
-              {errors.password?.message}
+              {errors.confirm_password?.message
+                ? errors.confirm_password.message
+                : 'ต้องตรงกับ password'}
             </FormHelperText>
           </FormControl>
         )}
@@ -202,61 +212,6 @@ const SignUpForm = ({ setView }) => {
         style={{ width: '100%', marginBottom: 20 }}
       />
       <Typography>ข้อมูลส่วนตัว</Typography>
-      <Controller
-        name="idcard"
-        control={control}
-        defaultValue=""
-        render={({ onChange, onBlur, value }) => (
-          <TextField
-            label="ID Card"
-            value={value}
-            variant="outlined"
-            style={{ width: '100%', marginTop: 20 }}
-            onChange={async (e) => {
-              onChange(e.target.value);
-              setMessage({
-                ...message,
-                msg: '',
-              });
-              if (e.target.value.length === 13) {
-                setCheckIdLoading(true);
-                const res = await axios.get(
-                  `${api}/api/everyone/checkcitizenidnumber/${e.target.value}`
-                );
-
-                if (res.status === 200) {
-                  if (
-                    res.data.data === 'หมายเลขบัตรประจำตัวประชาชนของคุณถูกต้อง'
-                  ) {
-                    setTimeout(() => {
-                      setMessage({
-                        msg: 'หมายเลขบัตรประจำตัวประชาชนของคุณถูกต้อง',
-                        state: 'success',
-                      });
-                      setCheckIdLoading(false);
-                    }, 800);
-                  } else if (res.data.data === 'รหัสบัตรประชาชนถูกใช้งานแล้ว') {
-                    setMessage({
-                      msg: 'หมายเลขบัตรประจำตัวประชาชนของคุณถูกใช้งานแล้ว',
-                      state: 'error',
-                    });
-                    setCheckIdLoading(false);
-                  } else {
-                    setTimeout(() => {
-                      setMessage({
-                        msg: 'หมายเลขบัตรประจำตัวประชาชนของคุณไม่ถูกต้อง',
-                        state: 'error',
-                      });
-                      setCheckIdLoading(false);
-                    }, 800);
-                  }
-                }
-              }
-            }}
-          />
-        )}
-        // disabled={loading}
-      />
       <div style={{ marginBottom: 20 }}>
         {message.msg !== '' && (
           <Typography
@@ -275,7 +230,7 @@ const SignUpForm = ({ setView }) => {
         name="first_name"
         control={control}
         defaultValue=""
-        label="First Name"
+        label="ชื่อ"
         variant="outlined"
         rules={{
           required: 'กรุณาใส่ First Name',
@@ -290,7 +245,7 @@ const SignUpForm = ({ setView }) => {
         name="last_name"
         control={control}
         defaultValue=""
-        label="Last Name"
+        label="นามสกุล"
         variant="outlined"
         rules={{
           required: 'กรุณาใส่ Last Name',
@@ -305,7 +260,7 @@ const SignUpForm = ({ setView }) => {
         name="phone_number"
         control={control}
         defaultValue=""
-        label="Phone Number"
+        label="เบอร์โทรศัพท์"
         variant="outlined"
         rules={{
           required: 'กรุณาใส่ Phone Number',
@@ -321,7 +276,7 @@ const SignUpForm = ({ setView }) => {
         inputVariant="outlined"
         openTo="year"
         views={['year', 'month', 'date']}
-        label="Birth Day"
+        label="วันเกิด"
         format="DD MMMM YYYY"
         value={selectedDate}
         InputAdornmentProps={{ position: 'end' }}
@@ -338,7 +293,7 @@ const SignUpForm = ({ setView }) => {
         // disabled={loading}
         render={({ onChange, value }) => (
           <Select
-            placeholder="Gender"
+            placeholder="เพศ"
             value={gender.filter((option) => option.value === value)}
             options={gender}
             onChange={(e) => {
@@ -369,7 +324,7 @@ const SignUpForm = ({ setView }) => {
         // disabled={loading}
         render={({ onChange, value }) => (
           <Select
-            placeholder="Blood Type"
+            placeholder="กรุ๊ปเลือด"
             value={blood_type.filter((option) => option.value === value)}
             options={blood_type}
             onChange={(e) => {
@@ -398,25 +353,15 @@ const SignUpForm = ({ setView }) => {
         style={{ width: '100%' }}
         type="submit"
       >
-        สมัคร Ramble Id
+        บันทึกข้อมูล
       </Button>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
+      <Typography
+        variant="body1"
+        style={{ color: 'red', margin: '10px 0', textAlign: 'center' }}
       >
-        <Typography>มีบัญชีแล้ว ใช่หรือไม่</Typography>
-        <Button
-          style={{ color: theme.palette.primary.main, fontSize: 18 }}
-          onClick={() => {
-            setView(0);
-          }}
-        >
-          ล็อคอิน
-        </Button>
-      </div>
+        ท่านสามารถเข้า Ramble Applicaiton ได้โดยใช้ Username และ Password
+        จากการลงข้อมูลในครั้งนี้
+      </Typography>
     </form>
   );
 };

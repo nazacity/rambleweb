@@ -6,6 +6,8 @@ import { setLoading } from '../../../../redux/actions/layoutActions';
 import { CircularProgress, makeStyles } from '@material-ui/core';
 import axios from 'axios';
 import { api } from 'api/api';
+import Cookie from 'js-cookie';
+import { get } from 'utils/request';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,14 +34,22 @@ const AllActivities = () => {
   const [activities, setActivities] = useState([]);
   const [page, setPage] = useState(0);
   const [noMore, setNoMore] = useState(false);
+
   const onLoadMore = async (newRefresh) => {
     if (!noMore) {
       dispatch(setLoading(true));
       setPage(page + 1);
       try {
-        const res = await axios.get(
-          `${api}/api/everyone/getactivities?skip=${5 * page}&limit=5`
-        );
+        const token = Cookie.get('accessToken');
+
+        let res;
+        if (token) {
+          res = await get(`/api/users/getactivities?skip=${5 * page}&limit=5`);
+        } else {
+          res = await axios.get(
+            `${api}/api/everyone/getactivities?skip=${5 * page}&limit=5`
+          );
+        }
 
         if (res.status === 200) {
           if (res.data.length === 0) {

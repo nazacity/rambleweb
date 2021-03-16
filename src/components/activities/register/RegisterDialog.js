@@ -44,7 +44,7 @@ export default function RegisterDialog({
         <AppBar className={classes.appBar}>
           <Toolbar>
             <Typography variant="h6" className={classes.title}>
-              {user.type === 'line' && 'สมัครRamble'}
+              {user.type === 'line' && 'กรอกข้อมูลส่วนตัว'}
               {user.type === 'ramble' && `สมัครกิจกรรม`}
             </Typography>
             <IconButton
