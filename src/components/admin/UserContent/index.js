@@ -56,8 +56,8 @@ const index = () => {
       } else {
         res = await get(
           `/api/employees/getusers?skip=${
-            page === 0 ? 15 * page : 15 * page + page
-          }&limit=16`
+            page === 0 ? 20 * page : 20 * page + page
+          }&limit=21`
         );
       }
 
