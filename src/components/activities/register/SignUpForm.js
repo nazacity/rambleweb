@@ -57,7 +57,7 @@ const SignUpForm = () => {
       const userinfo = {
         username: data.username,
         password: data.password,
-        display_name: data.display_name,
+        display_name: data.first_name,
         idcard: 'not provide yet',
         first_name: data.first_name,
         last_name: data.last_name,
@@ -195,21 +195,6 @@ const SignUpForm = () => {
             </FormHelperText>
           </FormControl>
         )}
-      />
-      <Controller
-        as={TextField}
-        name="display_name"
-        control={control}
-        defaultValue=""
-        label="Display Name"
-        variant="outlined"
-        rules={{
-          required: 'กรุณาใส่ Display Name',
-        }}
-        error={errors.display_name && true}
-        helperText={errors.display_name?.message}
-        // disabled={loading}
-        style={{ width: '100%', marginBottom: 20 }}
       />
       <Typography>ข้อมูลส่วนตัว</Typography>
       <div style={{ marginBottom: 20 }}>

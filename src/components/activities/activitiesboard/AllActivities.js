@@ -35,7 +35,7 @@ const AllActivities = () => {
   const [page, setPage] = useState(0);
   const [noMore, setNoMore] = useState(false);
 
-  const onLoadMore = async (newRefresh) => {
+  const onLoadMore = async () => {
     if (!noMore) {
       dispatch(setLoading(true));
       setPage(page + 1);
