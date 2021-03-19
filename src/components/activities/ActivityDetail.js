@@ -72,6 +72,15 @@ const Activity = () => {
     setPaymentDialogOpen(false);
   };
 
+  const handleButton = () => {
+    if (userActivity.state === 'waiting_payment') {
+      handlePaymentDialogOpen;
+    } else if (userActivity.state === 'upcoming') {
+    } else if (userActivity.state === 'unregister') {
+      handleRegisterDialogOpen;
+    }
+  };
+
   return (
     <div
       style={{
@@ -83,11 +92,7 @@ const Activity = () => {
       <BackButton setUserActivity={setUserActivity} />
       <Banner
         activityDetail={activityDetail}
-        buttonOnClick={
-          userActivity.state === 'waiting_payment'
-            ? handlePaymentDialogOpen
-            : handleRegisterDialogOpen
-        }
+        buttonOnClick={handleButton}
         userActivity={userActivity}
       />
       <div
@@ -113,14 +118,7 @@ const Activity = () => {
       </div>
 
       <div style={{ marginTop: 20 }}>
-        <ButtonRegister
-          onClick={
-            userActivity.state === 'waiting_payment'
-              ? handlePaymentDialogOpen
-              : handleRegisterDialogOpen
-          }
-          userActivity={userActivity}
-        />
+        <ButtonRegister onClick={handleButton} userActivity={userActivity} />
       </div>
 
       {userActivity.state === 'waiting_payment' && (

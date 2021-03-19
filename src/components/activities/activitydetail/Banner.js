@@ -30,6 +30,7 @@ const Banner = ({ activityDetail, buttonOnClick, userActivity }) => {
           แชร์
         </Button>
       </Link>
+
       <ButtonRegister
         absolute
         onClick={buttonOnClick}
