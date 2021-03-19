@@ -71,13 +71,14 @@ const Activity = () => {
   const handlePaymentDialogClose = () => {
     setPaymentDialogOpen(false);
   };
+  console.log(userActivity.state);
 
   const handleButton = () => {
     if (userActivity.state === 'waiting_payment') {
-      handlePaymentDialogOpen;
+      handlePaymentDialogOpen();
     } else if (userActivity.state === 'upcoming') {
     } else if (userActivity.state === 'unregister') {
-      handleRegisterDialogOpen;
+      handleRegisterDialogOpen();
     }
   };
 
