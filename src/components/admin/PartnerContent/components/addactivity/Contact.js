@@ -31,7 +31,24 @@ const Contact = ({ control, errors }) => {
           label="LineId or Line@"
           variant="outlined"
           rules={{
-            required: 'กรุณา LineId หรือ Line@',
+            required: 'กรุณาใส่ LineId หรือ Line@',
+          }}
+          error={errors.contact?.line && true}
+          helperText={errors.contact?.line?.message}
+          // disabled={loading}
+          style={{ width: '100%' }}
+        />
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: 20 }}>
+        <Controller
+          as={TextField}
+          name="contact[facebook]"
+          control={control}
+          defaultValue=""
+          label="facebook link"
+          variant="outlined"
+          rules={{
+            required: 'กรุณาใส่ facebook link',
           }}
           error={errors.contact?.line && true}
           helperText={errors.contact?.line?.message}
