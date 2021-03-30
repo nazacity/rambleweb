@@ -3,16 +3,16 @@ import { Controller } from 'react-hook-form';
 import { IconButton, TextField, Typography } from '@material-ui/core';
 import { HighlightOff, Add } from '@material-ui/icons';
 
-const Routes = ({ control, errors, unregister, activityDetail }) => {
+const RacePack = ({ control, errors, unregister, activityDetail }) => {
   const [indexes, setIndexes] = React.useState(
-    activityDetail.routes
-      ? activityDetail.routes.map((item, index) => {
+    activityDetail.racepack
+      ? activityDetail.racepack.map((item, index) => {
           return index;
         })
       : [0]
   );
   const [counter, setCounter] = React.useState(
-    activityDetail.routes ? activityDetail.routes.length + 1 : 1
+    activityDetail.racepack ? activityDetail.racepack.length + 1 : 1
   );
   const addCourse = () => {
     setIndexes((prevIndexes) => [...prevIndexes, counter]);
@@ -23,23 +23,22 @@ const Routes = ({ control, errors, unregister, activityDetail }) => {
     setIndexes((prevIndexes) => [
       ...prevIndexes.filter((item) => item !== index),
     ]);
-    const fieldName = `course[${index}]`;
+    const fieldName = `racepack[${index}]`;
     unregister(`${fieldName}.title`);
-    unregister(`${fieldName}.range`);
-    unregister(`${fieldName}.route_picture_url`);
+    unregister(`${fieldName}.racepack_picture_url`);
   };
 
   return (
     <div>
       <div style={{ display: 'flex' }}>
-        <Typography variant="h4">เส้นทาง</Typography>
+        <Typography variant="h4">Race Pack</Typography>
         <IconButton onClick={addCourse}>
           <Add />
         </IconButton>
       </div>
       {indexes.map((index) => {
         return (
-          <div name="routes" key={index}>
+          <div name="racepack" key={index}>
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <IconButton
                 variant="outlined"
@@ -52,10 +51,10 @@ const Routes = ({ control, errors, unregister, activityDetail }) => {
             </div>
             <Controller
               as={TextField}
-              name={`routes[${index}].title`}
+              name={`racepack[${index}].title`}
               control={control}
               defaultValue=""
-              label="Route Title"
+              label="Racepack Title"
               variant="outlined"
               // disabled={loading}
               style={{
@@ -66,25 +65,10 @@ const Routes = ({ control, errors, unregister, activityDetail }) => {
             />
             <Controller
               as={TextField}
-              name={`routes[${index}].range`}
+              name={`racepack[${index}].racepack_picture_url`}
               control={control}
               defaultValue=""
-              label="Route Range"
-              variant="outlined"
-              // disabled={loading}
-              style={{
-                width: '100%',
-                margin: '1vh auto',
-                height: '50px',
-              }}
-              type="number"
-            />
-            <Controller
-              as={TextField}
-              name={`routes[${index}].route_picture_url`}
-              control={control}
-              defaultValue=""
-              label="Route Picture Url"
+              label="Racepack Picture Url"
               variant="outlined"
               // disabled={loading}
               style={{
@@ -100,4 +84,4 @@ const Routes = ({ control, errors, unregister, activityDetail }) => {
   );
 };
 
-export default Routes;
+export default RacePack;

@@ -8,6 +8,7 @@ import Timeline from './addactivity/Timeline';
 import DateInfo from './addactivity/DateInfo';
 import CourseInfo from './addactivity/CourseInfo';
 import Routes from './addactivity/Routes';
+import RacePack from './addactivity/RacePack';
 import Size from './addactivity/Size';
 import Rules from './addactivity/Rules';
 import Rules1 from './addactivity/Rules1';
@@ -44,6 +45,7 @@ const defaultValues = {
   register_end_date: new Date(),
   courses: [],
   routes: [],
+  racepack: [],
   timeline: [],
   rules: [],
   rules1: '',
@@ -146,6 +148,7 @@ const AddActivity = ({
 
         courses: courses,
         routes: activityDetail.routes,
+        racepack: activityDetail.racepack,
 
         timeline: timeline,
 
@@ -221,6 +224,12 @@ const AddActivity = ({
             activityDetail={activityDetail}
           />
           <Routes
+            control={control}
+            errors={errors}
+            unregister={unregister}
+            activityDetail={activityDetail}
+          />
+          <RacePack
             control={control}
             errors={errors}
             unregister={unregister}

@@ -212,6 +212,39 @@ const ActivityPreview = ({ activityDetail }) => {
       </div>
       <div style={{ margin: '20px auto' }}>
         <div style={{ display: 'flex' }}>
+          <Typography variant="h4">Race Pack</Typography>
+        </div>
+        {activityDetail.racepack.map((item, index) => {
+          return (
+            <div
+              key={index}
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}
+            >
+              <div
+                style={{
+                  width: 200,
+                  height: 200,
+                  overflow: 'hidden',
+                }}
+              >
+                <ModalImage
+                  small={item.racepack_picture_url}
+                  large={item.racepack_picture_url}
+                />
+              </div>
+              <div>
+                <Typography style={{ marginLeft: 20 }}>{item.title}</Typography>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <div style={{ margin: '20px auto' }}>
+        <div style={{ display: 'flex' }}>
           <Typography variant="h4">รายละเอียดกำหนดการ</Typography>
         </div>
         <TimelineDisplay data={activityDetail.timeline} />

@@ -6,6 +6,7 @@ import DateInfo from '../editactivity/DateInfo';
 
 import CourseInfo from '../editactivity/CourseInfo';
 import Routes from '../editactivity/Routes';
+import RacePack from '../editactivity/RacePack';
 import TimelineForm from '../editactivity/TimelineForm';
 import ShirtStyle from '../editactivity/ShirtStyle';
 import Size from '../editactivity/Size';
@@ -73,7 +74,13 @@ const Detail = ({ activityDetail, editMode, setEditMode, editActivity }) => {
         />
         <Routes
           setEditMode={setEditMode}
-          editMode={editMode.courses}
+          editMode={editMode.routes}
+          activityDetail={activityDetail}
+          editActivity={editActivity}
+        />
+        <RacePack
+          setEditMode={setEditMode}
+          editMode={editMode.racepack}
           activityDetail={activityDetail}
           editActivity={editActivity}
         />
