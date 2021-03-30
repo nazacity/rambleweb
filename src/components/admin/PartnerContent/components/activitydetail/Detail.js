@@ -5,6 +5,7 @@ import Location from '../editactivity/Location';
 import DateInfo from '../editactivity/DateInfo';
 
 import CourseInfo from '../editactivity/CourseInfo';
+import Routes from '../editactivity/Routes';
 import TimelineForm from '../editactivity/TimelineForm';
 import ShirtStyle from '../editactivity/ShirtStyle';
 import Size from '../editactivity/Size';
@@ -51,7 +52,7 @@ const Detail = ({ activityDetail, editMode, setEditMode, editActivity }) => {
           editMode={editMode.location}
           activityDetail={activityDetail}
           editActivity={editActivity}
-        />{' '}
+        />
         <Contact
           setEditMode={setEditMode}
           editMode={editMode.contact}
@@ -65,6 +66,12 @@ const Detail = ({ activityDetail, editMode, setEditMode, editActivity }) => {
           editActivity={editActivity}
         />
         <CourseInfo
+          setEditMode={setEditMode}
+          editMode={editMode.courses}
+          activityDetail={activityDetail}
+          editActivity={editActivity}
+        />
+        <Routes
           setEditMode={setEditMode}
           editMode={editMode.courses}
           activityDetail={activityDetail}
