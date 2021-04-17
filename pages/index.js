@@ -8,11 +8,6 @@ import Banner from 'landingpage/Banner';
 import AppSlider from 'landingpage/AppSlider';
 import Features from 'landingpage/Features';
 import DashboardFeatures from 'landingpage/Dashboard';
-import ProductSlide from 'landingpage/ProductSlide';
-import DesignedAndBuilt from 'landingpage/DesignedAndBuilt';
-import PricingPolicy from 'landingpage/PricingPolicy';
-import TeamPortfolio from 'landingpage/TeamPortfoilo';
-import Testimonial from 'landingpage/Testimonial';
 import GetStarted from 'landingpage/GetStarted';
 import Footer from 'landingpage/Footer';
 import GlobalStyle, {

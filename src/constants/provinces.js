@@ -1,5 +1,9 @@
 const provinces = [
   {
+    province: 'virtual',
+    region: 'virtual',
+  },
+  {
     province: 'กรุงเทพมหานคร',
     region: 'ภาคกลาง',
   },
@@ -320,6 +324,7 @@ export const regionEnum = [
   'ภาคตะวันออก',
   'ภาคตะวันออกเฉียงเหนือ',
   'ภาคตะวันตก',
+  'virtual',
 ];
 
 export const regionEnum1 = [
@@ -329,4 +334,5 @@ export const regionEnum1 = [
   { label: 'ภาคตะวันออก', value: 'ภาคตะวันออก' },
   { label: 'ภาคตะวันออกเฉียงเหนือ', value: 'ภาคตะวันออกเฉียงเหนือ' },
   { label: 'ภาคตะวันตก', value: 'ภาคตะวันตก' },
+  { label: 'virtual', value: 'virtual' },
 ];
