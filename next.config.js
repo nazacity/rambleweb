@@ -18,9 +18,10 @@ const nextConfig = {
       process.env.SERVER_API_HOST || 'https://api.ramble-club.com',
   },
   env: {
-    SERVER_API_HOST: process.env.SERVER_API_HOST || 'http://localhost:5000',
-    SOCIAL_API: process.env.SOCIAL_API || 'http://localhost:5100',
-    LINE_CLIENT_KEY: process.env.LINE_CLIENT_KEY,
+    SERVER_API_HOST:
+      process.env.SERVER_API_HOST || 'https://api.ramble-club.com',
+    SOCIAL_API: process.env.SOCIAL_API || 'https://social.ramble-club.com',
+    LINE_CLIENT_KEY: process.env.LINE_CLIENT_KEY || '1655591354',
   },
 };
 
